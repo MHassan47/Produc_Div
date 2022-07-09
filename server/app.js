@@ -1,9 +1,10 @@
 require("dotenv").config();
-const { ENVIROMENT, PORT } = process.env;
+const { ENVIROMENT } = process.env;
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
+const PORT = 8080;
 
 // db connection
 const db = require("./configs/db.config");
@@ -24,6 +25,7 @@ app.use(cookieSession({ name: "session", keys: ["key1", "key2"] }));
 // routes
 app.use("/users", usersRoutes(db));
 app.use("/api/tasks", tasksRoutes(db));
+
 
 app.get("/", (req, res) => {
   res.json({ greetings: "hello world" });
