@@ -48,5 +48,39 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.post("new/:userID", (req, res) => {
+    const { projectName } = req.body.name;
+    const user_id = req.params.userID;
+    const members = [
+      req.body.memberOne,
+      req.body.memberTwo,
+      req.body.memberThree,
+    ];
+
+    db.query(`INSERT INTO projects(name, owner_id) VALUES($1, $2) ;`, [
+      projectName,
+      user_id,
+    ])
+      // .then(
+      //   db.query(
+      //     `INSERT INTO users_to_projects(user_id, project_id) VALUES ($1, $2), ($3, $2), ($4, $2);`,
+      //     [members[0], members[1], members[2]]
+      //   )
+      // ) ---- adding multiple members to users_to_projects
+      // .then(db.query(`INSERT INTO`)) --- inserting multiple users to users_to_tasks
+      .then(({ rows: tasks }) => {
+        res.json(
+          tasks.reduce(
+            (previous, current) => ({ ...previous, [current.id]: current }),
+            {}
+          )
+        );
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };
