@@ -1,8 +1,8 @@
 require("dotenv").config();
-const { ENVIROMENT, PORT } = process.env;
+const { ENVIROMENT } = process.env;
+const PORT = 8080;
 const express = require("express");
 const morgan = require("morgan");
-const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 
 // db connection
