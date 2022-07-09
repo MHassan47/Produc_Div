@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS users_to_tasks CASCADE;
 CREATE TABLE columns (
     id SERIAL PRIMARY KEY NOT NULL,
     title VARCHAR(255) NOT NULL,
-    project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE
+    cproject_id INTEGER REFERENCES projects(id) ON DELETE CASCADE
 );
 
 
