@@ -11,7 +11,7 @@ const db = require("./configs/db.config");
 // routes import
 const usersRoutes = require("./routes/usersRoutes");
 const tasksRoutes = require("./routes/tasksRoutes");
-const kanbanRoutes = require("./routes/kanbanRoutes");
+const projectsRoutes = require("./routes/projectsRoutes");
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use(cookieSession({ name: "session", keys: ["key1", "key2"] }));
 // routes
 app.use("/users", usersRoutes(db));
 app.use("/api/tasks", tasksRoutes(db));
-app.use("/api/kanban", kanbanRoutes(db));
+app.use("/api/projects", projectsRoutes(db));
 
 app.get("/", (req, res) => {
   res.json({ greetings: "hello world" });
