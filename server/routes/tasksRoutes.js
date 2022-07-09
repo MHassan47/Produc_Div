@@ -19,7 +19,7 @@ module.exports = (db) => {
       });
   });
 
-  //   Editing a task card
+  //   Edits a task card
   router.patch("/edit/:id", (req, res) => {
     const { name } = req.body;
     const task_id = req.params;
@@ -35,7 +35,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  //   Deleting a task card
+  //   Delets a task card
   router.delete("/delete/:id", (req, res) => {
     const task_id = req.params.id;
 
@@ -48,17 +48,17 @@ module.exports = (db) => {
       });
   });
 
-  //   Creating a task card
-  router.post("new/:projectID/:columnID", (req, res) => {
+  //   Creats a task card
+  router.post("new/:projectID/:column", (req, res) => {
     const { name, created_at } = req.body;
     const project_id = req.params.projectID;
-    const column_id = req.params.columnID;
+    const column_name = req.params.col;
     const owner_id = req.session.user_id;
 
     db.query(
-      `INSERT INTO tasks(name, created_at, owner_id,roject_ column_id, project_id) VALUES($1, $2, $3, $4, $5)
+      `INSERT INTO tasks(name, created_at, owner_id, col, project_id) VALUES($1, $2, $3, $4, $5)
         RETURNING tasks;`,
-      [name, created_at, owner_id, column_id, project_id]
+      [name, created_at, owner_id, column_name, project_id]
     )
       // .then(db.query(`INSERT INTO`)) --- inserting multiple users to users_to_tasks
       .then(({ rows: tasks }) => {
@@ -74,14 +74,14 @@ module.exports = (db) => {
       });
   });
 
-  //   Moving tasks
-  router.patch("/:id/:columnID", (req, res) => {
+  //   Moves tasks
+  router.patch("/:id/:column", (req, res) => {
     const task_id = req.params.id;
-    const column_id = req.params.columnID;
+    const column = req.params.columnID;
     db.query(
-      `UPDATE tasks SET column_id = $1  
+      `UPDATE tasks SET col = $1  
       WHERE tasks.id = $2`,
-      [column_id, task_id]
+      [column, task_id]
     )
       .then((data) => {
         res.json(data.rows);
