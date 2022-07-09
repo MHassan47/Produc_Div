@@ -1,9 +1,5 @@
 require("dotenv").config();
 const { ENVIROMENT } = process.env;
-<<<<<<< HEAD
-=======
-const PORT = 8080;
->>>>>>> components
 const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
@@ -30,7 +26,6 @@ app.use(cookieSession({ name: "session", keys: ["key1", "key2"] }));
 app.use("/users", usersRoutes(db));
 app.use("/api/tasks", tasksRoutes(db));
 app.use("/api/kanban", kanbanRoutes(db));
-
 
 app.get("/", (req, res) => {
   res.json({ greetings: "hello world" });
