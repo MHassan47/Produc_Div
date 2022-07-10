@@ -5,13 +5,15 @@ module.exports = (db) => {
   // Getting all tasks
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM tasks;`)
-      .then(({ rows: tasks }) => {
+      .then((data) => {
         // const users = data.rows;
+
         res.json(
-          tasks.reduce(
-            (previous, current) => ({ ...previous, [current.id]: current }),
-            {}
-          )
+          data.rows
+          //   tasks.reduce(
+          //     (previous, current) => ({ ...previous, [current.id]: current }),
+          //     {}
+          //   )
         );
       })
       .catch((err) => {
