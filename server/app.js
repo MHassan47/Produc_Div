@@ -4,6 +4,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const PORT = 8080;
+const cors = require("cors");
 
 // db connection
 const db = require("./configs/db.config");
@@ -14,7 +15,7 @@ const tasksRoutes = require("./routes/tasksRoutes");
 const projectsRoutes = require("./routes/projectsRoutes");
 
 const app = express();
-
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 // middleware setup
 app.use(morgan(ENVIROMENT));
 
