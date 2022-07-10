@@ -1,13 +1,20 @@
 require("dotenv").config();
 const { ENVIROMENT } = process.env;
-<<<<<<< HEAD
-=======
-const PORT = 8080;
->>>>>>> components
 const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const PORT = 8080;
+
+// access token
+const jwt = require('jsonwebtoken');
+// Register the route to get a new token
+// In a real world scenario we would authenticate user credentials
+// before creating a token, but for simplicity accessing this route
+// will generate a new token that is valid for 2 minutes
+app.get('/token', function(req, res){
+  var token = jwt.sign({username:"ado"}, 'supersecret',{expiresIn: 120});
+  res.send(token)
+})
 
 // db connection
 const db = require("./configs/db.config");

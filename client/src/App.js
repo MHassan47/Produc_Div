@@ -1,10 +1,16 @@
 import "./App.css";
+import Register from './components/Auth/Register.js';
+import SignIn from "./components/Auth/SignIn";
 
 function App() {
+
+
+
+
   return (
-    <div className="App">
-      <div>Hello World</div>
-    </div>
+    <main className="App">
+      <SignIn />
+    </main>
   );
 }
 

@@ -1,5 +1,7 @@
+require('dotenv').config()
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 // Get all users
 module.exports = (db) => {
@@ -24,8 +26,9 @@ module.exports = (db) => {
 
     res.render("register");
     
-  })
-  router.post("/", (req, res) => {
+  }) 
+
+  router.post("/register", (req, res) => {
     const { first_name, last_name, email, password, photo_url, role } = req.body;
 
     console.log("register body: " + req.body)
@@ -44,14 +47,17 @@ module.exports = (db) => {
   return router;
   })
 
-  router.get("/login", (req, res) => {
+  router.get("/sign-in", (req, res) => {
 
-    res.render("login");
-    res.status(200).send("login path is working");
+    res.render("sign-in");
+    res.status(200).send("sign-in path is working");
   });
 
-  router.post("/", (req, res) => {
+  router.post("/sign-in", (req, res) => {
     const { email, password } = req.body;
+    // const user = { email, password }
+  //  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+  //  res.json({ accessToken: accessToken })
     db.query(`SELECT * FROM users WHERE email = $1 AND password = $2 LIMIT 1;`, [email, password])
     .then(users => {
         console.log(users.rows);
@@ -63,7 +69,7 @@ module.exports = (db) => {
           res.redirect("/");
         }
         if (!user) {
-          res.send({ error: "error" })
+          res.status(401).send({ error: "error" })
         }
       })
       .catch(err => res.send(err));
