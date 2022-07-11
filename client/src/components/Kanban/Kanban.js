@@ -2,6 +2,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useState } from "react";
 import axios from "axios";
 import Card from "../Task/Card";
+import Form from "../Task/Form";
 import "./Kanban.css";
 import { IoIosAdd } from "react-icons/io";
 
@@ -13,8 +14,11 @@ import { IoIosAdd } from "react-icons/io";
 const Kanban = (props) => {
   const state = props.state;
   const setState = props.setState;
+  const [project, setProject] = useState(1);
   const [column, setColumn] = useState(["To Do", "In Progress", "Complete"]);
-  // const [project, setProject] = useState(1);
+  const [newCardToDo, setNewCardToDo] = useState(false);
+  const [newCardInProgress, setNewCardInProgress] = useState(false);
+  const [newCardComplete, setNewCardComplete] = useState(false);
 
   const onDragEnd = (result) => {
     console.log("-------iiii", result);
@@ -42,13 +46,21 @@ const Kanban = (props) => {
     console.log("dragged item");
   };
 
-  // const columnCount = () => {
-  //   count=0
-  //   state.tasks.map((task) =>)
-  // }
-  // const onClickDots = () => {
-  //   console.log("clicked");
-  // };
+  const newTask = (element) => {
+    // setNewCard(true);
+    console.log(element);
+    if (element === "To Do") {
+      // if ("To Do" === element) return <Form />;
+      setNewCardToDo((prev) => !prev);
+      console.log(element);
+    } else if (element === "In Progress") {
+      setNewCardInProgress((prev) => !prev);
+      console.log(element);
+    } else if (element === "Complete") {
+      setNewCardComplete((prev) => !prev);
+      console.log(element);
+    }
+  };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -71,7 +83,16 @@ const Kanban = (props) => {
                     }
                   </div>
                   <div className="kanban__section__add">
-                    <IoIosAdd onClick={() => console.log(element)} />
+                    <IoIosAdd
+                      onClick={
+                        () => newTask(element)
+                        /* () => {
+                          // setNewCard((prev) => !prev);
+                          
+                        }
+                        /*setNewCard((prev) => !prev)*/
+                      }
+                    />
                   </div>
                 </div>
                 <div className="kanban__section__content">
@@ -101,10 +122,25 @@ const Kanban = (props) => {
                   })}
                   {provided.placeholder}
                 </div>
+                {/* <div>{newCardToDo && <Form />}</div>
+                <div>{newCardInProgress && <Form />}</div>
+                <div>{newCardComplete && <Form />}</div> */}
+                {console.log(newCardToDo, newCardInProgress, newCardComplete)}
               </div>
             )}
           </Droppable>
         ))}
+      </div>
+      <div className="newCard">
+        <div className="newCard-form">
+          {newCardToDo && <Form state={state} setState={setState} />}
+        </div>
+        <div className="newCard-form">
+          {newCardInProgress && <Form state={state} setState={setState} />}
+        </div>
+        <div className="newCard-form">
+          {newCardComplete && <Form state={state} setState={setState} />}
+        </div>
       </div>
     </DragDropContext>
   );

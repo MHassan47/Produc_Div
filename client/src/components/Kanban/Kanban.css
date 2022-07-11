@@ -1,6 +1,7 @@
 .kanban {
   display: flex;
   align-items: center;
+  justify-content: left;
   gap: 2rem;
 }
 .kanban__section__title {
@@ -39,4 +40,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.newCard {
+  display: flex;
+  justify-content: left;
+  gap: 2rem;
+}
+
+.newCard-form {
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  border: 10px black;
 }
