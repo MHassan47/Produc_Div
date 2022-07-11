@@ -1,0 +1,25 @@
+.kanban {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.kanban__section__title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.kanban__section {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  border: 10px black;
+  background-color: rgb(113, 113, 123);
+}
+
+.kanban__section__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

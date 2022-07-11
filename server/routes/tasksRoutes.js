@@ -2,24 +2,91 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  // Getting all tasks
   router.get("/", (req, res) => {
-    // const user_id = req.session.user_id;
-    // if (!user_id) {
-    //   alert("Please log in");
-    //   return res.redirect("/");
-    // }
+    db.query(`SELECT * FROM tasks;`)
+      .then((data) => {
+        // const users = data.rows;
+
+        res.json(
+          data.rows
+          //   tasks.reduce(
+          //     (previous, current) => ({ ...previous, [current.id]: current }),
+          //     {}
+          //   )
+        );
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  //   Edits a task card
+  router.patch("/edit/:id", (req, res) => {
+    const { name } = req.body;
+    const task_id = req.params;
+    db.query(
+      `UPDATE tasks SET name = $1
+      WHERE tasks.id = $2`,
+      [name, task_id]
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+  //   Delets a task card
+  router.delete("/delete/:id", (req, res) => {
+    const task_id = req.params.id;
+
+    db.query(`DELETE FROM tasks WHERE  id = $1;`, [task_id])
+      .then((data) => {
+        res.json({ deleted: true });
+      })
+      .catch((err) => {
+        res.status(500).json({ deleted: false, error: err.message });
+      });
+  });
+
+  //   Creats a task card
+  router.post("new/:projectID/:column", (req, res) => {
+    const { name, created_at } = req.body;
+    const project_id = req.params.projectID;
+    const column_name = req.params.col;
+    const owner_id = req.session.user_id;
 
     db.query(
-      `SELECT categories.title, categories.id, json_agg(tasks.*) as tasks, count(tasks.*)::int as total FROM categories JOIN tasks ON category_id=categories.id GROUP BY categories.title, categories.id ORDER BY categories.id ;`
+      `INSERT INTO tasks(name, created_at, owner_id, col, project_id) VALUES($1, $2, $3, $4, $5)
+        RETURNING tasks;`,
+      [name, created_at, owner_id, column_name, project_id]
     )
+      // .then(db.query(`INSERT INTO`)) --- inserting multiple users to users_to_tasks
       .then(({ rows: tasks }) => {
-        // const users = data.rows;
         res.json(
           tasks.reduce(
-            (previous, current) => ({ ...previous, [current.title]: current }),
+            (previous, current) => ({ ...previous, [current.id]: current }),
             {}
           )
         );
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  //   Moves tasks
+  router.patch("/:id/:column", (req, res) => {
+    const task_id = req.params.id;
+    const column = req.params.columnID;
+    db.query(
+      `UPDATE tasks SET col = $1  
+      WHERE tasks.id = $2`,
+      [column, task_id]
+    )
+      .then((data) => {
+        res.json(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
