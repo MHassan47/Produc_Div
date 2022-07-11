@@ -15,7 +15,6 @@ export default function useApplicationData(props) {
       axios.get("http://localhost:8080/api/projects/"),
     ]).then((all) => {
       setState((prev) => {
-        console.log("+++++++++", all[0].data);
         return {
           ...prev,
           users: all[0].data,
