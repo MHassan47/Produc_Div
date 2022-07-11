@@ -1,7 +1,13 @@
-import { useRef, useState, useEffect, React } from "react";
+import { useRef, useState, useEffect, useContext,  React } from "react";
+// import AuthContext from './context/AuthProvider'
+// import useApplicationData from "./hooks/useApplicationData";
+// import axios from "axios";
+
+
 
 
 export default function SignIn() {
+  // const { setAuth } = useContext(AuthContext)
 
 // user input, allow us to set focus to user input when the component loads
 const userRef = useRef();

@@ -4,17 +4,19 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const PORT = 8080;
+const cors = require("cors");
 
 // access token
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 // Register the route to get a new token
 // In a real world scenario we would authenticate user credentials
 // before creating a token, but for simplicity accessing this route
 // will generate a new token that is valid for 2 minutes
-app.get('/token', function(req, res){
-  var token = jwt.sign({username:"ado"}, 'supersecret',{expiresIn: 120});
-  res.send(token)
-})
+// app.get('/token', function(req, res){
+//   var token = jwt.sign({username:"ado"}, 'supersecret',{expiresIn: 120});
+//   res.send(token)
+// })
+
 
 // db connection
 const db = require("./configs/db.config");
@@ -22,9 +24,10 @@ const db = require("./configs/db.config");
 // routes import
 const usersRoutes = require("./routes/usersRoutes");
 const tasksRoutes = require("./routes/tasksRoutes");
+const projectsRoutes = require("./routes/projectsRoutes");
 
 const app = express();
-
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 // middleware setup
 app.use(morgan(ENVIROMENT));
 
@@ -35,7 +38,7 @@ app.use(cookieSession({ name: "session", keys: ["key1", "key2"] }));
 // routes
 app.use("/users", usersRoutes(db));
 app.use("/api/tasks", tasksRoutes(db));
-
+app.use("/api/projects", projectsRoutes(db));
 
 app.get("/", (req, res) => {
   res.json({ greetings: "hello world" });
