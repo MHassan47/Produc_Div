@@ -5,14 +5,31 @@
 }
 .kanban__section__title {
   display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
+  justify-content: end;
+  flex-direction: row;
+  /* padding-bottom: 1rem; */
+  /* padding-top: 1rem; */
+  align-items: center;
+  background-color: rgb(76, 76, 81);
+}
+
+.kanban__section__count {
+  display: flex;
+  margin-left: 1rem;
+  color: brown;
+}
+.kanban__section__add {
+  justify-content: end;
+  cursor: pointer;
+  font-size: 35px;
+  margin-left: 5rem;
+  margin-right: 1.5rem;
+  color: rgb(101, 86, 86);
 }
 
 .kanban__section {
   width: 300px;
-  height: 300px;
+  height: 500px;
   border-radius: 10px;
   border: 10px black;
   background-color: rgb(113, 113, 123);

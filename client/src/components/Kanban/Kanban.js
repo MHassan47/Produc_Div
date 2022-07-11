@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import Card from "../Task/Card";
 import "./Kanban.css";
+import { IoIosAdd } from "react-icons/io";
 
 // const test = [
 //   { id: 1, name: "one" },
@@ -40,7 +41,14 @@ const Kanban = (props) => {
 
     console.log("dragged item");
   };
-  // console.log("UPDATED STATE", state);
+
+  // const columnCount = () => {
+  //   count=0
+  //   state.tasks.map((task) =>)
+  // }
+  // const onClickDots = () => {
+  //   console.log("clicked");
+  // };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -53,7 +61,19 @@ const Kanban = (props) => {
                 className="kanban__section"
                 ref={provided.innerRef}
               >
-                <div className="kanban__section__title">{element}</div>
+                <div className="kanban__section__title">
+                  {element}
+                  <div className="kanban__section__count">
+                    {
+                      state.tasks.filter(
+                        (task) => task.col === element && task.project_id === 1
+                      ).length
+                    }
+                  </div>
+                  <div className="kanban__section__add">
+                    <IoIosAdd onClick={() => console.log(element)} />
+                  </div>
+                </div>
                 <div className="kanban__section__content">
                   {state.tasks.map((task, index) => {
                     if (task.col === element && task.project_id === 1)
