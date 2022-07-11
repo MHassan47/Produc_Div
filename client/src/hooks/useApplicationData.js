@@ -8,22 +8,22 @@ export default function useApplicationData(props) {
     tasks: [],
   });
 
-  useEffect(() => {
-    Promise.all([
-      axios.get("http://localhost:8080/users/"),
-      axios.get("http://localhost:8080/api/tasks/"),
-      axios.get("http://localhost:8080/api/projects/"),
-    ]).then((all) => {
-      setState((prev) => {
-        return {
-          ...prev,
-          users: all[0].data,
-          tasks: all[1].data,
-          projects: all[2].data,
-        };
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("http://localhost:8080/users/"),
+  //     axios.get("http://localhost:8080/api/tasks/"),
+  //     axios.get("http://localhost:8080/api/projects/"),
+  //   ]).then((all) => {
+  //     setState((prev) => {
+  //       return {
+  //         ...prev,
+  //         users: all[0].data,
+  //         tasks: all[1].data,
+  //         projects: all[2].data,
+  //       };
+  //     });
+  //   });
+  // }, []);
 
   return {
     state,

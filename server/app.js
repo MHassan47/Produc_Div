@@ -33,12 +33,15 @@ app.use(morgan(ENVIROMENT));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieSession({ name: "session", keys: ["key1", "key2"] }));
+app.use(cookieSession({ name: "session", keys: ["key1", "key2"], maxAge: 24 * 60 * 60 * 1000 
+// 24 hours 
+}));
 
 // routes
 app.use("/users", usersRoutes(db));
 app.use("/api/tasks", tasksRoutes(db));
 app.use("/api/projects", projectsRoutes(db));
+
 
 app.get("/", (req, res) => {
   res.json({ greetings: "hello world" });

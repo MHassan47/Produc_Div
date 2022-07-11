@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useRef, useState, useEffect, useContext,  React } from "react";
+import { useRef, useState, useEffect,  React } from "react";
+import { useNavigate } from "react-router-dom";
 // import AuthContext from './context/AuthProvider'
 // import useApplicationData from "./hooks/useApplicationData";
 // import axios from "axios";
@@ -7,18 +8,20 @@ import { useRef, useState, useEffect, useContext,  React } from "react";
 
 
 
-export default function SignIn() {
-  // const { setAuth } = useContext(AuthContext)
+export default function SignIn(props) {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
+  
 
 // user input, allow us to set focus to user input when the component loads
 const userRef = useRef();
 //   // for the error message, so if we get an error it can be announced by a screen reader for accessibility
 const errRef = useRef();
 
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [errMsg, setErrMsg] = useState("");
-const [success, setSuccess] = useState(false);
 
 useEffect(() => {
   userRef.current.focus();
@@ -29,12 +32,28 @@ useEffect(() => {
 }, [email, password]);
 
 const handleSubmit = async (event) => {
-  event.preventDefault();
-  console.log(email, password);
-  axios.get("/users")
-  setEmail('');
-  setPassword('');
-  setSuccess(true);
+
+  console.log("**************SUBMIT Sign-In clicked **************")
+  const body = {
+    email,
+    password
+  }
+  try {
+    const { data } = await axios.post('/users/sign-in', body)
+    console.log("+++++++++++++++data:  ", data)
+
+    
+  } catch (error) {
+    console.log("----------- error:  ", error)
+  }
+  // return(axios.post('/signIn', { email:email, password:password })
+  // .then((result) => {
+  //   console.log("Successful Sign In!", result)
+  // })
+  // .then(() => {
+  //   navigate('/homepage')
+  // })
+  // )
 }
 
 return (
@@ -49,20 +68,20 @@ return (
     </section>
   ) : (
   <section>
-    <p
+    {/* <p
       ref={errRef}
       className={errMsg ? "error message" : "offscreen"}
-      aria-live="assertive">{errMsg} </p>
+      aria-live="assertive">{errMsg} </p> */}
 
       <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={event => event.preventDefault()}>
         <label htmlFor="email">Email:</label>
         <input
           type="text"
           id="email"
           ref={userRef}
           autoComplete="off"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           value={email}
           required
         />
@@ -70,17 +89,17 @@ return (
         <input
           type="password"
           id="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           value={password}
           required
         />
-        <button>Sign In</button>
+        <button type="button" className="btn" onClick={(event) => handleSubmit()}>Sign In</button>
       </form>
       <p>
         Don't have an account?<br />
         <span className="link">
           {/* put router link here */}
-          <a href="/register">Register</a>
+          <a href="/users/register">Register</a>
         </span>
       </p>
   </section>

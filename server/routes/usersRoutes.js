@@ -55,11 +55,11 @@ module.exports = (db) => {
     .then(result => {
       const user = result.rows[0];
         console.log("user.result: " + user);
-
-        res.redirect("/");
+        res.status(200).send({ user })
+        // res.redirect("/");
     })
     .catch(err => {
-      res.status(401).send("Couldn't connect to the register page0")
+      res.status(401).send("Couldn't connect to the register page")
     }) 
 
   return router;
@@ -78,11 +78,13 @@ module.exports = (db) => {
   //  res.json({ accessToken: accessToken })
     db.query(`SELECT * FROM users WHERE email = $1 AND password = $2 LIMIT 1;`, [email, password])
     .then(users => {
-        console.log(users.rows);
+        console.log(users.rows, email);
         const user = users.rows[0];
         
         if (user) {
+          res.status(200).send({ user })
           console.log(user);
+          console.log("user.result: " + user);
          
           res.redirect("/");
         }

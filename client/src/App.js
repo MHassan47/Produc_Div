@@ -23,7 +23,7 @@ function App() {
             element={<Kanban state={state} setState={setState} />}
           />
           {/* <Route path="/" element={<Homepage />} /> */}
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<Register state={state} setState={setState} />} />
           <Route path="/signin" element={<SignIn />} />
         </Routes>
       </BrowserRouter>
