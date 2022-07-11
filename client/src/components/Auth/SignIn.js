@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRef, useState, useEffect, useContext,  React } from "react";
 // import AuthContext from './context/AuthProvider'
 // import useApplicationData from "./hooks/useApplicationData";
@@ -30,6 +31,7 @@ useEffect(() => {
 const handleSubmit = async (event) => {
   event.preventDefault();
   console.log(email, password);
+  axios.get("/users")
   setEmail('');
   setPassword('');
   setSuccess(true);

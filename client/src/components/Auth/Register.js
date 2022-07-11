@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-import { FiCheck } from "react-icons/fi";
-import { FaAsterisk } from "react-icons/fa";
+// import { FiCheck } from "react-icons/fi";
+// import { FaAsterisk } from "react-icons/fa";
 
 // const validEmail = function ValidateEmail(input) {
 //   const userRegValidation =
@@ -17,10 +17,10 @@ import { FaAsterisk } from "react-icons/fa";
 //   }
 // };
 const validEmail =
-/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const validPwd  =
-/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+// const validPwd  =
+// /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 // const validPwd = function ValidatePwd(input) {
 //   const passwordValidation =
 //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -74,15 +74,15 @@ export default function Register() {
     setValidatedEmail(result);
   }, [user]);
 
-  useEffect(() => {
-    const result = validPwd.test(password);
-    console.log(result);
-    console.log(password);
-    setValidatePwd(result);
-    const confirmed = password === confirmedPwd;
-    setValidateConfirmedPwd(confirmed);
-    //password state in the dependency array
-  }, [password, confirmedPwd]);
+  // useEffect(() => {
+  //   const result = validPwd.test(password);
+  //   console.log(result);
+  //   console.log(password);
+  //   setValidatePwd(result);
+  //   const confirmed = password === confirmedPwd;
+  //   setValidateConfirmedPwd(confirmed);
+  //   //password state in the dependency array
+  // }, [password, confirmedPwd]);
 
   useEffect(() => {
     setErrMsg("");
@@ -96,18 +96,57 @@ export default function Register() {
   return (
     <section>
       <h1>Register</h1>
-      <p
+      {/* <p
         ref={errRef}
         className={errMsg ? "error message" : "offscreen"}
         aria-live="assertive"
       >
         {errMsg}{" "}
-      </p>
+      </p> */}
       <form>
+        <label htmlFor="first_name">
+          First Name:
+          <div>
+            {/* {validatedEmail ? <FiCheck /> : "hide"}
+         {validatedEmail || !user ? <FaAsterisk /> : "hide"} */}
+          </div>
+        </label>
+        <input
+          type="text"
+          // id of user name
+          id="first_name"
+          // allow us to set focus on teh input
+          ref={userRef}
+          // autoComplete is off because we don't want to see previous values suggested for this field.
+          autoComplete="off"
+          //ties the input to the userState
+          onChange={(event) => setUser(event.target.value)}
+        />
+        <br />
+
+        <label htmlFor="last_name">
+          Last Name:
+          <div>
+            {/* {validatedEmail ? <FiCheck /> : "hide"}
+         {validatedEmail || !user ? <FaAsterisk /> : "hide"} */}
+          </div>
+        </label>
+        <input
+          type="text"
+          // id of user name
+          id="last_name"
+          // allow us to set focus on teh input
+          ref={userRef}
+          // autoComplete is off because we don't want to see previous values suggested for this field.
+          autoComplete="off"
+          //ties the input to the userState
+          onChange={(event) => setUser(event.target.value)}
+        />
+        <br />
         <label htmlFor="email">
           Email:
           <div>
-         {/* {validatedEmail ? <FiCheck /> : "hide"}
+            {/* {validatedEmail ? <FiCheck /> : "hide"}
          {validatedEmail || !user ? <FaAsterisk /> : "hide"} */}
           </div>
         </label>
@@ -154,10 +193,10 @@ export default function Register() {
           // when you leave the input field
           onBlur={() => setPasswordFocus(false)}
         />
-        <p
+        {/* <p
           id="pwdnote"
           className={
-            passwordFocus && !validatePwd ? "instructions" : "offscreen"
+            passwordFocus && !validatePwd ? "instructions" : "offscreen"bdsbfd
           }
         >
           8 to 24 characters.
@@ -171,8 +210,8 @@ export default function Register() {
           <span aria-label="hashtag">#</span>{" "}
           <span aria-label="dollar sign">$</span>{" "}
           <span aria-label="percent">%</span>
-        </p>
-
+        </p> */}
+        <br />
         <label htmlFor="confirm_pwd">
           Confirm Password:
           {/* <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
@@ -184,20 +223,24 @@ export default function Register() {
           onChange={(e) => setPassword(e.target.value)}
           value={confirmedPwd}
           required
-          aria-invalid={validateConfirmedPwd ? "false" : "true"}
-          aria-describedby="confirmnote"
+          // aria-invalid={validateConfirmedPwd ? "false" : "true"}
+          // aria-describedby="confirmnote"
           onFocus={() => setConfirmedPwdFocus(true)}
           onBlur={() => setConfirmedPwdFocus(false)}
         />
-        <p
+        {/* <p
           id="confirmnote"
           className={setConfirmedPwdFocus && ! confirmedPwd ? "instructions" : "offscreen"}
         >
           Must match the first password input field.
-        </p>
+        </p> */}
 
         <button
-          disabled={!validatedEmail || ! validatePwd || !validateConfirmedPwd ? true : false}
+          disabled={
+            !validatedEmail || !validatePwd || !validateConfirmedPwd
+              ? true
+              : false
+          }
         >
           Register
         </button>
@@ -206,8 +249,7 @@ export default function Register() {
         Already registered?
         <br />
         <span className="line">
-          {/*put router link here*/}
-          <a href="#">Sign In</a>
+          <a href="/signIn">Sign In</a>
         </span>
       </p>
     </section>

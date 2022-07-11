@@ -22,6 +22,24 @@ module.exports = (db) => {
   return router;
   });
 
+  router.get("/:id", (req, res) => {
+    const user_email = req.params.id;
+    db.query(`SELECT * FROM users WHERE users.email = $1;`, [user_email])
+      .then(({ rows: users }) => {
+        res.json(
+          users.reduce(
+            (previous, current) => ({ ...previous, [current.id]: current }),
+            {}
+          )
+        );
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+
+  return router;
+  });
+
   router.get("/register", (req, res) => {
 
     res.render("register");
