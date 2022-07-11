@@ -77,9 +77,10 @@ module.exports = (db) => {
   });
 
   //   Moves tasks
-  router.patch("/:id/:column", (req, res) => {
+  router.put("/move/:id", (req, res) => {
+    console.log("testtt");
     const task_id = req.params.id;
-    const column = req.params.columnID;
+    const column = req.body.col;
     db.query(
       `UPDATE tasks SET col = $1  
       WHERE tasks.id = $2`,

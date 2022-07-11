@@ -3,8 +3,16 @@
   align-items: center;
   justify-content: center;
   width: 150px;
+  height: 80px;
   padding: 10px;
   background-color: bisque;
   border-radius: 10px;
   margin-bottom: 1rem;
+  z-index: 1;
+}
+
+.card__option {
+  display: flex;
+  z-index: 100;
+  cursor: pointer;
 }
