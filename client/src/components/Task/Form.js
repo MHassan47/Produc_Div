@@ -1,11 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Form = ({ state, setState }) => {
+const Form = ({
+  state,
+  setState,
+  currentColumn,
+  newTask,
+  //   setNewCardToDo,
+  //   setNewCardInProgress,
+  //   setNewCardComplete,
+}) => {
   //   const state = props.state;
   //   const setState = props.setState;
   const project = 1;
-  const column = "In Progress";
+  const column = currentColumn;
   const [user_id, setUser_id] = useState(1);
   const [description, setDescription] = useState("");
 
@@ -27,6 +35,7 @@ const Form = ({ state, setState }) => {
         setState({ ...state, tasks: [...state.tasks, response.data] });
         console.log(response);
       })
+      .then(() => newTask(currentColumn))
       .catch((err) => console.log(err));
   };
 
