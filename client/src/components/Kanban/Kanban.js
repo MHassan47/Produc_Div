@@ -11,9 +11,9 @@ import { IoIosAdd } from "react-icons/io";
 //   { id: 2, name: "two" },
 // ];
 
-const Kanban = (props) => {
-  const state = props.state;
-  const setState = props.setState;
+const Kanban = ({ state, setState }) => {
+  // const state = props.state;
+  // const setState = props.setState;
   const [project, setProject] = useState(1);
   const [columns, setColumns] = useState(["To Do", "In Progress", "Complete"]);
   const [currentColumn, setCurrentColumn] = useState("");
@@ -90,6 +90,8 @@ const Kanban = (props) => {
                     <IoIosAdd
                       onClick={
                         () => newTask(element)
+
+                        // newTask(element)
                         /* () => {
                           // setNewCard((prev) => !prev);
                           
@@ -118,7 +120,13 @@ const Kanban = (props) => {
                                 opacity: snapshot.isDragging ? "0.5" : "1",
                               }}
                             >
-                              <Card>{task.name}</Card>
+                              <Card
+                                state={state}
+                                setState={setState}
+                                task={task}
+                              >
+                                {task.name}
+                              </Card>
                             </div>
                           )}
                         </Draggable>
@@ -126,21 +134,47 @@ const Kanban = (props) => {
                   })}
                   {provided.placeholder}
                 </div>
+
+                <div className="newCard-form" id={element}>
+                  {element === "To Do" && newCardToDo && (
+                    <Form
+                      state={state}
+                      setState={setState}
+                      currentColumn={element}
+                      newTask={newTask}
+                    />
+                  )}
+
+                  {element === "In Progress" && newCardInProgress && (
+                    <Form
+                      state={state}
+                      setState={setState}
+                      currentColumn={element}
+                      newTask={newTask}
+                    />
+                  )}
+
+                  {element === "Complete" && newCardComplete && (
+                    <Form
+                      state={state}
+                      setState={setState}
+                      currentColumn={element}
+                      newTask={newTask}
+                    />
+                  )}
+                </div>
               </div>
             )}
           </Droppable>
         ))}
       </div>
-      <div className="newCard">
+      {/* <div className="newCard">
         <div className="newCard-form">
           {newCardToDo && (
             <Form
               state={state}
               setState={setState}
               currentColumn={currentColumn}
-              // setNewCardToDo={setNewCardToDo}
-              // setNewCardInProgress={setNewCardInProgress}
-              // setNewCardComplete={setNewCardComplete}
               newTask={newTask}
             />
           )}
@@ -151,9 +185,7 @@ const Kanban = (props) => {
               state={state}
               setState={setState}
               currentColumn={currentColumn}
-              setNewCardToDo={setNewCardToDo}
-              setNewCardInProgress={setNewCardInProgress}
-              setNewCardComplete={setNewCardComplete}
+              newTask={newTask}
             />
           )}
         </div>
@@ -163,13 +195,11 @@ const Kanban = (props) => {
               state={state}
               setState={setState}
               currentColumn={currentColumn}
-              setNewCardToDo={setNewCardToDo}
-              setNewCardInProgress={setNewCardInProgress}
-              setNewCardComplete={setNewCardComplete}
+              newTask={newTask}
             />
           )}
         </div>
-      </div>
+      </div> */}
     </DragDropContext>
   );
 };

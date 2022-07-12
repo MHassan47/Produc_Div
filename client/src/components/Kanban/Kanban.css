@@ -1,5 +1,6 @@
 .kanban {
   display: flex;
+  height: fit-content;
   align-items: flex-start;
   justify-content: left;
   gap: 2rem;
@@ -11,7 +12,7 @@
   /* padding-bottom: 1rem; */
   /* padding-top: 1rem; */
   align-items: center;
-  background-color: rgb(76, 76, 81);
+  background-color: rgb(155, 155, 158);
 }
 
 .kanban__section__count {
@@ -33,7 +34,10 @@
   height: fit-content;
   border-radius: 10px;
   border: 10px black;
-  background-color: rgb(113, 113, 123);
+  background-color: rgb(207, 207, 208);
+}
+.kanban__section:hover {
+  background-color: rgb(129, 129, 143);
 }
 
 .kanban__section__content {
