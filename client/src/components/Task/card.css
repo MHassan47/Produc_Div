@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   width: 200px;
-  height: 80px;
+  height: 90px;
   padding: 10px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
@@ -35,5 +35,25 @@
 }
 
 .create__card {
-  background-color: aliceblue;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  height: 90px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  z-index: 1;
+}
+
+.create__card {
+  display: flex;
+  font-size: smaller;
+}
+.card__form {
+  display: flex;
+  flex-direction: column;
 }

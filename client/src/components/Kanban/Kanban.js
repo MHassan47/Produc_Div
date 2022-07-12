@@ -65,7 +65,6 @@ const Kanban = ({ state, setState }) => {
     }
   };
 
-  console.log("+++++", currentColumn);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="kanban">
@@ -102,6 +101,34 @@ const Kanban = ({ state, setState }) => {
                   </div>
                 </div>
                 <div className="kanban__section__content">
+                  <div className="newCard-form" id={element}>
+                    {element === "To Do" && newCardToDo && (
+                      <Form
+                        state={state}
+                        setState={setState}
+                        currentColumn={element}
+                        newTask={newTask}
+                      />
+                    )}
+
+                    {element === "In Progress" && newCardInProgress && (
+                      <Form
+                        state={state}
+                        setState={setState}
+                        currentColumn={element}
+                        newTask={newTask}
+                      />
+                    )}
+
+                    {element === "Complete" && newCardComplete && (
+                      <Form
+                        state={state}
+                        setState={setState}
+                        currentColumn={element}
+                        newTask={newTask}
+                      />
+                    )}
+                  </div>
                   {state.tasks.map((task, index) => {
                     if (task.col === element && task.project_id === 1)
                       return (
@@ -133,35 +160,6 @@ const Kanban = ({ state, setState }) => {
                       );
                   })}
                   {provided.placeholder}
-                </div>
-
-                <div className="newCard-form" id={element}>
-                  {element === "To Do" && newCardToDo && (
-                    <Form
-                      state={state}
-                      setState={setState}
-                      currentColumn={element}
-                      newTask={newTask}
-                    />
-                  )}
-
-                  {element === "In Progress" && newCardInProgress && (
-                    <Form
-                      state={state}
-                      setState={setState}
-                      currentColumn={element}
-                      newTask={newTask}
-                    />
-                  )}
-
-                  {element === "Complete" && newCardComplete && (
-                    <Form
-                      state={state}
-                      setState={setState}
-                      currentColumn={element}
-                      newTask={newTask}
-                    />
-                  )}
                 </div>
               </div>
             )}
