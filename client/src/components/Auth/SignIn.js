@@ -40,6 +40,7 @@ export default function SignIn({ state, setState }) {
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     // console.log("///////", state);
     // let userStateArray = Object.keys(state.users).map((key) => {
     //   let array = state.users[key];
@@ -63,12 +64,13 @@ export default function SignIn({ state, setState }) {
           // userStateArray.map((user) => {
           //   if (user.email === email) {
           //     console.log("##########", user.id);
-
+          console.log("DATA USERRRRR", data);
           return login(data.user);
         }
         //   });
       )
       .then(() => navigate("/dashboard", { replace: true }))
+      .then(() => console.log("THIS IS STATE", state))
 
       .catch((error) => {
         setErrMsg(error.response.data.error);
@@ -89,7 +91,7 @@ export default function SignIn({ state, setState }) {
         <section>
           <h1>Sign In</h1>
           {/* <div>{errMsg ? <div>{errMsg}<div> : <div></div>} </div> */}
-          <form onSubmit={(event) => event.preventDefault()}>
+          <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email:</label>
             <input
               type="text"
@@ -109,9 +111,9 @@ export default function SignIn({ state, setState }) {
               required
             />
             <button
-              type="button"
+              type="submit"
               className="btn"
-              onClick={(event) => handleSubmit()}
+              // onClick={(event) => handleSubmit()}
             >
               Sign In
             </button>
