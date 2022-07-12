@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import usersRoutes from "../../../../server/routes/usersRoutes";
 
 const Form = ({
   state,
@@ -14,7 +15,7 @@ const Form = ({
   //   const setState = props.setState;
   const project = 1;
   const column = currentColumn;
-  const [user_id, setUser_id] = useState(1);
+  // const [user_id, setUser_id] = useState(1);
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
 
@@ -29,7 +30,7 @@ const Form = ({
         name: description,
         created_at: "2022/07/13",
         col: column,
-        owner_id: user_id,
+        owner_id: user.id,
       })
       .then((response) => {
         setState({ ...state, tasks: [...state.tasks, response.data] });
