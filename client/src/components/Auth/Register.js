@@ -28,7 +28,7 @@ export default function Register(props) {
     }
 
     try {
-      const { data } = await axios.post('/users/register', body)
+      const { data } = await axios.post('http://localhost:8080/users/register', body)
       console.log("+++++++++++++++data:  ", data)
     } catch (error) {
       console.log("----------- error:  ", error)

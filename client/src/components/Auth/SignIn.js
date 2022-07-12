@@ -1,16 +1,17 @@
 import axios from "axios";
-import { useRef, useState, useEffect,  React } from "react";
+import { useRef, useState, useEffect, useContext,  React } from "react";
 import { useNavigate } from "react-router-dom";
-// import AuthContext from './context/AuthProvider'
+
+import {AuthContext} from '/Users/ameraalleyne/lighthouse/final/client/src/context/AuthProvider.js'
 // import useApplicationData from "./hooks/useApplicationData";
 // import axios from "axios";
 
 
 
 
-export default function SignIn(props) {
+export default function SignIn({state, setState}) {
   const navigate = useNavigate();
-
+const {login, logout} = useContext(AuthContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -31,21 +32,51 @@ useEffect(() => {
   setErrMsg("");
 }, [email, password]);
 
-const handleSubmit = async (event) => {
+const validateLogin= () => {
+  if(!email){
+    setErrMsg("Cannot be left blank")
+    return false
+  }
+  if(!password){
+    setErrMsg("Cannot be left blank")
+    return false
+  }
+   return true
+}
 
+
+const handleSubmit = (event) => {
+  console.log("///////", state)
+  let userStateArray = Object.keys(state.users).map(key => {
+    let array = state.users[key]
+    array.key = key
+    return array
+  })
+  console.log(userStateArray);
+  console.log("----------------------------------------");
+  if(validateLogin())
   console.log("**************SUBMIT Sign-In clicked **************")
   const body = {
     email,
     password
   }
-  try {
-    const { data } = await axios.post('/users/sign-in', body)
-    console.log("+++++++++++++++data:  ", data)
+  axios.post('http://localhost:8080/users/sign-in', body)
+  // const userArr = [];
 
-
-  } catch (error) {
-    console.log("----------- error:  ", error)
+  .then(() => {
+userStateArray.map((user) => {
+  if(user.email === email){
+    console.log("##########", user.id);
+    
+    return login(user)
   }
+})
+  })
+    .then( () => navigate("/dashboard", { replace: true }))
+  
+   .catch(error => 
+    console.log("----------- error:  ", error))
+  
 }
 
 return (
@@ -60,12 +91,9 @@ return (
     </section>
   ) : (
   <section>
-    {/* <p
-      ref={errRef}
-      className={errMsg ? "error message" : "offscreen"}
-      aria-live="assertive">{errMsg} </p> */}
-
+  
       <h1>Sign In</h1>
+      {/* <div>{errMsg ? <div>{errMsg}<div> : <div></div>} </div> */}
       <form onSubmit={event => event.preventDefault()}>
         <label htmlFor="email">Email:</label>
         <input

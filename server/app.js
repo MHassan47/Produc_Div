@@ -18,7 +18,6 @@ const cors = require("cors");
 //   res.send(token)
 // }) 
 
-
 // db connection
 const db = require("./configs/db.config");
 

@@ -1,18 +1,59 @@
 .card {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  width: 150px;
-  height: 80px;
+  width: 200px;
+  height: 90px;
   padding: 10px;
-  background-color: bisque;
+  background-color: rgb(255, 255, 255);
   border-radius: 10px;
   margin-bottom: 1rem;
   z-index: 1;
 }
 
+.card__description {
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+}
 .card__option {
   display: flex;
+  justify-content: end;
   z-index: 100;
   cursor: pointer;
+}
+.card__footer {
+  height: 50px;
+  width: 50px;
+}
+
+.card__owner {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.create__card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  height: 90px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  z-index: 1;
+}
+
+.create__card {
+  display: flex;
+  font-size: smaller;
+}
+.card__form {
+  display: flex;
+  flex-direction: column;
 }

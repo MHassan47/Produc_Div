@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -19,7 +19,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
 
-  return router;
+    return router;
   });
 
   router.get("/:id", (req, res) => {
@@ -37,18 +37,18 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
 
-  return router;
+    return router;
   });
 
   router.get("/register", (req, res) => {
   const { users } = req.body;
   console.log("++++++++++++++++++++USers:  ", users)
     res.render("register");
-    
-  }) 
+  });
 
   router.post("/register", (req, res) => {
-    const { first_name, last_name, email, password, photo_url, role } = req.body;
+    const { first_name, last_name, email, password, photo_url, role } =
+      req.body;
 
    
 
@@ -63,11 +63,10 @@ module.exports = (db) => {
       res.status(401).send("Couldn't connect to the register page")
     }) 
 
-  return router;
-  })
+    return router;
+  });
 
   router.get("/sign-in", (req, res) => {
-
     res.render("sign-in");
     res.status(200).send("sign-in path is working");
   });
@@ -80,15 +79,18 @@ module.exports = (db) => {
   //  res.json({ accessToken: accessToken })
     db.query(`SELECT * FROM users WHERE email = $1 AND password = $2 LIMIT 1;`, [email, password])
     .then(users => {
-        console.log(users.rows, email);
-        const user = users.rows[0];
+      const user = users.rows[0];
+      
+      // console.log("*************", users.rows, email);
        
         if (user) {
-          // res.status(200).send({ user })
+         
+          res.status(200).send({ user })
           console.log(user);
           console.log("user.result: " + user);
          
-          return res.status(200).send("Heyyy stuff");
+          return  res.json(users)
+          // res.status(200).send("Heyyy stuff");
         }
           res.status(401).send({ error: "error" })
       })
