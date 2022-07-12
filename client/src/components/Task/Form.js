@@ -16,13 +16,13 @@ const Form = ({
   const column = currentColumn;
   const [user_id, setUser_id] = useState(1);
   const [description, setDescription] = useState("");
+  const [error, setError] = useState(false);
 
   //   const [owner, setOwner] = useState(null);
   //   const [members, setMembers] = useState([]);
 
   const handleSubmit = (e) => {
-    // console.log(state);
-    // console.log(setState);
+    if (!description) return setError(true);
     e.preventDefault();
     axios
       .post(`http://localhost:8080/api/tasks/new/${project}`, {
@@ -45,6 +45,7 @@ const Form = ({
       <form onSubmit={handleSubmit} className="card__form">
         <label>
           <p>Description</p>
+          <p>{error ? <div>Include a description</div> : <></>} </p>
           <input
             type="text"
             id="description"
@@ -52,7 +53,7 @@ const Form = ({
           />
         </label>
         <div className="card__form__footer">
-          <button type="submit">Add</button>
+          <button type="submit">Create</button>
         </div>
       </form>
     </div>
