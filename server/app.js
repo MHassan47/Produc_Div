@@ -2,6 +2,7 @@ require("dotenv").config();
 const { ENVIROMENT } = process.env;
 const express = require("express");
 const morgan = require("morgan");
+// import session = require('express-session');
 const cookieSession = require("cookie-session");
 const PORT = 8080;
 const cors = require("cors");
@@ -15,7 +16,7 @@ const cors = require("cors");
 // app.get('/token', function(req, res){
 //   var token = jwt.sign({username:"ado"}, 'supersecret',{expiresIn: 120});
 //   res.send(token)
-// })
+// }) 
 
 
 // db connection
@@ -33,7 +34,14 @@ app.use(morgan(ENVIROMENT));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieSession({ name: "session", keys: ["key1", "key2"], maxAge: 24 * 60 * 60 * 1000 
+
+app.use(cookieSession({ 
+  name: "session", 
+  keys: ["key1", "key2"],
+  // 24 hours
+  cookie: { maxAge: 30000 },
+  saveUninitialized: false
+  // expires: 
 // 24 hours 
 }));
 
@@ -44,6 +52,10 @@ app.use("/api/projects", projectsRoutes(db));
 
 
 app.get("/", (req, res) => {
+  req.session.isAuth = true;
+  console.log("req.session: ", req.session);
+
+  console.log("req.session.id: ", req.session.id);
   res.json({ greetings: "hello world" });
 });
 

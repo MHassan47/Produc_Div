@@ -41,7 +41,8 @@ module.exports = (db) => {
   });
 
   router.get("/register", (req, res) => {
-
+  const { users } = req.body;
+  console.log("++++++++++++++++++++USers:  ", users)
     res.render("register");
     
   }) 
@@ -49,12 +50,12 @@ module.exports = (db) => {
   router.post("/register", (req, res) => {
     const { first_name, last_name, email, password, photo_url, role } = req.body;
 
-    console.log("register body: " + req.body)
+   
 
     db.query(`INSERT INTO users (first_name, last_name, email, password, photo_url, role) VALUES ('${first_name}', '${last_name}', '${email}', '${password}', '${photo_url}', '${role}') RETURNING *;`)
     .then(result => {
       const user = result.rows[0];
-        console.log("user.result: " + user);
+        console.log("user.result: ", user);
         res.status(200).send({ user })
         // res.redirect("/");
     })
@@ -73,6 +74,7 @@ module.exports = (db) => {
 
   router.post("/sign-in", (req, res) => {
     const { email, password } = req.body;
+    req.session.id = email
     // const user = { email, password }
   //  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
   //  res.json({ accessToken: accessToken })
@@ -80,19 +82,17 @@ module.exports = (db) => {
     .then(users => {
         console.log(users.rows, email);
         const user = users.rows[0];
-        
+       
         if (user) {
-          res.status(200).send({ user })
+          // res.status(200).send({ user })
           console.log(user);
           console.log("user.result: " + user);
          
-          res.redirect("/");
+          return res.status(200).send("Heyyy stuff");
         }
-        if (!user) {
           res.status(401).send({ error: "error" })
-        }
       })
-      .catch(err => res.send(err));
+      .catch(err => console.log("+++++++++++++++++", err));
   });
 
   return router;

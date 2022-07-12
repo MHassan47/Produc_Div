@@ -105,7 +105,7 @@ export default function Homepage() {
           <h1 className={classes.appbarTitle}>
           <span className={classes.colorText}>HomePage.</span>
           </h1>
-       <NavLink to='/signin' >
+       <NavLink to='/sign-in' >
          <button>Login</button>
           </NavLink>
         <NavLink to='/register'> <button>Register</button></NavLink> 

@@ -42,18 +42,10 @@ const handleSubmit = async (event) => {
     const { data } = await axios.post('/users/sign-in', body)
     console.log("+++++++++++++++data:  ", data)
 
-    
+
   } catch (error) {
     console.log("----------- error:  ", error)
   }
-  // return(axios.post('/signIn', { email:email, password:password })
-  // .then((result) => {
-  //   console.log("Successful Sign In!", result)
-  // })
-  // .then(() => {
-  //   navigate('/homepage')
-  // })
-  // )
 }
 
 return (

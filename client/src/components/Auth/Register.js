@@ -12,30 +12,9 @@ export default function Register(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
-  // const [state, setState] = useState({
-  //   first_name: "",
-  //   last_name: "",
-  //   email: "",
-  //   password: "",
-  //   confirm_password: "",
+  
+  // const navigate = useNavigate();
 
-  // })
-  // const [first_name, setFirstName] = useState;
-  // const [last_name, setLastName] = useState;
-  // // const [user, setUser] = useState('');
-  // const [email, setEmail] = useState();
-  // const [password, setPassword] = useState();
-  // const [confirmPassword, setConfirmPassword] = useState();
-  // const userRef = useRef();
-  // const [success, setSuccess] = useState(false);
-  const [errMsg, setErrMsg] = useState();
-
-  const navigate = useNavigate();
-
-  // setting the focus on the userName when the component loads. userRef = refernce the user
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, []);
 
   const handleSubmit = async (event) => {
     // event.preventDefault()
