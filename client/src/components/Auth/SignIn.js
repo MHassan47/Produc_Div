@@ -70,7 +70,9 @@ export default function SignIn({ state, setState }) {
       )
       .then(() => navigate("/dashboard", { replace: true }))
 
-      .catch((error) => console.log("----------- error:  ", error));
+      .catch((error) => {
+        setErrMsg(error.response.data.error);
+      });
   };
 
   return (
