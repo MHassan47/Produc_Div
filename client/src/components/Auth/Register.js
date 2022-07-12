@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import axios from "./api/axios";
 import "./Register.css";
 
-export default function Register(props) {
+export default function Register({ state, setState }) {
   const navigate = useNavigate();
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
@@ -47,6 +47,17 @@ export default function Register(props) {
 
     axios
       .post("http://localhost:8080/users/register", body)
+      .then((response) => {
+        console.log(response);
+        setState({
+          ...state,
+          users: {
+            ...state.users,
+            [response.data.user.id]: response.data.user,
+          },
+        });
+        console.log("NEW STATE----", state);
+      })
       .then(() => navigate("/sign-in"))
       .catch((error) => {
         console.log("Registration error---", error);
