@@ -105,7 +105,7 @@ export default function Homepage() {
           <h1 className={classes.appbarTitle}>
           <span className={classes.colorText}>HomePage.</span>
           </h1>
-       <NavLink to='/signin' >
+       <NavLink to='/sign-in' >
          <button>Login</button>
           </NavLink>
         <NavLink to='/register'> <button>Register</button></NavLink> 
@@ -120,7 +120,7 @@ export default function Homepage() {
       <Collapse
         in={checked}
         {...(checked ? { timeout: 1000 } : {})}
-        collapsedHeight={50}
+        collapsedSize={50}
       >
         <div className={classes.container}>
           <h1 className={classes.title}>

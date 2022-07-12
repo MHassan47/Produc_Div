@@ -51,24 +51,27 @@ module.exports = (db) => {
   });
 
   //   Creats a task card
-  router.post("new/:projectID/:column", (req, res) => {
-    const { name, created_at } = req.body;
+  router.post("/new/:projectID", (req, res) => {
+    console.log("reached");
+    const { name, created_at, owner_id, col } = req.body;
     const project_id = req.params.projectID;
-    const column_name = req.params.col;
-    const owner_id = req.session.user_id;
+    // const column_name = req.params.col;
+    // const owner_id = req.session.user_id;
 
     db.query(
       `INSERT INTO tasks(name, created_at, owner_id, col, project_id) VALUES($1, $2, $3, $4, $5)
-        RETURNING tasks;`,
-      [name, created_at, owner_id, column_name, project_id]
+        RETURNING *;`,
+      [name, created_at, owner_id, col, project_id]
     )
       // .then(db.query(`INSERT INTO`)) --- inserting multiple users to users_to_tasks
-      .then(({ rows: tasks }) => {
+      .then((response) => {
+        console.log("done");
         res.json(
-          tasks.reduce(
-            (previous, current) => ({ ...previous, [current.id]: current }),
-            {}
-          )
+          response.rows[0]
+          // tasks.reduce(
+          //   (previous, current) => ({ ...previous, [current.id]: current }),
+          //   {}
+          // )
         );
       })
       .catch((err) => {
