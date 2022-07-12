@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
-import usersRoutes from "../../../../server/routes/usersRoutes";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Form = ({
   state,
@@ -11,6 +11,7 @@ const Form = ({
   //   setNewCardInProgress,
   //   setNewCardComplete,
 }) => {
+  const { user } = useContext(AuthContext);
   //   const state = props.state;
   //   const setState = props.setState;
   const project = 1;
