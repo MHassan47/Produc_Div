@@ -41,14 +41,7 @@ export default function SignIn({ state, setState }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("///////", state);
-    // let userStateArray = Object.keys(state.users).map((key) => {
-    //   let array = state.users[key];
-    //   array.key = key;
-    //   return array;
-    // });
-    // console.log(userStateArray);
-    // console.log("----------------------------------------");
+
     if (validateLogin())
       console.log("**************SUBMIT Sign-In clicked **************");
     const body = {
@@ -64,7 +57,7 @@ export default function SignIn({ state, setState }) {
           // userStateArray.map((user) => {
           //   if (user.email === email) {
           //     console.log("##########", user.id);
-          console.log("DATA USERRRRR", data);
+
           return login(data.user);
         }
         //   });
