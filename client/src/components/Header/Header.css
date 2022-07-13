@@ -1,0 +1,23 @@
+.Header {
+  padding-top: 50px;
+  height: 100px;
+  width: 100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: none;
+  background-color: #93ef7d;
+  /* margin: 200px 120px; */
+}
+.header img {
+  width: 100px;
+  height: 13px;
+}
+
+@media only screen and (max-width: 1024px) {
+  #header {
+    margin: 120px 0px;
+  }
+}

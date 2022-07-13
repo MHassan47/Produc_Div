@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "/Users/sydannymorris/Documents/lighthouse/final/client/src/context/AuthProvider";
 // import useApplicationData from "./hooks/useApplicationData";
 // import axios from "axios";
+// import Header from './components/Header/Header';
 
 export default function SignIn({ state, setState }) {
   const navigate = useNavigate();

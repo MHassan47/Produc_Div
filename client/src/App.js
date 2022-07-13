@@ -57,6 +57,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import {AuthContext} from "./context/AuthProvider"
 import SideBar from './components/SideBar/SideBar';
+import Header from './components/Header/Header';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -117,14 +118,14 @@ export default function App() {
         <CssBaseline />
         <Routes>
           <Route
-            path="/dashboard"
-            element={<Kanban state={state} setState={setState} />} />
+            path="/dashboard" element={<Kanban state={state} setState={setState} />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/sign-in" element={<SignIn state={state} setState={setState}/>} />
 
         </Routes>
       </div>
+           
     </BrowserRouter>
     </AuthContext.Provider>
   );

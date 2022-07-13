@@ -54,6 +54,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { NavLink } from "react-router-dom";
 import { Button } from "@material-ui/core";
 // import { Link as Scroll } from 'react-scroll';
+import Header from '../Header/Header';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,6 +102,7 @@ export default function Homepage() {
   }, []);
   return (
     <div className={classes.root} id="header">
+      
       <AppBar className={classes.appbar} elevation={0}>
         <Toolbar className={classes.appbarWrapper}>
           <h1 className={classes.appbarTitle}>
@@ -116,7 +119,6 @@ export default function Homepage() {
 
         </Toolbar>
       </AppBar>
-
       <Collapse
         in={checked}
         {...(checked ? { timeout: 1000 } : {})}

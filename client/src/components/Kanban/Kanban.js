@@ -6,6 +6,7 @@ import Card from "../Task/Card";
 import Form from "../Task/Form";
 import "./Kanban.css";
 import { IoIosAdd } from "react-icons/io";
+import Header from "../Header/Header";
 
 // const test = [
 //   { id: 1, name: "one" },
@@ -67,15 +68,18 @@ const Kanban = ({ state, setState }) => {
   };
 
   return (
+    <div>
+<Header />
+    <section>
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="kanban">
         {columns.map((element) => (
           <Droppable key={element} droppableId={element}>
             {(provided) => (
               <div
-                {...provided.droppableProps}
-                className="kanban__section"
-                ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="kanban__section"
+              ref={provided.innerRef}
               >
                 <div className="kanban__section__title">
                   {element}
@@ -83,14 +87,14 @@ const Kanban = ({ state, setState }) => {
                     {
                       state.tasks.filter(
                         (task) => task.col === element && task.project_id === 1
-                      ).length
-                    }
+                        ).length
+                      }
                   </div>
                   <div className="kanban__section__add">
                     <IoIosAdd
                       onClick={
                         () => newTask(element)
-
+                        
                         // newTask(element)
                         /* () => {
                           // setNewCard((prev) => !prev);
@@ -98,68 +102,68 @@ const Kanban = ({ state, setState }) => {
                         }
                         /*setNewCard((prev) => !prev)*/
                       }
-                    />
+                      />
                   </div>
                 </div>
                 <div className="kanban__section__content">
                   <div className="newCard-form" id={element}>
                     {element === "To Do" && newCardToDo && (
                       <Form
-                        state={state}
-                        setState={setState}
-                        currentColumn={element}
-                        newTask={newTask}
+                      state={state}
+                      setState={setState}
+                      currentColumn={element}
+                      newTask={newTask}
                       />
-                    )}
+                      )}
 
                     {element === "In Progress" && newCardInProgress && (
                       <Form
-                        state={state}
-                        setState={setState}
-                        currentColumn={element}
-                        newTask={newTask}
+                      state={state}
+                      setState={setState}
+                      currentColumn={element}
+                      newTask={newTask}
                       />
-                    )}
+                      )}
 
                     {element === "Complete" && newCardComplete && (
                       <Form
-                        state={state}
-                        setState={setState}
-                        currentColumn={element}
-                        newTask={newTask}
+                      state={state}
+                      setState={setState}
+                      currentColumn={element}
+                      newTask={newTask}
                       />
-                    )}
+                      )}
                   </div>
                   {state.tasks.map((task, index) => {
                     if (task.col === element && task.project_id === 1)
-                      return (
-                        <Draggable
-                          key={task.id.toString()}
-                          draggableId={task.id.toString()}
-                          index={index}
-                        >
+                    return (
+                      <Draggable
+                      key={task.id.toString()}
+                      draggableId={task.id.toString()}
+                      index={index}
+                      >
                           {(provided, snapshot) => (
                             <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              style={{
-                                ...provided.draggableProps.style,
-                                opacity: snapshot.isDragging ? "0.5" : "1",
-                              }}
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                              ...provided.draggableProps.style,
+                              opacity: snapshot.isDragging ? "0.5" : "1",
+                            }}
                             >
                               <Card
                                 state={state}
                                 setState={setState}
                                 task={task}
-                              >
+                                >
                                 {task.name}
                               </Card>
                             </div>
                           )}
                         </Draggable>
                       );
-                  })}
+                    })}
                   {provided.placeholder}
                 </div>
               </div>
@@ -169,37 +173,39 @@ const Kanban = ({ state, setState }) => {
       </div>
       {/* <div className="newCard">
         <div className="newCard-form">
-          {newCardToDo && (
-            <Form
-              state={state}
-              setState={setState}
-              currentColumn={currentColumn}
-              newTask={newTask}
-            />
+        {newCardToDo && (
+          <Form
+          state={state}
+          setState={setState}
+          currentColumn={currentColumn}
+          newTask={newTask}
+          />
           )}
-        </div>
-        <div className="newCard-form">
+          </div>
+          <div className="newCard-form">
           {newCardInProgress && (
             <Form
+            state={state}
+            setState={setState}
+            currentColumn={currentColumn}
+            newTask={newTask}
+            />
+            )}
+            </div>
+            <div className="newCard-form">
+            {newCardComplete && (
+              <Form
               state={state}
               setState={setState}
               currentColumn={currentColumn}
               newTask={newTask}
-            />
-          )}
-        </div>
-        <div className="newCard-form">
-          {newCardComplete && (
-            <Form
-              state={state}
-              setState={setState}
-              currentColumn={currentColumn}
-              newTask={newTask}
-            />
-          )}
-        </div>
-      </div> */}
+              />
+              )}
+              </div>
+            </div> */}
     </DragDropContext>
+            </section>
+            </div>
   );
 };
 
