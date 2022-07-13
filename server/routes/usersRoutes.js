@@ -92,5 +92,10 @@ module.exports = (db) => {
       })
       .catch((err) => console.log("+++++++++++++++++", err));
   });
+
+  router.post("/logout", (req, res) => {
+    req.session.id = null;
+    return res.status(200).send();
+  });
   return router;
 };
