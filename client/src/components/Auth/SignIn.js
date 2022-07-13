@@ -49,7 +49,9 @@ export default function SignIn({ state, setState }) {
       password,
     };
     axios
-      .post("http://localhost:8080/users/sign-in", body)
+      .post("http://localhost:8080/users/sign-in", body, {
+        withCredentials: true,
+      })
       // const userArr = [];
 
       .then(
@@ -116,9 +118,14 @@ export default function SignIn({ state, setState }) {
             <br />
             <span className="link">
               {/* put router link here */}
-              <button  type="button"
-              className="btn"
-              onClick={(event) => handleSubmit()}> <a href="/register">Register</a> </button>
+              <button
+                type="button"
+                className="btn"
+                onClick={(event) => handleSubmit()}
+              >
+                {" "}
+                <a href="/register">Register</a>{" "}
+              </button>
             </span>
           </p>
         </section>
