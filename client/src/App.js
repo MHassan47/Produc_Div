@@ -39,7 +39,7 @@
 
 // export default App;
 
-import React from "react";
+import React, { useEffect } from "react";
 // import { CssBaseline } from "@material-ui/core";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
@@ -67,17 +67,11 @@ import Header from "./components/Header/Header";
 // }));
 export default function App() {
   const { state, setState } = useApplicationData();
-  console.log("////////\\\\\\\\", state);
+  const [user, setUser] = useState(state.user[0]);
 
-  const [user, setUser] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    photo_url: "",
-    role: "",
-  });
-
+  useEffect(() => {
+    setUser(state.user[0]);
+  }, [state.user[0]]);
   const login = (data) => {
     setUser({
       id: data.id,
@@ -99,9 +93,11 @@ export default function App() {
       password: "",
       photo_url: "",
       role: "",
+      auth: false,
     });
   };
 
+  console.log("+++++++++++++++++", user);
   // const classes = useStyles();
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
