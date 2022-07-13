@@ -1,19 +1,67 @@
 import axios from "axios";
-import { useRef, useState, useEffect, useContext, React } from "react";
+import { useRef, useState, useEffect, useContext,  React } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AuthContext } from "/Users/sydannymorris/Documents/lighthouse/final/client/src/context/AuthProvider";
+import {AuthContext} from '/Users/ameraalleyne/lighthouse/final/client/src/context/AuthProvider.js'
 // import useApplicationData from "./hooks/useApplicationData";
 // import axios from "axios";
-// import Header from './components/Header/Header';
 
-export default function SignIn({ state, setState }) {
+
+
+
+export default function SignIn({state, setState}) {
   const navigate = useNavigate();
-  const { login, logout } = useContext(AuthContext);
+const {login, logout} = useContext(AuthContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  
+
+// user input, allow us to set focus to user input when the component loads
+const userRef = useRef();
+//   // for the error message, so if we get an error it can be announced by a screen reader for accessibility
+const errRef = useRef();
+
+
+useEffect(() => {
+  userRef.current.focus();
+}, []);
+
+useEffect(() => {
+  setErrMsg("");
+}, [email, password]);
+
+const validateLogin= () => {
+  if(!email){
+    setErrMsg("Cannot be left blank")
+    return false
+  }
+  if(!password){
+    setErrMsg("Cannot be left blank")
+    return false
+  }
+   return true
+}
+
+
+const handleSubmit = (event) => {
+  console.log("///////", state)
+  let userStateArray = Object.keys(state.users).map(key => {
+    let array = state.users[key]
+    array.key = key
+    return array
+  })
+  console.log(userStateArray);
+  console.log("----------------------------------------");
+  if(validateLogin())
+  console.log("**************SUBMIT Sign-In clicked **************")
+  const body = {
+    email,
+    password
+  }
+  axios.post('http://localhost:8080/users/sign-in', body)
+  // const userArr = [];
 
   // user input, allow us to set focus to user input when the component loads
   const userRef = useRef();

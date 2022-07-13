@@ -7,7 +7,7 @@ import Form from "../Task/Form";
 import "./Kanban.css";
 import { IoIosAdd } from "react-icons/io";
 import Header from "../Header/Header";
-
+import SideBar from "../SideBar/SideBar";
 // const test = [
 //   { id: 1, name: "one" },
 //   { id: 2, name: "two" },
@@ -22,6 +22,7 @@ const Kanban = ({ state, setState }) => {
   const [newCardToDo, setNewCardToDo] = useState(false);
   const [newCardInProgress, setNewCardInProgress] = useState(false);
   const [newCardComplete, setNewCardComplete] = useState(false);
+
 
   const onDragEnd = (result) => {
     console.log("-------iiii", result);
@@ -70,6 +71,7 @@ const Kanban = ({ state, setState }) => {
   return (
     <div>
 <Header />
+<SideBar />
     <section>
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="kanban">
