@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import {AuthContext} from '/Users/ameraalleyne/lighthouse/final/client/src/context/AuthProvider.js'
 // import useApplicationData from "./hooks/useApplicationData";
 // import axios from "axios";
-// import Header from './components/Header/Header';
 
 
 
@@ -68,13 +67,14 @@ const handleSubmit = (event) => {
 userStateArray.map((user) => {
   if(user.email === email){
     console.log("##########", user.id);
+    login(user)
+    navigate("/dashboard", { replace: true })
     
-    return login(user)
   }
 })
   })
-    .then( () => navigate("/dashboard", { replace: true }))
-  
+   
+
    .catch(error => 
     console.log("----------- error:  ", error))
   
@@ -92,7 +92,7 @@ return (
     </section>
   ) : (
   <section>
-  {/* <Header /> */}
+  
       <h1>Sign In</h1>
       {/* <div>{errMsg ? <div>{errMsg}<div> : <div></div>} </div> */}
       <form onSubmit={event => event.preventDefault()}>
@@ -120,7 +120,7 @@ return (
         Don't have an account?<br />
         <span className="link">
           {/* put router link here */}
-          <a href="/users/register">Register</a>
+          <a href="/register">Register</a>
         </span>
       </p>
   </section>
