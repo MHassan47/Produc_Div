@@ -17,13 +17,13 @@ export default function Header(props) {
             <h1>Project Name</h1>
           </div>
           <div>
-            <button size="small" label="Log out" />
+            {/* <button size="small" label="Log out" />
             <>
               <button size="small" label="Log in" />
               <Link to="/register" >
               <button size="small" onClick={"/register"} label="Sign up" />
               </Link>
-            </>
+            </> */}
           </div>
         </div>
       </header>
