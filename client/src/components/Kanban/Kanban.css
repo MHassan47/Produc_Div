@@ -13,7 +13,8 @@
   /* padding-bottom: 1rem; */
   /* padding-top: 1rem; */
   align-items: center;
-  background-color: #8c77be;
+  /* background-color: #8c77be; */
+  background-color: #b2a4d4;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
@@ -21,7 +22,7 @@
 .kanban__section__count {
   display: flex;
   margin-left: 1rem;
-  color: brown;
+  color: #080808e7;
 }
 .kanban__section__add {
   justify-content: end;
