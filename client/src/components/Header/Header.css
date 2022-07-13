@@ -13,9 +13,14 @@
 }
 .header_title {
   display: flex;
-  align-items: center;
+  /* align-items: center;
   align-self: center;
-  align-content: center;
+  align-content: center; */
+  font-size: 35px;
+  justify-content: start;
+}
+.header_title_text {
+  display: flex;
 }
 .header img {
   width: 100px;

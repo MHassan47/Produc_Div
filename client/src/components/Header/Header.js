@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 // import PropTypes from 'prop-types';
 // import { Button } from './Button';
 import "./Header.css";
 import { Navigate, Link } from "react-router-dom";
-// import useApplicationData from "/Users/ameraalleyne/lighthouse/final/client/src/hooks/useApplicationData.js";
+import { AuthContext } from "../../context/AuthProvider";
 // import { useState } from "react";
 
 export default function Header(props) {
+  const [currentproject, setCurrentProject] = useState(1);
+  const { user } = useContext(AuthContext);
   return (
     <header className="header">
       <div>
         <div className="header_title">
-          <h1>Project Name</h1>
+          {props.state.projects.map((project) => {
+            if (project.id === currentproject)
+              return <div className="header_title_text">{project.name} </div>;
+          })}
         </div>
         <div>
           {/* <button size="small" label="Log out" />
