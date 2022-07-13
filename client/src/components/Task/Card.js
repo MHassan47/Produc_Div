@@ -17,7 +17,6 @@ const Card = (props) => {
       </div>
     );
   }
-  console.log(props.state.users[props.task.owner_id]);
   return (
     <div className="card-container">
       <div className="card__option">

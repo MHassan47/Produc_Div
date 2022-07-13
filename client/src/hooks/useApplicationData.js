@@ -6,13 +6,25 @@ export default function useApplicationData(props) {
     users: {},
     projects: [],
     tasks: [],
+    user: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      photo_url: "",
+      role: "",
+      auth: false,
+    },
   });
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:8080/users/"),
-      axios.get("http://localhost:8080/api/tasks/"),
-      axios.get("http://localhost:8080/api/projects/"),
+      axios.get("http://localhost:8080/users/", { withCredentials: true }),
+      axios.get("http://localhost:8080/api/tasks/", { withCredentials: true }),
+      axios.get("http://localhost:8080/api/projects/", {
+        withCredentials: true,
+      }),
+      axios.get("http://localhost:8080/user", { withCredentials: true }),
     ]).then((all) => {
       setState((prev) => {
         return {
@@ -20,6 +32,7 @@ export default function useApplicationData(props) {
           users: all[0].data,
           tasks: all[1].data,
           projects: all[2].data,
+          user: all[3].data,
         };
       });
     });
@@ -29,6 +42,4 @@ export default function useApplicationData(props) {
     state,
     setState,
   };
-
-
 }
