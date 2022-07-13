@@ -7,7 +7,7 @@ const Dashboard = ({ state, setState }) => {
   return (
     <div className="dashboard_container">
       <div className="dashboard_header">
-        <Header />
+        <Header state={state} />
       </div>
       <div className="dashboard_content">
         <div className="dashboard_sidebar">
