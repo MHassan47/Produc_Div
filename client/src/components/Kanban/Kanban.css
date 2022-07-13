@@ -36,7 +36,7 @@
 .kanban__section {
   width: 325px;
   height: fit-content;
-  border-radius: 10px;
+  border-radius: 15px;
   border: 10px black;
   /* background-color: #c9bfe0; */
   background-color: #f3f1f8;

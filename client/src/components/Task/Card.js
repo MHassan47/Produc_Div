@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./card.css";
 import { BsThreeDots } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
+
+import { TiUserAdd } from "react-icons/ti";
 import Form from "./Form";
 
 const Card = (props) => {
@@ -35,11 +37,9 @@ const Card = (props) => {
                 : ""
             }
           />
-
-          {/* {props.state.users.map((user) => {
-            if (user.id === props.task.owner_id)
-              return <div>{user.photo_url}</div>;
-          })} */}
+          <div className="card_add_members">
+            <TiUserAdd className="card_add_members_icon" />
+          </div>
         </div>
       </div>
     </div>
