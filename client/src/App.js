@@ -92,16 +92,14 @@ export default function App() {
   };
 
   const logout = (data) => {
-    setUser(() => ({
-      id: data,
-      first_name: data,
-      last_name: data,
-      email: data,
-      password: data,
-      photo_url: data,
-      role: data,
-      auth: false,
-    }));
+    setUser({
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      photo_url: "",
+      role: "",
+    });
   };
 
   // const classes = useStyles();
