@@ -13,7 +13,7 @@
   /* padding-bottom: 1rem; */
   /* padding-top: 1rem; */
   align-items: center;
-  background-color: rgb(155, 155, 158);
+  background-color: #8c77be;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
@@ -37,10 +37,11 @@
   height: fit-content;
   border-radius: 10px;
   border: 10px black;
-  background-color: rgb(207, 207, 208);
+  /* background-color: #c9bfe0; */
+  background-color: #f3f1f8;
 }
 .kanban__section:hover {
-  background-color: rgb(129, 129, 143);
+  background-color: #afaac2e7;
 }
 
 .kanban__section__content {

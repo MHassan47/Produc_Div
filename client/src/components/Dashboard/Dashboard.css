@@ -2,24 +2,24 @@
   display: flex;
 
   flex-direction: column;
-  background-color: #2f4050;
 }
 .dashboard_header {
   display: flex;
   height: 10vh;
-  /* background-color: #2f4050; */
 }
 
 .dashboard_content {
   display: flex;
   height: 87vh;
+
   margin: 1rem;
 }
 
 .dashboard_kanban {
   display: flex;
-  /* height: 80vh; */
-  padding: 4rem;
-  background-color: #54697e;
+  padding-top: 4rem;
+  padding-left: 9rem;
+  padding-right: 11rem;
+  background-color: white;
   border-radius: 3%;
 }
