@@ -32,8 +32,8 @@
   cursor: pointer;
   /* background-color: #293846; */
   background-color: #b2a4d4;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
   /* border-bottom-right-radius: 10px;
   border-top-right-radius: 10px; */
 }
@@ -41,13 +41,13 @@
   /* background-color: #293846; */
   /* background-color: #8c77be; */
   background-color: white;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .SidebarList li:last-child {
   display: flex;
-  margin-top: 20rem;
+  margin-top: 22rem;
 }
 
 .row #icon {
@@ -76,4 +76,8 @@ img {
   border-radius: 50px;
   width: 40px;
   height: 40px;
+}
+
+.logout_icon {
+  font-size: 28px;
 }
