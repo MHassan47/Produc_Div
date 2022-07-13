@@ -17,6 +17,7 @@ const Card = (props) => {
       </div>
     );
   }
+  console.log(props.state.users[props.task.owner_id]);
   return (
     <div className="card-container">
       <div className="card__option">
@@ -27,7 +28,11 @@ const Card = (props) => {
         <div className="card__footer">
           <img
             className="card__owner"
-            src={props.state.users[props.task.owner_id].photo_url}
+            src={
+              props.state.users[props.task.owner_id]
+                ? props.state.users[props.task.owner_id].photo_url
+                : ""
+            }
           />
 
           {/* {props.state.users.map((user) => {
