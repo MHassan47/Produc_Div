@@ -72,23 +72,19 @@ module.exports = (db) => {
     return router;
   });
 
-  router.get("/sign-in", (req, res) => {
-    res.render("sign-in");
-    res.status(200).send("sign-in path is working");
-  });
+  // router.get("/sign-in", (req, res) => {
+  //   res.render("sign-in");
+  //   res.status(200).send("sign-in path is working");
+  // });
 
   router.post("/sign-in", (req, res) => {
     const { email, password } = req.body;
-
-    req.session.id = email;
-    // const user = { email, password }
-    //  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-    //  res.json({ accessToken: accessToken })
     db.query(`SELECT * FROM users WHERE email = $1;`, [email])
       .then((response) => {
         const user = response.rows[0];
         if (user) correctPassword = bcrypt.compareSync(password, user.password);
         if (correctPassword) {
+          req.session.id = user.id;
           return res.json({ user });
         } else {
           return res.status(401).send({ error: "Incorrect email/password" });
