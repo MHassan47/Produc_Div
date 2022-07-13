@@ -76,7 +76,7 @@ export default function App() {
   });
 
   const login = (data) => {
-    setUser((user) => ({
+    setUser({
       id: data.id,
       first_name: data.first_name,
       last_name: data.last_name,
@@ -85,8 +85,7 @@ export default function App() {
       photo_url: data.photo_url,
       role: data.role,
       auth: true,
-    }));
-    console.log(user);
+    });
   };
 
   const logout = (data) => {
