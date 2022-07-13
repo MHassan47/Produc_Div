@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   width: 200px;
   height: 90px;
   padding: 10px;
@@ -11,11 +11,23 @@
   margin-bottom: 1rem;
   z-index: 1;
 }
+.card_header {
+  display: flex;
+  width: 200px;
+  height: max-content;
+  background-color: #f3f1f8;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom: 2px solid #afaac2e7;
+}
 
 .card__description {
   display: flex;
+  align-items: flex-start;
   font-weight: 500;
   font-size: 14px;
+  margin-left: 3px;
+  margin-bottom: 5px;
 }
 .card__option {
   display: flex;
@@ -24,11 +36,15 @@
   cursor: pointer;
 }
 .card__footer {
-  height: 50px;
-  width: 50px;
+  display: flex;
+  justify-content: flex-end;
+  height: 45px;
+  width: 200px;
 }
 
 .card__owner {
+  display: flex;
+
   width: 40px;
   height: 40px;
   border-radius: 50%;

@@ -23,7 +23,9 @@ const Card = (props) => {
         <BsThreeDots onClick={() => setEdit(`${props.children}`)} />
       </div>
       <div className="card">
-        <div className="card__description">{props.children}</div>
+        <div className="card_header">
+          <div className="card__description">{props.children}</div>
+        </div>
         <div className="card__footer">
           <img
             className="card__owner"
