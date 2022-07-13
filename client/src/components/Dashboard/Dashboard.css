@@ -1,0 +1,23 @@
+.dashboard_container {
+  display: flex;
+  flex-direction: column;
+  background-color: #2f4050;
+}
+.dashboard_header {
+  display: flex;
+  height: 10vh;
+  /* background-color: #2f4050; */
+}
+
+.dashboard_content {
+  display: flex;
+  height: 90vh;
+}
+
+.dashboard_kanban {
+  display: flex;
+
+  padding: 5rem;
+  background-color: #54697e;
+  border-radius: 3%;
+}

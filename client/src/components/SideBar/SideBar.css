@@ -1,12 +1,12 @@
 .Sidebar {
   height: 100%;
   width: 250px;
-  background-color: #2F4050;
+  /* background-color: #2F4050; */
 }
 
 .SidebarList {
   display: inline-block;
-	vertical-align: top;
+  vertical-align: top;
   height: 100%;
   padding: 0;
   width: 100%;
@@ -19,12 +19,12 @@
   margin: 0%;
   display: flex;
 
-  
   flex-direction: row;
   color: white;
   justify-content: center;
   align-items: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .SidebarList .row:hover {
@@ -33,7 +33,6 @@
 }
 .SidebarList #active {
   background-color: #293846;
-
 }
 .row #icon {
   flex: 30%;
@@ -42,5 +41,5 @@
 }
 
 .row #title {
-  flex: 70%; 
+  flex: 70%;
 }
