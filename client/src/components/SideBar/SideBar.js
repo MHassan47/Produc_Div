@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./SideBar.css";
-import Logout from "../Auth/Logout";
+// import Logout from "../Auth/Logout";
 import { SidebarData } from "./SideBarData";
+// import Logout from "../Auth/Logout";
+import { useSearchParams } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 export default function SideBar() {
+  const { user } = useContext(AuthContext);
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
+        <div className="user_profile">
+          <div className="user_profile_picture">
+            <img src={user.photo_url} />
+          </div>
+          <div className="user_profile_name">
+            {`${user.first_name} ${user.last_name}`}
+          </div>
+        </div>
         {SidebarData.map((val, key) => {
           return (
             <li
@@ -21,7 +33,6 @@ export default function SideBar() {
             </li>
           );
         })}
-        <Logout />
       </ul>
     </div>
   );

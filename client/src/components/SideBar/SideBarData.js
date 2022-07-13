@@ -3,6 +3,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import MailIcon from "@material-ui/icons/Mail";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import GroupIcon from "@material-ui/icons/Group";
+import { MdLogout } from "react-icons/md";
+
 export const SidebarData = [
   {
     title: "Home",
@@ -23,5 +25,10 @@ export const SidebarData = [
     title: "Conference",
     icon: <GroupIcon />,
     link: "/conference",
+  },
+  {
+    title: "Logout",
+    icon: <MdLogout className="md_logout_icon" />,
+    link: "/",
   },
 ];

@@ -7,7 +7,7 @@
 .SidebarList {
   display: inline-block;
   vertical-align: top;
-  margin-top: 4em;
+  /* margin-top: 4em; */
   height: 100%;
   padding: 0;
   width: 100%;
@@ -44,6 +44,12 @@
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
+
+.SidebarList li:last-child {
+  display: flex;
+  margin-top: 20rem;
+}
+
 .row #icon {
   flex: 30%;
   display: grid;
@@ -52,4 +58,22 @@
 
 .row #title {
   flex: 70%;
+}
+
+.md_logout_icon {
+  font-size: 30px;
+}
+
+.user_profile {
+  margin-left: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  width: 200px;
+  height: 50px;
+}
+
+img {
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
 }
