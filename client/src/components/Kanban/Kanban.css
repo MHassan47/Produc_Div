@@ -4,6 +4,7 @@
   align-items: flex-start;
   justify-content: left;
   gap: 2rem;
+  margin-left: 260px
 }
 .kanban__section__title {
   display: flex;

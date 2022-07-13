@@ -11,12 +11,11 @@
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     minHeight: '100vh',
-//     backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/homepagebackground.jpg'})`, 
+//     backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/homepagebackground.jpg'})`,
 //     backgroundRepeat: 'no-repeat',
 //     backgroundSize: 'cover',
 //   }
 // }));
-
 
 // function App() { const classes = useStyles();
 
@@ -30,23 +29,21 @@
         element={<Kanban state={state} setState={setState} />} />
       {<Route path="/" element={<Homepage />} />
     /* <Route path="/register" element={<Register />} />
-    <Route path="/signin" element={<SignIn />} /> */ 
+    <Route path="/signin" element={<SignIn />} /> */
 //     </Routes>
 //   </BrowserRouter>
 // </div>
 //   ); */}
 
-
 // }
 
 // export default App;
 
-
-import React from 'react';
-import { CssBaseline } from '@material-ui/core';
-import HomePage from './components/HomePage/Homepage';
-import Register from './components/Auth/Register';
-import SignIn from './components/Auth/SignIn';
+import React from "react";
+import { CssBaseline } from "@material-ui/core";
+import HomePage from "./components/HomePage/Homepage";
+import Register from "./components/Auth/Register";
+import SignIn from "./components/Auth/SignIn";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
@@ -61,72 +58,74 @@ import Header from './components/Header/Header';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: '100vh',
+    minHeight: "100vh",
     // backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/homepagebackground.jpg'})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
   },
 }));
 export default function App() {
   const { state, setState } = useApplicationData();
   console.log("////////\\\\\\\\", state);
-  
 
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
     email: "",
     password: "",
-    photo_url:"",
-    role: ""
-  })
+    photo_url: "",
+    role: "",
+  });
 
-  const login = (data) =>{
-    setUser((user) => ({
+  const login = (data) => {
+    setUser({
       id: data.id,
       first_name: data.first_name,
-    last_name: data.last_name,
-    email: data.email,
-    password: data.password,
-    photo_url: data.photo_url,
-    role: data.role,
-    auth: true
-    }))
-    console.log(user);
-  }
+      last_name: data.last_name,
+      email: data.email,
+      password: data.password,
+      photo_url: data.photo_url,
+      role: data.role,
+      auth: true,
+    });
+  };
 
   const logout = (data) => {
     setUser(() => ({
       id: data,
       first_name: data,
-    last_name: data,
-    email: data,
-    password: data,
-    photo_url: data,
-    role: data,
-    auth: false
-    }))
-  }
+      last_name: data,
+      email: data,
+      password: data,
+      photo_url: data,
+      role: data,
+      auth: false,
+    }));
+  };
 
   const classes = useStyles();
   return (
-    <AuthContext.Provider value={{user, login, logout}}>
-    <BrowserRouter>
-      <div className={classes.root}>
-        {/* <Header />
-        <SideBar /> */}
-        <CssBaseline />
-        <Routes>
-          <Route
-            path="/dashboard" element={<Kanban state={state} setState={setState} />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/sign-in" element={<SignIn state={state} setState={setState}/>} />
-
-        </Routes>
-      </div>
-           
-    </BrowserRouter>
+    <AuthContext.Provider value={{ user, login, logout }}>
+      <BrowserRouter>
+        <div className={classes.root}>
+          <CssBaseline />
+          <Routes>
+            <Route
+              path="/dashboard"
+              element={<Kanban state={state} setState={setState} />}
+            />
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/register"
+              element={<Register state={state} setState={setState} />}
+            />
+            <Route
+              path="/sign-in"
+              element={<SignIn state={state} setState={setState} />}
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </AuthContext.Provider>
   );
 }
