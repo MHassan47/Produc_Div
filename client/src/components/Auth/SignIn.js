@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {AuthContext} from '/Users/ameraalleyne/lighthouse/final/client/src/context/AuthProvider.js'
 // import useApplicationData from "./hooks/useApplicationData";
 // import axios from "axios";
+// import Header from './components/Header/Header';
 
 
 
@@ -91,7 +92,7 @@ return (
     </section>
   ) : (
   <section>
-  
+  {/* <Header /> */}
       <h1>Sign In</h1>
       {/* <div>{errMsg ? <div>{errMsg}<div> : <div></div>} </div> */}
       <form onSubmit={event => event.preventDefault()}>
