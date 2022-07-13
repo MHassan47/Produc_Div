@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Form = ({
   state,
@@ -10,11 +11,12 @@ const Form = ({
   //   setNewCardInProgress,
   //   setNewCardComplete,
 }) => {
+  const { user } = useContext(AuthContext);
   //   const state = props.state;
   //   const setState = props.setState;
   const project = 1;
   const column = currentColumn;
-  const [user_id, setUser_id] = useState(1);
+  // const [user_id, setUser_id] = useState(1);
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
 
@@ -29,7 +31,7 @@ const Form = ({
         name: description,
         created_at: "2022/07/13",
         col: column,
-        owner_id: user_id,
+        owner_id: user.id,
       })
       .then((response) => {
         setState({ ...state, tasks: [...state.tasks, response.data] });

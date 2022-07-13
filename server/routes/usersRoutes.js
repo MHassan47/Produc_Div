@@ -41,61 +41,56 @@ module.exports = (db) => {
   });
 
   router.get("/register", (req, res) => {
-  const { users } = req.body;
-  console.log("++++++++++++++++++++USers:  ", users)
+    const { users } = req.body;
+    console.log("++++++++++++++++++++USers:  ", users);
     res.render("register");
   });
 
   router.post("/register", (req, res) => {
     const { first_name, last_name, email, password, photo_url, role } =
       req.body;
-
-   
-
-    db.query(`INSERT INTO users (first_name, last_name, email, password, photo_url, role) VALUES ('${first_name}', '${last_name}', '${email}', '${password}', '${photo_url}', '${role}') RETURNING *;`)
-    .then(result => {
-      const user = result.rows[0];
-        console.log("user.result: ", user);
-        res.status(200).send({ user })
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+    console.log("password----", hashedPassword);
+    db.query(
+      `INSERT INTO users (first_name, last_name, email, password, photo_url, role) 
+      VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
+      [first_name, last_name, email, hashedPassword, photo_url, role]
+    )
+      .then((result) => {
+        const user = result.rows[0];
+        // console.log("user.result: ", user);
+        // res.status(200).send({ user });
         // res.redirect("/");
-    })
-    .catch(err => {
-      res.status(401).send("Couldn't connect to the register page")
-    }) 
+
+        res.json({ user });
+      })
+      .catch((err) => {
+        res.status(401).send("Couldn't connect to the register page");
+      });
 
     return router;
   });
 
-  router.get("/sign-in", (req, res) => {
-    res.render("sign-in");
-    res.status(200).send("sign-in path is working");
-  });
+  // router.get("/sign-in", (req, res) => {
+  //   res.render("sign-in");
+  //   res.status(200).send("sign-in path is working");
+  // });
 
   router.post("/sign-in", (req, res) => {
     const { email, password } = req.body;
-    req.session.id = email
-    // const user = { email, password }
-  //  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-  //  res.json({ accessToken: accessToken })
-    db.query(`SELECT * FROM users WHERE email = $1 AND password = $2 LIMIT 1;`, [email, password])
-    .then(users => {
-      const user = users.rows[0];
-      
-      // console.log("*************", users.rows, email);
-       
-        if (user) {
-         
-          res.status(200).send({ user })
-          console.log(user);
-          console.log("user.result: " + user);
-         
-          return  res.json(users)
-          // res.status(200).send("Heyyy stuff");
+    db.query(`SELECT * FROM users WHERE email = $1;`, [email])
+      .then((response) => {
+        const user = response.rows[0];
+        if (user) correctPassword = bcrypt.compareSync(password, user.password);
+        if (correctPassword) {
+          req.session.id = user.id;
+          return res.json({ user });
+        } else {
+          return res.status(401).send({ error: "Incorrect email/password" });
         }
-          res.status(401).send({ error: "error" })
       })
-      .catch(err => console.log("+++++++++++++++++", err));
+      .catch((err) => console.log("+++++++++++++++++", err));
   });
-
   return router;
 };

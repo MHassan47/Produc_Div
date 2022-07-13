@@ -16,7 +16,7 @@ const cors = require("cors");
 // app.get('/token', function(req, res){
 //   var token = jwt.sign({username:"ado"}, 'supersecret',{expiresIn: 120});
 //   res.send(token)
-// }) 
+// })
 
 // db connection
 const db = require("./configs/db.config");
@@ -34,28 +34,24 @@ app.use(morgan(ENVIROMENT));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(cookieSession({ 
-  name: "session", 
-  keys: ["key1", "key2"],
-  // 24 hours
-  cookie: { maxAge: 30000 },
-  saveUninitialized: false
-  // expires: 
-// 24 hours 
-}));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["id"],
+  })
+);
 
 // routes
 app.use("/users", usersRoutes(db));
 app.use("/api/tasks", tasksRoutes(db));
 app.use("/api/projects", projectsRoutes(db));
 
+// app.get("/", (req, res) => {
+//   req.session.isAuth = true;
+//   console.log("req.session: ", req.session);
 
-app.get("/", (req, res) => {
-  req.session.isAuth = true;
-  console.log("req.session: ", req.session);
-
-  console.log("req.session.id: ", req.session.id);
-  res.json({ greetings: "hello world" });
-});
+//   console.log("req.session.id: ", req.session.id);
+//   res.json({ greetings: "hello world" });
+// });
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
