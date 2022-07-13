@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./card.css";
 import { BsThreeDots } from "react-icons/bs";
+import { MdClose } from "react-icons/md";
+import Form from "./Form";
 
 const Card = (props) => {
+  const [edit, setEdit] = useState("");
   // console.log(props.task);
+  if (props.children === edit) {
+    return (
+      <div className="card_edit">
+        <div className="card_edit_close">
+          <MdClose onClick={() => setEdit("")} />
+        </div>
+        <Form edit={edit} />
+      </div>
+    );
+  }
   return (
     <div className="card-container">
       <div className="card__option">
-        <BsThreeDots onClick={() => console.log(props.children)} />
+        <BsThreeDots onClick={() => setEdit(`${props.children}`)} />
       </div>
       <div className="card">
         <div className="card__description">{props.children}</div>
