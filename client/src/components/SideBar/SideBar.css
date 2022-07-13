@@ -5,7 +5,9 @@
 }
 
 .SidebarList {
-  height: auto;
+  display: inline-block;
+	vertical-align: top;
+  height: 100%;
   padding: 0;
   width: 100%;
 }
