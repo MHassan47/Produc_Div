@@ -56,6 +56,7 @@ import useApplicationData from "./hooks/useApplicationData";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import {AuthContext} from "./context/AuthProvider"
+import SideBar from './components/SideBar/SideBar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -112,6 +113,7 @@ export default function App() {
     <AuthContext.Provider value={{user, login, logout}}>
     <BrowserRouter>
       <div className={classes.root}>
+        <SideBar />
         <CssBaseline />
         <Routes>
           <Route
@@ -120,6 +122,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/sign-in" element={<SignIn state={state} setState={setState}/>} />
+
         </Routes>
       </div>
     </BrowserRouter>
