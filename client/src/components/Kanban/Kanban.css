@@ -10,10 +10,10 @@
   display: flex;
   justify-content: end;
   flex-direction: row;
-  /* padding-bottom: 1rem; */
-  /* padding-top: 1rem; */
   align-items: center;
-  /* background-color: #8c77be; */
+  font-weight: 400;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   background-color: #b2a4d4;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
