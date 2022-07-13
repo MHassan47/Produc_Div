@@ -25,6 +25,7 @@ const db = require("./configs/db.config");
 const usersRoutes = require("./routes/usersRoutes");
 const tasksRoutes = require("./routes/tasksRoutes");
 const projectsRoutes = require("./routes/projectsRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
@@ -45,6 +46,7 @@ app.use(
 app.use("/users", usersRoutes(db));
 app.use("/api/tasks", tasksRoutes(db));
 app.use("/api/projects", projectsRoutes(db));
+app.use("/user", userRoutes(db));
 
 // app.get("/", (req, res) => {
 //   req.session.isAuth = true;
