@@ -1,5 +1,6 @@
 .dashboard_container {
   display: flex;
+
   flex-direction: column;
   background-color: #2f4050;
 }
@@ -11,13 +12,14 @@
 
 .dashboard_content {
   display: flex;
-  height: 90vh;
+  height: 87vh;
+  margin: 1rem;
 }
 
 .dashboard_kanban {
   display: flex;
-
-  padding: 5rem;
+  /* height: 80vh; */
+  padding: 4rem;
   background-color: #54697e;
   border-radius: 3%;
 }
