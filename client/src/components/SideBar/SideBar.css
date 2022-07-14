@@ -30,6 +30,7 @@
 
 .SidebarList .row:hover {
   cursor: pointer;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   /* background-color: #293846; */
   background-color: #b2a4d4;
   border-bottom-left-radius: 20px;
@@ -40,6 +41,7 @@
 .SidebarList #active {
   /* background-color: #293846; */
   /* background-color: #8c77be; */
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   background-color: white;
   border-bottom-left-radius: 20px;
   border-top-left-radius: 20px;
