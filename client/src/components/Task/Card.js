@@ -2,31 +2,62 @@ import React, { useState } from "react";
 import "./card.css";
 import { BsThreeDots } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
+import { HiCheck } from "react-icons/hi";
 import Form from "./Form";
 import PhotoUrl from "./PhotoUrl";
 import AddUsers from "./AddUsers";
+import axios from "axios";
 
 const Card = (props) => {
   const [edit, setEdit] = useState("");
-  // console.log(props.task);
-  if (props.children === edit) {
-    return (
-      <div className="card_edit">
-        <div className="card_edit_close">
-          <MdClose onClick={() => setEdit("")} />
-        </div>
-        <Form edit={edit} />
-      </div>
-    );
-  }
+  const [value, setValue] = useState(props.children);
+
+  const handleEditClick = (e) => {
+    console.log(props.task.id);
+    e.preventDefault();
+    axios
+      .put(`http://localhost:8080/api/tasks/edit/${props.task.id}`, value, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response);
+        props.setState({
+          ...props.state,
+          tasks: [...props.state.tasks, response.data],
+        });
+      })
+      .then(() => setEdit(false))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="card-container">
       <div className="card__option">
-        <BsThreeDots onClick={() => setEdit(`${props.children}`)} />
+        {edit ? (
+          <MdClose onClick={() => setEdit(false)} />
+        ) : (
+          <BsThreeDots onClick={() => setEdit(true)} />
+        )}
       </div>
       <div className="card">
         <div className="card_header">
-          <div className="card__description">{props.children}</div>
+          {edit ? (
+            <div className="card_description_edit">
+              <form onSubmit={console.log()}>
+                <input
+                  type="text"
+                  id="edit_description"
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                />
+              </form>
+              <div className="card_description_edit_submit">
+                <HiCheck onClick={handleEditClick} />
+              </div>
+            </div>
+          ) : (
+            <div className="card__description">{props.children}</div>
+          )}
         </div>
         <div className="card__footer">
           <ul className="list_container">

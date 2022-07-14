@@ -29,6 +29,19 @@
   margin-left: 3px;
   margin-bottom: 5px;
 }
+.card_description_edit {
+  display: flex;
+  align-items: center;
+}
+.card_description_edit_submit {
+  display: flex;
+  font-size: 20px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.card_description_edit_submit:hover {
+  color: #afaac2e7;
+}
 .card__option {
   display: flex;
   justify-content: end;
@@ -115,4 +128,5 @@
 .card_edit_close {
   display: flex;
   justify-content: end;
+  margin-bottom: -15px;
 }
