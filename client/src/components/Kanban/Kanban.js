@@ -6,6 +6,7 @@ import Card from "../Task/Card";
 import Form from "../Task/Form";
 import "./Kanban.css";
 import { IoIosAdd } from "react-icons/io";
+import { IoRemoveSharp } from "react-icons/io5";
 import Header from "../Header/Header";
 import SideBar from "../SideBar/SideBar";
 // const test = [
@@ -90,20 +91,32 @@ const Kanban = ({ state, setState }) => {
                           ).length
                         }
                       </div>
-                      <div className="kanban__section__add">
-                        <IoIosAdd
-                          onClick={
-                            () => newTask(element)
+                      {newCardToDo || newCardInProgress || newCardComplete ? (
+                        <div className="kanban__section__add">
+                          <IoRemoveSharp
+                            onClick={() => {
+                              setNewCardToDo(false);
+                              setNewCardInProgress(false);
+                              setNewCardComplete(false);
+                            }}
+                          />
+                        </div>
+                      ) : (
+                        <div className="kanban__section__add">
+                          <IoIosAdd
+                            onClick={
+                              () => newTask(element)
 
-                            // newTask(element)
-                            /* () => {
+                              // newTask(element)
+                              /* () => {
                           // setNewCard((prev) => !prev);
                           
                         }
                         /*setNewCard((prev) => !prev)*/
-                          }
-                        />
-                      </div>
+                            }
+                          />
+                        </div>
+                      )}
                     </div>
                     <div className="kanban__section__content">
                       <div className="newCard-form" id={element}>
