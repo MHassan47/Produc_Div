@@ -44,17 +44,29 @@
   width: 200px;
 }
 
+.list_container {
+  display: flex;
+}
+.list_photo {
+  display: flex;
+  /* flex-direction: column; */
+  width: max-content;
+  height: fit-content;
+  list-style-type: none;
+}
 .card__owner {
   display: flex;
-  width: 35px;
-  height: 35px;
+  flex-direction: row;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  margin-right: -5px;
   z-index: 1;
 }
 .card_add_members {
   display: flex;
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   justify-content: center;
   align-items: center;
   background-color: #f3f1f8;
@@ -62,6 +74,9 @@
   margin-left: -6px;
   z-index: 10;
   cursor: pointer;
+}
+.card_add_members:hover {
+  background-color: #b2a4d4;
 }
 .card_add_members_icon {
   display: flex;
