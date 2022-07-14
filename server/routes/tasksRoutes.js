@@ -109,5 +109,21 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/users_to_tasks/:id/:taskID", (req, res) => {
+    const user_id = req.params.id;
+    const task_id = req.params.taskID;
+    db.query(
+      `INSERT INTO users_to_tasks (user_id, task_id) 
+      VALUES ($1, $2) RETURNING *;`,
+      [user_id, task_id]
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };
