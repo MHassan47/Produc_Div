@@ -15,6 +15,7 @@ export default function useApplicationData(props) {
       role: "",
       auth: false,
     },
+    users_to_tasks: [],
   });
 
   useEffect(() => {
@@ -25,6 +26,9 @@ export default function useApplicationData(props) {
         withCredentials: true,
       }),
       axios.get("http://localhost:8080/user", { withCredentials: true }),
+      axios.get("http://localhost:8080/api/tasks/users_to_tasks", {
+        withCredentials: true,
+      }),
     ]).then((all) => {
       setState((prev) => {
         return {
@@ -33,6 +37,7 @@ export default function useApplicationData(props) {
           tasks: all[1].data,
           projects: all[2].data,
           user: all[3].data,
+          users_to_tasks: all[4].data,
         };
       });
     });

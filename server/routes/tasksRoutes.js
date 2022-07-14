@@ -96,5 +96,18 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.get("/users_to_tasks", (req, res) => {
+    db.query(
+      `SELECT task_id, array_agg(user_id) as assigned_users FROM users_to_tasks GROUP BY task_id;`
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };
