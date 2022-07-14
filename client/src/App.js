@@ -97,7 +97,7 @@ export default function App() {
     });
   };
 
-  console.log("+++++++++++++++++", user);
+  console.log("+++++++++++++++++", state);
   // const classes = useStyles();
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
