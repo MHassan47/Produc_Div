@@ -10,8 +10,8 @@
 
 .dashboard_content {
   display: flex;
-  height: 87vh;
-
+  height: 800px;
+  overflow: hidden;
   margin: 1rem;
 }
 

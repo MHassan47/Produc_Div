@@ -1,6 +1,6 @@
 .kanban {
   display: flex;
-  height: fit-content;
+  height: 600px;
   width: fit-content;
   align-items: flex-start;
   justify-content: left;
@@ -36,10 +36,12 @@
 .kanban__section {
   width: 325px;
   height: fit-content;
+  overflow: auto;
   border-radius: 15px;
   border: 10px black;
   /* background-color: #c9bfe0; */
   background-color: #f3f1f8;
+  box-shadow: 10px 0 10px rgba(33, 33, 33, 0.2);
 }
 .kanban__section:hover {
   background-color: #afaac2e7;
