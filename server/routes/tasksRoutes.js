@@ -22,9 +22,9 @@ module.exports = (db) => {
   });
 
   //   Edits a task card
-  router.patch("/edit/:id", (req, res) => {
-    const { name } = req.body;
-    const task_id = req.params;
+  router.put("/edit/:id", (req, res) => {
+    const name = req.body.value;
+    const task_id = req.params.id;
     db.query(
       `UPDATE tasks SET name = $1
       WHERE tasks.id = $2`,
