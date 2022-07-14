@@ -11,33 +11,13 @@ export default function Header(props) {
   const { user } = useContext(AuthContext);
   return (
     <header className="header">
-      <div>
-        <div className="header_title">
-          {props.state.projects.map((project) => {
-            if (project.id === currentproject)
-              return <div className="header_title_text">{project.name} </div>;
-          })}
-        </div>
-        <div>
-          {/* <button size="small" label="Log out" />
-            <>
-              <button size="small" label="Log in" />
-              <Link to="/register" >
-              <button size="small" onClick={"/register"} label="Sign up" />
-              </Link>
-            </> */}
-        </div>
+      <div className="header_title">
+        {props.state.projects.map((project) => {
+          if (project.id === currentproject)
+            return <div className="header_title_text">{project.name} </div>;
+        })}
       </div>
+      <div className="project_members"></div>
     </header>
   );
 }
-// }
-// Header.propTypes = {
-//   user: PropTypes.shape({}),
-//   onLogin: PropTypes.func.isRequired,
-//   onLogout: PropTypes.func.isRequired,
-//   onCreateAccount: PropTypes.func.isRequired,
-// };
-
-// Header.defaultProps = {
-//   user: null,  onClick={logout}   onClick={login}
