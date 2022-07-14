@@ -5,6 +5,7 @@ import { MdClose } from "react-icons/md";
 
 import { TiUserAdd } from "react-icons/ti";
 import Form from "./Form";
+import PhotoUrl from "./PhotoUrl";
 
 const Card = (props) => {
   const [edit, setEdit] = useState("");
@@ -29,14 +30,21 @@ const Card = (props) => {
           <div className="card__description">{props.children}</div>
         </div>
         <div className="card__footer">
-          <img
-            className="card__owner"
-            src={
-              props.state.users[props.task.owner_id]
-                ? props.state.users[props.task.owner_id].photo_url
-                : ""
-            }
-          />
+          <ul className="list_container">
+            {props.state.users_to_tasks.map((assignment) => {
+              let test = [];
+              if (assignment.task_id === props.task.id) {
+                console.log("TRUE FALSE", assignment.task_id === props.task.id);
+                assignment.assigned_users.map((assigned_user) => {
+                  console.log("RETURN", assigned_user);
+                  test.push(props.state.users[assigned_user].photo_url);
+                  console.log(props.state.users[assigned_user].photo_url);
+                });
+                return <PhotoUrl photolist={test} />;
+                // return <div>hi</div>;
+              }
+            })}
+          </ul>
           <div className="card_add_members">
             <TiUserAdd className="card_add_members_icon" />
           </div>
