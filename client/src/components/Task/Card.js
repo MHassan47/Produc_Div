@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./card.css";
 import { BsThreeDots } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
@@ -9,6 +9,7 @@ import AddUsers from "./AddUsers";
 import axios from "axios";
 
 const Card = (props) => {
+  const [photoListContainer, setPhotoListContainer] = useState([]);
   const [edit, setEdit] = useState("");
   const [value, setValue] = useState(props.children);
 
@@ -29,6 +30,44 @@ const Card = (props) => {
       .then(() => setEdit(false))
       .catch((error) => console.log(error));
   };
+
+  // const filteredAssignments = props.state.users_to_tasks.filter((assignment) => assignment.task_id === props.task.id )
+  // const assignedUsers = filteredAssignments.map((assignment) => {
+
+  // })
+  // {
+
+  //     // console.log("TRUE FALSE", assignment.task_id === props.task.id);
+  //     assignment.assigned_users.map((assigned_user) => {
+  //       // console.log("RETURN", assigned_user);
+  //       test.push(props.state.users[assigned_user].photo_url);
+  //       // console.log(props.state.users[assigned_user].photo_url);
+  //     });
+  //     return <PhotoUrl photolist={test} />;
+  //     // return <div>hi</div>;
+  //   }
+  // });
+
+  const renderListContainer = () => {
+    const renderedListContainer =
+      props.state.users_to_tasks &&
+      props.state.users_to_tasks.map((assignment) => {
+        let test = [];
+        if (assignment.task_id === props.task.id) {
+          // console.log("TRUE FALSE", assignment.task_id === props.task.id);
+          assignment.assigned_users.map((assigned_user) => {
+            // console.log("RETURN", assigned_user);
+            test.push(props.state.users[assigned_user].photo_url);
+            // console.log(props.state.users[assigned_user].photo_url);
+          });
+          return <PhotoUrl photolist={test} />;
+          // return <div>hi</div>;
+        }
+      });
+    setPhotoListContainer(renderedListContainer);
+  };
+
+  // useEffect(() => console.log("hi"), [photoListContainer]);
 
   return (
     <div className="card-container">
@@ -60,22 +99,9 @@ const Card = (props) => {
           )}
         </div>
         <div className="card__footer">
-          <ul className="list_container">
-            {props.state.users_to_tasks.map((assignment) => {
-              let test = [];
-              if (assignment.task_id === props.task.id) {
-                // console.log("TRUE FALSE", assignment.task_id === props.task.id);
-                assignment.assigned_users.map((assigned_user) => {
-                  // console.log("RETURN", assigned_user);
-                  test.push(props.state.users[assigned_user].photo_url);
-                  // console.log(props.state.users[assigned_user].photo_url);
-                });
-                return <PhotoUrl photolist={test} />;
-                // return <div>hi</div>;
-              }
-            })}
-          </ul>
+          <ul className="list_container">{photoListContainer}</ul>
           <AddUsers
+            renderListContainer={renderListContainer}
             taskID={props.task.id}
             state={props.state}
             setState={props.setState}
