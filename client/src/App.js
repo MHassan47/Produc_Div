@@ -44,6 +44,7 @@ import React from "react";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
 import SignIn from "./components/Auth/SignIn";
+import Chat from "./components/Chat/Chat";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
@@ -56,6 +57,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthProvider";
 import SideBar from "./components/SideBar/SideBar";
 import Header from "./components/Header/Header";
+// import Router from "/Users/sydannymorris/Documents/lighthouse/final/client/src/components/Chat/Router"
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -124,6 +126,10 @@ export default function App() {
           <Route
             path="/sign-in"
             element={<SignIn state={state} setState={setState} />}
+          />
+          <Route
+            path="/chat"
+            element={<Chat state={state} setState={setState} />}
           />
         </Routes>
         {/* </div> */}

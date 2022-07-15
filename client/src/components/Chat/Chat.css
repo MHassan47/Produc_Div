@@ -1,0 +1,24 @@
+.chat_container {
+  display: flex;
+
+  flex-direction: column;
+}
+.chat_header {
+  display: flex;
+  height: 10vh;
+}
+
+.chat_content {
+  display: flex;
+  height: 87vh;
+  margin: 1rem;
+}
+
+.chat_bubble {
+  display: flex;
+  padding-top: 4rem;
+  padding-left: 9rem;
+  padding-right: 11rem;
+  background-color: limegreen;
+  border-radius: 3%;
+}
