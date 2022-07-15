@@ -99,7 +99,7 @@ module.exports = (db) => {
 
   router.get("/users_to_tasks", (req, res) => {
     db.query(
-      `SELECT task_id, array_agg(user_id) as assigned_users FROM users_to_tasks GROUP BY task_id;`
+      `SELECT task_id, array_agg(user_id) as assigned_users FROM users_to_tasks GROUP BY task_id ORDER BY task_id;`
     )
       .then((data) => {
         res.json(data.rows);
@@ -112,6 +112,7 @@ module.exports = (db) => {
   router.post("/users_to_tasks/:id/:taskID", (req, res) => {
     const user_id = req.params.id;
     const task_id = req.params.taskID;
+    console.log("////////////////", req.params);
     db.query(
       `INSERT INTO users_to_tasks (user_id, task_id) 
       VALUES ($1, $2) RETURNING *;`,

@@ -18,7 +18,7 @@ const Logout = (props) => {
       .then(() => navigate("/", { replace: true }))
       .catch((error) => console.log(error));
   };
-  console.log("LOGGED OUT USER", user);
+
   return (
     <div className="row" onClick={handleClick}>
       <MdLogout className="logout_icon" id="icon" />
