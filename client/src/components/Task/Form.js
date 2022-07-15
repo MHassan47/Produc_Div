@@ -34,9 +34,21 @@ const Form = ({
         owner_id: user.id,
       })
       .then((response) => {
-        setState({ ...state, tasks: [...state.tasks, response.data] });
-        console.log(response);
+        console.log("========", response.data.id);
+        axios
+          .post(
+            `http://localhost:8080/api/tasks/users_to_tasks/${user.id}/${response.data.id}`
+          )
+          .then(() => {
+            console.log("HERE");
+            setState({
+              ...state,
+              tasks: [...state.tasks, response.data],
+              user_to_tasks: [...state.users_to_tasks, response.data],
+            });
+          });
       })
+
       .then(() => newTask(currentColumn))
       .catch((err) => console.log(err));
   };
