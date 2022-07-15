@@ -6,17 +6,42 @@ const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const PORT = 8080;
 const cors = require("cors");
+// const twilio = require('twilio');
 
-// access token
-// const jwt = require('jsonwebtoken');
-// Register the route to get a new token
-// In a real world scenario we would authenticate user credentials
-// before creating a token, but for simplicity accessing this route
-// will generate a new token that is valid for 2 minutes
-// app.get('/token', function(req, res){
-//   var token = jwt.sign({username:"ado"}, 'supersecret',{expiresIn: 120});
-//   res.send(token)
-// })
+// webpack/node-style require
+//
+// const DailyIframe = require('@daily-co/daily-js');
+// let callFrame = DailyIframe.wrap(MY_IFRAME);
+
+// callFrame = window.DailyIframe.createFrame({
+//   showLeaveButton: true,
+//   iframeStyle: {
+//     position: 'fixed',
+//     top: '0',
+//     left: '0',
+//     width: '100%',
+//     height: '100%',
+//   },
+// });
+
+
+
+// const accountSid = 'ACa1da19cc2a396d15f6c95f67a31b9b8e'; // Your Account SID from www.twilio.com/console
+// const authToken = '4484649d1b0100761ae567a2c9db0e0b'; // Your Auth Token from www.twilio.com/console
+
+// const twilio = require('twilio');
+// const client = new twilio(accountSid, authToken);
+
+// client.messages
+//   .create({
+//     body: 'Hello from Node',
+//     to: '+7782374633', // Text this number
+//     from: '++19704652089', // From a valid Twilio number
+//   })
+//   .then((message) => console.log(message.sid));
+
+
+
 
 // db connection
 const db = require("./configs/db.config");
