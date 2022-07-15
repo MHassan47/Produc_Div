@@ -66,12 +66,17 @@ import Header from "./components/Header/Header";
 //   },
 // }));
 export default function App() {
-  const { state, setState } = useApplicationData();
+  const { isFetching, state, setState } = useApplicationData();
   const [user, setUser] = useState(state.user[0]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setUser(state.user[0]);
-  }, [state.user[0]]);
+    if (!isFetching) {
+      setLoading(false);
+      setUser(state.user[0]);
+    }
+  }, [isFetching]);
+
   const login = (data) => {
     setUser({
       id: data.id,
@@ -85,7 +90,7 @@ export default function App() {
     });
   };
 
-  const logout = (data) => {
+  const logout = () => {
     setUser({
       first_name: "",
       last_name: "",
@@ -97,8 +102,10 @@ export default function App() {
     });
   };
 
-  console.log("+++++++++++++++++", state);
-  // const classes = useStyles();
+  if (loading) {
+    return <p>Loading</p>;
+  }
+  console.log({ user });
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       <BrowserRouter>
@@ -110,7 +117,9 @@ export default function App() {
         <Routes>
           <Route
             path="/dashboard"
-            element={<Dashboard state={state} setState={setState} />}
+            element={
+              <Dashboard user={user} state={state} setState={setState} />
+            }
           />
           <Route path="/" element={<HomePage />} />
           <Route

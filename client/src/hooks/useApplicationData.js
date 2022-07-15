@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData(props) {
+  const [isFetching, setIsFetching] = useState(true);
   const [state, setState] = useState({
     users: {},
     projects: [],
@@ -40,10 +41,12 @@ export default function useApplicationData(props) {
           users_to_tasks: all[4].data,
         };
       });
+      setIsFetching(false);
     });
   }, []);
 
   return {
+    isFetching,
     state,
     setState,
   };
