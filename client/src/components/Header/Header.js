@@ -7,13 +7,12 @@ import { AuthContext } from "../../context/AuthProvider";
 // import { useState } from "react";
 
 export default function Header(props) {
-  const [currentproject, setCurrentProject] = useState(1);
   const { user } = useContext(AuthContext);
   return (
     <header className="header">
       <div className="header_title">
         {props.state.projects.map((project) => {
-          if (project.id === currentproject)
+          if (project.id === props.currentProject)
             return <div className="header_title_text">{project.name} </div>;
         })}
       </div>
