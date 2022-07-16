@@ -1,45 +1,4 @@
-// import {React}from "react";
-// import { useState } from "react";
-// import "./App.css";
-// import Homepage from "./components/HomePage/Homepage"
-// import Kanban from "./components//Kanban/Kanban";
-// import useApplicationData from "./hooks/useApplicationData";
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import { makeStyles } from '@material-ui/core/styles';
-// import { CssBaseline } from '@material-ui/core';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     minHeight: '100vh',
-//     backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/homepagebackground.jpg'})`,
-//     backgroundRepeat: 'no-repeat',
-//     backgroundSize: 'cover',
-//   }
-// }));
-
-// function App() { const classes = useStyles();
-
-//   const { state, setState } = useApplicationData();
-//   return (
-/* <div className="App">
-  <BrowserRouter>
-    <Routes>
-      <Route
-        path="/dashboard"
-        element={<Kanban state={state} setState={setState} />} />
-      {<Route path="/" element={<Homepage />} />
-    /* <Route path="/register" element={<Register />} />
-    <Route path="/signin" element={<SignIn />} /> */
-//     </Routes>
-//   </BrowserRouter>
-// </div>
-//   ); */}
-
-// }
-
-// export default App;
-
-import React from "react";
+import React, {Component} from "react";
 // import { CssBaseline } from "@material-ui/core";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
@@ -57,19 +16,30 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthProvider";
 import SideBar from "./components/SideBar/SideBar";
 import Header from "./components/Header/Header";
-// import Router from "/Users/sydannymorris/Documents/lighthouse/final/client/src/components/Chat/Router"
+import { Button } from "@material-ui/core";
+import VideoCall from "./components/Conference/VideoCall";
+import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
+import Conference from "./components/Conference/Conference";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     minHeight: "100vh",
-//     // backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/homepagebackground.jpg'})`,
-//     backgroundRepeat: "no-repeat",
-//     backgroundSize: "cover",
-//   },
-// }));
+// const { connect } = require('twilio-video');
+// import DailyIframe from '@daily-co/daily-js';
+// let callFrame = DailyIframe.wrap(MY_IFRAME);
+
+const config = {mode: "rtc", codec: "vp8"}
+
+const useClient = createClient(config);
+const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
+
+
+
 export default function App() {
+  const client = useClient();
+  const { ready, tracks } = useMicrophoneAndCameraTracks();
+
+  const [inCall, setInCall] = useState(false);
   const { state, setState } = useApplicationData();
   console.log("////////\\\\\\\\", state);
+
 
   const [user, setUser] = useState({
     first_name: "",
@@ -107,16 +77,27 @@ export default function App() {
   // const classes = useStyles();
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
+     {/* ready && <AgoraVideoPlayer videoTrack={tracks[1]} style={{height: '100%', width: '100%'}} /> */}
       <BrowserRouter>
         {/* <div className={classes.root}> */}
         {/* <Header />
         <SideBar /> */}
 
         {/* <CssBaseline /> */}
+        {/* <Button variant="contained" color="primary" onClick={() => setInCall(true)} 
+    
+      >
+        Join Call
+      </Button>
+     {inCall ? <VideoCall setInCall={ setInCall } /> : "Waiting to join call!"} */}
         <Routes>
           <Route
             path="/dashboard"
             element={<Dashboard state={state} setState={setState} />}
+          />
+           <Route
+            path="/conference"
+            element={<Conference state={state} setState={setState} />}
           />
           <Route path="/" element={<HomePage />} />
           <Route
