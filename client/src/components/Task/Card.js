@@ -12,16 +12,21 @@ const Card = (props) => {
   const [photoListContainer, setPhotoListContainer] = useState([]);
   const [edit, setEdit] = useState("");
   const [value, setValue] = useState(props.children);
+  const [change, setChange] = useState(false);
 
   const handleEditClick = (e) => {
-    console.log(props.task.id);
+    console.log("[[[[[[[[[[", value);
     e.preventDefault();
     axios
-      .put(`http://localhost:8080/api/tasks/edit/${props.task.id}`, value, {
-        withCredentials: true,
-      })
+      .post(
+        `http://localhost:8080/api/tasks/edit/${props.task.id}`,
+        { value: value },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
-        console.log(response);
+        console.log({ response });
         props.setState({
           ...props.state,
           tasks: [...props.state.tasks, response.data],
@@ -49,6 +54,7 @@ const Card = (props) => {
   // });
 
   const renderListContainer = () => {
+    setChange(false);
     const renderedListContainer =
       props.state.users_to_tasks &&
       props.state.users_to_tasks.map((assignment) => {
@@ -60,7 +66,9 @@ const Card = (props) => {
             test.push(props.state.users[assigned_user].photo_url);
             // console.log(props.state.users[assigned_user].photo_url);
           });
-          return <PhotoUrl photolist={test} />;
+          return (
+            <PhotoUrl photolist={test} change={change} setChange={setChange} />
+          );
           // return <div>hi</div>;
         }
       });
@@ -105,6 +113,7 @@ const Card = (props) => {
             taskID={props.task.id}
             state={props.state}
             setState={props.setState}
+            setChange={setChange}
           />
         </div>
       </div>
