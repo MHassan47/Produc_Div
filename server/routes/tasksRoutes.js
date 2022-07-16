@@ -22,13 +22,13 @@ module.exports = (db) => {
   });
 
   //   Edits a task card
-  router.put("/edit/:id", (req, res) => {
-    const name = req.body.value;
+  router.post("/edit/:id", (req, res) => {
+    const value = req.body.value;
     const task_id = req.params.id;
     db.query(
       `UPDATE tasks SET name = $1
-      WHERE tasks.id = $2`,
-      [name, task_id]
+      WHERE tasks.id = $2;`,
+      [value, task_id]
     )
       .then((data) => {
         res.json(data.rows);
