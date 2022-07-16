@@ -1,6 +1,5 @@
 .conference_container {
   display: flex;
-
   flex-direction: column;
 }
 .conference_header {
@@ -17,9 +16,53 @@
 
 .conference_call {
   display: flex;
+  max-width: fixed;
   padding-top: 4rem;
   padding-left: 9rem;
   padding-right: 11rem;
+  border: 2px solid #581845;
   background-color: white;
   border-radius: 3%;
+ 
 }
+
+#grid {
+  display: grid;
+  height: 200px;
+  margin-top: 15px;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  gap: 2.5em;
+}
+
+#grid > div {
+  /* border: 1px solid green;
+  background-color: rgb(222, 142, 246); */
+  height: 35vh;
+  width: 35vw;
+}
+
+/* 
+.video_call {
+  display: flex;
+  justify-content: "space-between"
+} */
+/* 
+#local-video {
+  display: flex;
+  z-index: 1;
+  /* height: 20vh;
+  max-width: 100%; */
+  /* width: "35vw";
+  height: "35vh";
+  background-color: "green";
+} */
+/* 
+.remote-video {
+  display: flex;
+  z-index: 1;
+  /* height: 20vh;
+  max-width: 100%; */
+  /* width: "35vw";
+  height: "35vh";
+  background-color: "red";
+}  */

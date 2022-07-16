@@ -6,6 +6,8 @@ import Conference from "../Conference/Conference";
 
 const Dashboard = ({ state, setState }) => {
   return (
+      <div>
+
     <div className="dashboard_container">
       <div className="dashboard_header">
         <Header state={state} />
@@ -22,6 +24,7 @@ const Dashboard = ({ state, setState }) => {
         </div> */}
       </div>
     </div>
+        </div>
   );
 };
 

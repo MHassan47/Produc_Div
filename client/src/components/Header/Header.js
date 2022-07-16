@@ -15,7 +15,8 @@ export default function Header(props) {
         <div className="header_title">
           {props.state.projects.map((project) => {
             if (project.id === currentproject)
-              return <div className="header_title_text">{project.name} </div>;
+              return <div key={project.id} className="header_title_text">{project.name} </div>;
+
           })}
         </div>
         <div>

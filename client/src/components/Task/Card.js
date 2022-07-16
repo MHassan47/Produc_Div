@@ -6,6 +6,7 @@ import Form from "./Form";
 
 const Card = (props) => {
   const [edit, setEdit] = useState("");
+  const { state } = props;
   // console.log(props.task);
   if (props.children === edit) {
     return (
@@ -27,7 +28,8 @@ const Card = (props) => {
         <div className="card__footer">
           <img
             className="card__owner"
-            src={props.state.users[props.task.owner_id].photo_url}
+             src={state.users.photo_url}
+            //  src={state.users[props.task.owner_id].photo_url}
           />
 
           {/* {props.state.users.map((user) => {

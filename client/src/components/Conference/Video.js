@@ -1,6 +1,7 @@
 import { AgoraVideoPlayer } from "agora-rtc-react"
 import { Grid } from "@material-ui/core"
 import { useState, useEffect } from "react"
+import "./Conference.css";
 
 
 export default function Video(props) {
@@ -8,16 +9,23 @@ export default function Video(props) {
   const [gridSpacing, setGridSpacing] = useState(12);
 console.log("++++++++++++TRACKS+++++++++++", tracks);
 
+
+// const obj = document.getElementById("conference_container");
+// obj.style["background-color"] = "lightgray";
+// obj.style["height"] ="100%";
+
+
+
   useEffect(() => {
     setGridSpacing(Math.max(Math.floor(12 / (users.length + 1))), 4);
   }, [users, tracks]);
 console.log("?////////USERS///////", users)
   return (
-    // <Grid container style={{ height: "100%" }}>
-    <div style={{display: "flex"}}>
+    // <div style={{display: "flex"}}>
+    <Grid id="grid">
 
-      {/* <Grid item xs={{ gridSpacing }}> */}
-      <div style={{width: "50vw", height: "50vh", backgroundColor: "green"}}>
+      {/* <Grid item style={{boarder: }}> */}
+      <div style={{width: "20vw", height: "30vh", backgroundColor: "green"}}>
         {tracks && 
         <AgoraVideoPlayer
         videoTrack={tracks[1]}
@@ -30,8 +38,8 @@ console.log("?////////USERS///////", users)
         if (user.videoTrack) {
           return (
             
-            // <Grid item style={{display: "flex"}}>
-            <div style={{width: "50vw", height: "50vh", backgroundColor: "red"}}>
+            // <Grid item style={{boarder: }}>
+            <div  style={{width: "20vw", height: "30vh", backgroundColor: "red"}}>
               <AgoraVideoPlayer
                 videoTrack={user.videoTrack}
                 key={user.uid}
@@ -45,7 +53,7 @@ console.log("?////////USERS///////", users)
         
       }
       {/* <Grid item></Grid> */}
-    {/* </Grid> */}
-      </div>
+      {/* </div> */}
+    </Grid>
   )
 }

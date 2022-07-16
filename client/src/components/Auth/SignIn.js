@@ -106,7 +106,7 @@ export default function SignIn({ state, setState }) {
             <button
               type="submit"
               className="btn"
-              // onClick={(event) => handleSubmit()}
+            // onClick={(event) => handleSubmit()}
             >
               Sign In
             </button>
@@ -116,11 +116,16 @@ export default function SignIn({ state, setState }) {
             <br />
             <span className="link">
               {/* put router link here */}
-              <button  type="button"
-              className="btn"
-              onClick={(event) => handleSubmit()}> <a href="/register">Register</a> </button>
+              <button type="button"
+                className="btn"
+                onClick={(event) => handleSubmit()}> <a href="/register">Register</a> </button>
             </span>
           </p>
+          <p class="remember">
+            <input type="checkbox" id="remember" name="remember" value="1" />
+            <label for="remember">Remember me</label>
+          </p>
+
         </section>
       )}
     </>
