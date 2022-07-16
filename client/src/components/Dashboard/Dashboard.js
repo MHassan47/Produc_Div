@@ -2,6 +2,7 @@ import Kanban from "../Kanban/Kanban";
 import SideBar from "../SideBar/SideBar";
 import Header from "../Header/Header";
 import "./Dashboard.css";
+import Conference from "../Conference/Conference";
 
 const Dashboard = ({ state, setState }) => {
   return (
@@ -16,6 +17,9 @@ const Dashboard = ({ state, setState }) => {
         <div className="dashboard_kanban">
           <Kanban state={state} setState={setState} />
         </div>
+        {/* <div className="dashboard_conference">
+          <Conference state={state} setState={setState} />
+        </div> */}
       </div>
     </div>
   );

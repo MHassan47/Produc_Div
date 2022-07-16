@@ -42,14 +42,15 @@ export default function VideoCall(props) {
         })
       })
 
-      try {
-        await client.join(config.appId, name, config.token, null)
+      await client.join(config.appId, name, config.token, null)
+      // try {
+      //   await client.join(config.appId, name, config.token, null)
         
-      } catch (error) {
-        console.log("+++++++++++++++++line 46 (join channel):", error)
-      }
+      // } catch (error) {
+      //   console.log("+++++++++++++++++line 46 (join channel):", error)
+      // }
 
-      if (tracks) await client.publish([tracks[0], tracks[1]])
+      if (tracks) await client.publish([tracks[0], tracks[1]]);
       setStart(true);
     };
     

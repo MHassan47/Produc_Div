@@ -1,31 +1,21 @@
-.dashboard_container {
+.conference_container {
   display: flex;
 
   flex-direction: column;
 }
-.dashboard_header {
+.conference_header {
   display: flex;
   height: 10vh;
 }
 
-.dashboard_content {
+.conference_content {
   display: flex;
   height: 87vh;
 
   margin: 1rem;
 }
 
-.dashboard_kanban {
-  display: flex;
-  padding-top: 4rem;
-  padding-left: 9rem;
-  padding-right: 11rem;
-  background-color: white;
-  border-radius: 3%;
-}
-
-
-.dashboard_conference {
+.conference_call {
   display: flex;
   padding-top: 4rem;
   padding-left: 9rem;

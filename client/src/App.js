@@ -77,19 +77,13 @@ export default function App() {
   // const classes = useStyles();
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
-     {/* ready && <AgoraVideoPlayer videoTrack={tracks[1]} style={{height: '100%', width: '100%'}} /> */}
       <BrowserRouter>
         {/* <div className={classes.root}> */}
         {/* <Header />
         <SideBar /> */}
 
         {/* <CssBaseline /> */}
-        {/* <Button variant="contained" color="primary" onClick={() => setInCall(true)} 
-    
-      >
-        Join Call
-      </Button>
-     {inCall ? <VideoCall setInCall={ setInCall } /> : "Waiting to join call!"} */}
+      
         <Routes>
           <Route
             path="/dashboard"
