@@ -11,7 +11,7 @@ console.log("++++++++++++TRACKS+++++++++++", tracks);
   useEffect(() => {
     setGridSpacing(Math.max(Math.floor(12 / (users.length + 1))), 4);
   }, [users, tracks]);
-
+console.log("?////////USERS///////", users)
   return (
     // <Grid container style={{ height: "100%" }}>
     <div style={{display: "flex"}}>
@@ -30,21 +30,21 @@ console.log("++++++++++++TRACKS+++++++++++", tracks);
         if (user.videoTrack) {
           return (
             
-            // <Grid item xs={gridSpacing}>
+            // <Grid item style={{display: "flex"}}>
             <div style={{width: "50vw", height: "50vh", backgroundColor: "red"}}>
               <AgoraVideoPlayer
                 videoTrack={user.videoTrack}
                 key={user.uid}
-                // style={{ height: "100%", width: "100%" }}
+                style={{ height: "100%", width: "100%" }}
                 />
                 </div>
-            // </Grid>
+            //  </Grid>
             );
           } else return null;
         })
         
       }
-      <Grid item></Grid>
+      {/* <Grid item></Grid> */}
     {/* </Grid> */}
       </div>
   )
