@@ -2,19 +2,11 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 
-const Form = ({
-  state,
-  setState,
-  currentColumn,
-  newTask,
-  //   setNewCardToDo,
-  //   setNewCardInProgress,
-  //   setNewCardComplete,
-}) => {
+const Form = ({ state, setState, currentColumn, newTask, currentProject }) => {
   const { user } = useContext(AuthContext);
   //   const state = props.state;
   //   const setState = props.setState;
-  const project = 1;
+
   const column = currentColumn;
   // const [user_id, setUser_id] = useState(1);
   const [description, setDescription] = useState("");
@@ -24,27 +16,28 @@ const Form = ({
   //   const [members, setMembers] = useState([]);
 
   const handleSubmit = (e) => {
+    console.log({ currentProject });
     if (!description) return setError(true);
     e.preventDefault();
     axios
-      .post(`http://localhost:8080/api/tasks/new/${project}`, {
+      .post(`http://localhost:8080/api/tasks/new/${currentProject}`, {
         name: description,
         created_at: "2022/07/13",
         col: column,
         owner_id: user.id,
       })
       .then((response) => {
-        console.log("========", response.data.id);
+        // console.log("========", response.data.id);
         axios
           .post(
             `http://localhost:8080/api/tasks/users_to_tasks/${user.id}/${response.data.id}`
           )
-          .then(() => {
+          .then((data) => {
             console.log("HERE");
             setState({
               ...state,
               tasks: [...state.tasks, response.data],
-              user_to_tasks: [...state.users_to_tasks, response.data],
+              user_to_tasks: [...state.users_to_tasks, data.data],
             });
           });
       })
