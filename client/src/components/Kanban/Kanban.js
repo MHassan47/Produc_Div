@@ -9,15 +9,16 @@ import { IoIosAdd } from "react-icons/io";
 import { IoRemoveSharp } from "react-icons/io5";
 import Header from "../Header/Header";
 import SideBar from "../SideBar/SideBar";
+import { getThemeProps } from "@material-ui/styles";
 // const test = [
 //   { id: 1, name: "one" },
 //   { id: 2, name: "two" },
 // ];
 
-const Kanban = ({ state, setState }) => {
+const Kanban = ({ state, setState, currentProject, setCurrentProject }) => {
   // const state = props.state;
   // const setState = props.setState;
-  const [project, setProject] = useState(1);
+  // const [project, setProject] = useState(1);
   const [columns, setColumns] = useState(["To Do", "In Progress", "Complete"]);
   const [currentColumn, setCurrentColumn] = useState("");
   const [newCardToDo, setNewCardToDo] = useState(false);
@@ -69,7 +70,7 @@ const Kanban = ({ state, setState }) => {
   };
 
   return (
-    <div>
+    <div className="kanban_container">
       <section>
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="kanban">
@@ -87,7 +88,8 @@ const Kanban = ({ state, setState }) => {
                         {
                           state.tasks.filter(
                             (task) =>
-                              task.col === element && task.project_id === 1
+                              task.col === element &&
+                              task.project_id === currentProject
                           ).length
                         }
                       </div>
@@ -95,6 +97,7 @@ const Kanban = ({ state, setState }) => {
                         <div className="kanban__section__add">
                           <IoRemoveSharp
                             onClick={() => {
+                              console.log(currentProject);
                               setNewCardToDo(false);
                               setNewCardInProgress(false);
                               setNewCardComplete(false);
@@ -126,6 +129,7 @@ const Kanban = ({ state, setState }) => {
                             setState={setState}
                             currentColumn={element}
                             newTask={newTask}
+                            currentProject={currentProject}
                           />
                         )}
 
@@ -135,6 +139,7 @@ const Kanban = ({ state, setState }) => {
                             setState={setState}
                             currentColumn={element}
                             newTask={newTask}
+                            currentProject={currentProject}
                           />
                         )}
 
@@ -144,11 +149,15 @@ const Kanban = ({ state, setState }) => {
                             setState={setState}
                             currentColumn={element}
                             newTask={newTask}
+                            currentProject={currentProject}
                           />
                         )}
                       </div>
                       {state.tasks.map((task, index) => {
-                        if (task.col === element && task.project_id === 1)
+                        if (
+                          task.col === element &&
+                          task.project_id === currentProject
+                        )
                           return (
                             <Draggable
                               key={task.id.toString()}
