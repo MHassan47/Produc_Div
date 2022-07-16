@@ -1,3 +1,8 @@
+.kanban_container {
+  display: flex;
+  max-height: 800px;
+}
+
 .kanban {
   display: flex;
   height: 600px;
@@ -35,14 +40,17 @@
 
 .kanban__section {
   width: 325px;
-  height: fit-content;
-  overflow: auto;
+  /* height: 900px; */
+  height: max-content;
+  max-height: 720px;
+  overflow-y: auto;
   border-radius: 15px;
   border: 10px black;
   /* background-color: #c9bfe0; */
   background-color: #f3f1f8;
   box-shadow: 10px 0 10px rgba(33, 33, 33, 0.2);
 }
+
 .kanban__section:hover {
   background-color: #afaac2e7;
 }
