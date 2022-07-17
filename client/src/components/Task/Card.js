@@ -3,8 +3,7 @@ import "./card.css";
 import { BsThreeDots } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import { HiCheck } from "react-icons/hi";
-import Form from "./Form";
-import PhotoUrl from "./PhotoUrl";
+import PhotoList from "./PhotoList";
 import AddUsers from "./AddUsers";
 import axios from "axios";
 
@@ -53,28 +52,6 @@ const Card = (props) => {
   //   }
   // });
 
-  const renderListContainer = () => {
-    setChange(false);
-    const renderedListContainer =
-      props.state.users_to_tasks &&
-      props.state.users_to_tasks.map((assignment) => {
-        let test = [];
-        if (assignment.task_id === props.task.id) {
-          // console.log("TRUE FALSE", assignment.task_id === props.task.id);
-          assignment.assigned_users.map((assigned_user) => {
-            // console.log("RETURN", assigned_user);
-            test.push(props.state.users[assigned_user].photo_url);
-            // console.log(props.state.users[assigned_user].photo_url);
-          });
-          return (
-            <PhotoUrl photolist={test} change={change} setChange={setChange} />
-          );
-          // return <div>hi</div>;
-        }
-      });
-    setPhotoListContainer(renderedListContainer);
-  };
-
   // useEffect(() => console.log("hi"), [photoListContainer]);
 
   return (
@@ -107,9 +84,15 @@ const Card = (props) => {
           )}
         </div>
         <div className="card__footer">
-          <ul className="list_container">{photoListContainer}</ul>
+          {/* <div className="photo_container"> */}
+          <PhotoList
+            state={props.state}
+            setState={props.setState}
+            taskID={props.task.id}
+          />
+          {/* </div> */}
           <AddUsers
-            renderListContainer={renderListContainer}
+            // renderListContainer={renderListContainer}
             taskID={props.task.id}
             state={props.state}
             setState={props.setState}

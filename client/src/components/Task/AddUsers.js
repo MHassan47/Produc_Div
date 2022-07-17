@@ -29,17 +29,17 @@ const AddUsers = ({ renderListContainer, taskID, state, setState }) => {
             ...state,
             users_to_tasks: [...state.users_to_tasks, response.data],
           }) //get list of users from new users setPhotoListContainer(newListOfUsers)
-            .then(() => setAdd(false), setTest(true), renderListContainer());
+            .then(() => setAdd(false), setTest(true));
         })
         .catch((error) => console.log(error));
   };
-  useEffect(() => {
-    console.log({ useEffect: "hi" });
-    console.log("STATE------------------------", state);
-  }, [state]);
-  useEffect(() => {
-    renderListContainer();
-  }, []);
+  // useEffect(() => {
+  //   console.log({ useEffect: "hi" });
+  //   console.log("STATE------------------------", state);
+  // }, [state]);
+  // useEffect(() => {
+  //   renderListContainer();
+  // }, []);
 
   const handleAddClick = (e) => {
     e.preventDefault();
