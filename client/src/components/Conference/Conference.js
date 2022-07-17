@@ -23,7 +23,7 @@ return (
       {inCall ?
       <VideoCall setInCall={ setInCall } /> 
       :  
-      <Button style={{ height: "5%" }} variant="contained" color="primary" onClick={() => setInCall(true)}>
+      <Button id="join_button" variant="contained" color="primary" onClick={() => setInCall(true)}>
         Join Call
       </Button>}
       </div>

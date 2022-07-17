@@ -17,6 +17,7 @@
 
 .dashboard_kanban {
   display: flex;
+  width: 65%;
   padding-top: 4rem;
   padding-left: 9rem;
   padding-right: 11rem;

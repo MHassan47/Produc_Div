@@ -11,7 +11,7 @@ export const AuthContext = createContext({
   role: "",
   auth: false
 })
-
+console.log("}}}}}}}AuthProvider{{{{{{{")
 
 
 // export const AuthProvider = ({ children }) => {
@@ -26,3 +26,4 @@ export const AuthContext = createContext({
 // }
 
 // export default AuthContext;
+

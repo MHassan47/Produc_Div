@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRef, useState, useEffect, useContext, React } from "react";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { AuthContext } from "../../context/AuthProvider";
 // import useApplicationData from "./hooks/useApplicationData";
@@ -54,9 +55,12 @@ export default function SignIn({ state, setState }) {
 
       .then(
         ({ data }) => {
+          // localStorage.setItem("user", JSON.stringify(data.user))
+          // console.log("//////DATA//////", data)
           // userStateArray.map((user) => {
           //   if (user.email === email) {
           //     console.log("##########", user.id);
+          console.log("//////DATA//////", data.user)
 
           return login(data.user);
         }
@@ -77,7 +81,9 @@ export default function SignIn({ state, setState }) {
           <h1>You have loggin in!</h1>
           <br />
           <p>
-            <a href="#">Go to Project Dashboard</a>
+          <NavLink to='/dashboard' >
+          Go to Project Dashboard
+          </NavLink>
           </p>
         </section>
       ) : (
@@ -121,9 +127,9 @@ export default function SignIn({ state, setState }) {
                 onClick={(event) => handleSubmit()}> <a href="/register">Register</a> </button>
             </span>
           </p>
-          <p class="remember">
+          <p className="remember">
             <input type="checkbox" id="remember" name="remember" value="1" />
-            <label for="remember">Remember me</label>
+            <label htmlFor="remember">Remember me</label>
           </p>
 
         </section>

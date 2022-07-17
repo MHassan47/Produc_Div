@@ -25,7 +25,7 @@ console.log("?////////USERS///////", users)
     <Grid id="grid">
 
       {/* <Grid item style={{boarder: }}> */}
-      <div style={{width: "20vw", height: "30vh", backgroundColor: "green"}}>
+      <div style={{width: "30vw", height: "35vh", backgroundColor: "green"}}>
         {tracks && 
         <AgoraVideoPlayer
         videoTrack={tracks[1]}
@@ -39,7 +39,7 @@ console.log("?////////USERS///////", users)
           return (
             
             // <Grid item style={{boarder: }}>
-            <div  style={{width: "20vw", height: "30vh", backgroundColor: "red"}}>
+            <div  style={{width: "30vw", height: "35vh", backgroundColor: "red"}}>
               <AgoraVideoPlayer
                 videoTrack={user.videoTrack}
                 key={user.uid}

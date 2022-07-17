@@ -12,6 +12,8 @@ const Logout = (props) => {
       .post("http://localhost:8080/users/logout")
       .then(() => {
         logout();
+        //removes user from localStorage on logout
+        localStorage.removeItem("user")
       })
       .then(() => navigate("/", { replace: true }))
       .catch((error) => console.log(error));

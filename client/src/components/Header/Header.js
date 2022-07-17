@@ -4,6 +4,7 @@ import React, { useContext, useState } from "react";
 import "./Header.css";
 import { Navigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import "../../Docs/Logo.css"
 // import { useState } from "react";
 
 export default function Header(props) {
@@ -11,6 +12,9 @@ export default function Header(props) {
   const { user } = useContext(AuthContext);
   return (
     <header className="header">
+      <div className="logo">
+      <img src={require("../../Docs/ProducDiv_logo.png")} alt={"ProducDiv"}/> 
+      </div>
       <div>
         <div className="header_title">
           {props.state.projects.map((project) => {
@@ -32,13 +36,3 @@ export default function Header(props) {
     </header>
   );
 }
-// }
-// Header.propTypes = {
-//   user: PropTypes.shape({}),
-//   onLogin: PropTypes.func.isRequired,
-//   onLogout: PropTypes.func.isRequired,
-//   onCreateAccount: PropTypes.func.isRequired,
-// };
-
-// Header.defaultProps = {
-//   user: null,  onClick={logout}   onClick={login}

@@ -49,6 +49,10 @@ export default function App() {
     role: "",
   });
 
+  const userData = localStorage.getItem("user")
+  console.log("+++++++++UserData++++++++++++", userData);
+
+
   const login = (data) => {
     setUser({
       id: data.id,
