@@ -20,10 +20,12 @@ import { Button } from "@material-ui/core";
 import VideoCall from "./components/Conference/VideoCall";
 import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
 import Conference from "./components/Conference/Conference";
-
+import io from 'socket.io-client';
 // const { connect } = require('twilio-video');
 // import DailyIframe from '@daily-co/daily-js';
 // let callFrame = DailyIframe.wrap(MY_IFRAME);
+
+const socket = io.connect("http://localhost:3000/chat");
 
 const config = {mode: "rtc", codec: "vp8"}
 
@@ -33,6 +35,19 @@ const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 
 export default function App() {
+
+  // for socket.io chat:
+  const [username, setUsername] = useState("");
+  const [room, setRoom] = useState("");
+  const [showChat, setShowChat] = useState(false);
+
+  const joinRoom = () => {
+    if (username !== "" && room !== "") {
+      socket.emit("join_room", room);
+      setShowChat(true);
+    }
+  };
+
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
 
@@ -102,10 +117,28 @@ export default function App() {
             path="/sign-in"
             element={<SignIn state={state} setState={setState} />}
           />
-          <Route
+          <Route 
             path="/chat"
             element={<Chat state={state} setState={setState} />}
           />
+          {/* <div className="Chat">
+            {!showChat ? (
+            <div className="chat_container">
+              <h3>Join Chat</h3>
+              <input type="text" placeholder="Team member..." onChange={(event) => {
+                setUsername(event.target.value);
+              }} />
+              <input type="text" placeholder="Room ID..." onChange={(event) => {
+                setRoom(event.target.value);
+              }} />
+              <button onClick={joinRoom}>Join Room</button>
+             </div> 
+             )
+            : (
+              <Chat socket={socket} username={username} room={room}/>
+              )}
+          </div> */}
+         
         </Routes>
         {/* </div> */}
       </BrowserRouter>
