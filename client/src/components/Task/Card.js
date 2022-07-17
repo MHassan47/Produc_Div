@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./card.css";
 import { BsThreeDots } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
@@ -6,52 +6,21 @@ import { HiCheck } from "react-icons/hi";
 import Form from "./Form";
 import PhotoUrl from "./PhotoUrl";
 import AddUsers from "./AddUsers";
-import axios from "axios";
 
 const Card = (props) => {
   const [photoListContainer, setPhotoListContainer] = useState([]);
   const [edit, setEdit] = useState("");
   const [value, setValue] = useState(props.children);
   const [change, setChange] = useState(false);
+  const [test, setTest] = useState(false);
 
   const handleEditClick = (e) => {
-    console.log("[[[[[[[[[[", value);
+    // console.log("[[[[[[[[[[", value);
     e.preventDefault();
-    axios
-      .post(
-        `http://localhost:8080/api/tasks/edit/${props.task.id}`,
-        { value: value },
-        {
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        console.log({ response });
-        props.setState({
-          ...props.state,
-          tasks: [...props.state.tasks, response.data],
-        });
-      })
+    Promise.resolve(props.updateCard(value, props.task.id))
       .then(() => setEdit(false))
       .catch((error) => console.log(error));
   };
-
-  // const filteredAssignments = props.state.users_to_tasks.filter((assignment) => assignment.task_id === props.task.id )
-  // const assignedUsers = filteredAssignments.map((assignment) => {
-
-  // })
-  // {
-
-  //     // console.log("TRUE FALSE", assignment.task_id === props.task.id);
-  //     assignment.assigned_users.map((assigned_user) => {
-  //       // console.log("RETURN", assigned_user);
-  //       test.push(props.state.users[assigned_user].photo_url);
-  //       // console.log(props.state.users[assigned_user].photo_url);
-  //     });
-  //     return <PhotoUrl photolist={test} />;
-  //     // return <div>hi</div>;
-  //   }
-  // });
 
   const renderListContainer = () => {
     setChange(false);
@@ -76,6 +45,7 @@ const Card = (props) => {
   };
 
   // useEffect(() => console.log("hi"), [photoListContainer]);
+  useEffect(() => renderListContainer(), [test]);
 
   return (
     <div className="card-container">
@@ -111,9 +81,8 @@ const Card = (props) => {
           <AddUsers
             renderListContainer={renderListContainer}
             taskID={props.task.id}
-            state={props.state}
-            setState={props.setState}
-            setChange={setChange}
+            setTest={setTest}
+            addUserToCard={props.addUserToCard}
           />
         </div>
       </div>

@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { NavLink, useSearchParams } from "react-router-dom";
 
-const Dashboard = ({ state, setState }) => {
+const Dashboard = ({ state, setState, updateCard, addUserToCard }) => {
   const [currentProject, setCurrentProject] = useState(2);
   const { user } = useContext(AuthContext);
   return user ? (
@@ -28,6 +28,8 @@ const Dashboard = ({ state, setState }) => {
             setState={setState}
             currentProject={currentProject}
             setCurrentProject={setCurrentProject}
+            updateCard={updateCard}
+            addUserToCard={addUserToCard}
           />
         </div>
       </div>

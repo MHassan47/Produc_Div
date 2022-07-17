@@ -6,40 +6,53 @@ import axios from "axios";
 import { AuthContext } from "../../context/AuthProvider";
 import PhotoUrl from "./PhotoUrl";
 
-const AddUsers = ({ renderListContainer, taskID, state, setState }) => {
+const AddUsers = ({
+  renderListContainer,
+  taskID,
+  state,
+  setState,
+  setTest,
+  addUserToCard,
+}) => {
   const { user } = useContext(AuthContext);
   const [add, setAdd] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [test, setTest] = useState(false);
+  // const [test, setTest] = useState(false);
 
   // useEffect(() =>
 
   const handleCheckClick = (e) => {
     e.preventDefault();
-    console.log(taskID);
-    if (!state.users_to_tasks[taskID - 1].assigned_users.includes(user.id))
-      axios
-        .post(
-          `http://localhost:8080/api/tasks/users_to_tasks/${user.id}/${taskID}`
-        )
 
-        .then((response) => {
-          console.log("===============", response);
-          setState({
-            ...state,
-            users_to_tasks: [...state.users_to_tasks, response.data],
-          }) //get list of users from new users setPhotoListContainer(newListOfUsers)
-            .then(() => setAdd(false), setTest(true), renderListContainer());
-        })
-        .catch((error) => console.log(error));
+    // if (!state.users_to_tasks[taskID - 1].assigned_users.includes(user.id))
+
+    Promise.resolve(addUserToCard(user.id, taskID))
+      .then(() =>
+        setTimeout(() => {
+          setAdd(false);
+          setTest((prev) => !prev);
+          renderListContainer();
+          console.log("DONE");
+        }, 5000)
+      )
+      // .then(setAdd(false), setTest(true), renderListContainer())
+      .catch((error) => console.log(error));
+
+    // .then((response) => {
+    //   console.log("===============", response);
+    //   setState({
+    //     ...state,
+    //     users_to_tasks: [...state.users_to_tasks, response.data],
+    //   }) //get list of users from new users setPhotoListContainer(newListOfUsers)
+    //     .then(() => setAdd(false), setTest(true), renderListContainer());
+    // })
   };
-  useEffect(() => {
-    console.log({ useEffect: "hi" });
-    console.log("STATE------------------------", state);
-  }, [state]);
-  useEffect(() => {
-    renderListContainer();
-  }, []);
+  // useEffect(() => {
+  // }, [state]);
+  // useEffect(() => {
+  //   console.log("RAN");
+  //   renderListContainer();
+  // }, [test]);
 
   const handleAddClick = (e) => {
     e.preventDefault();

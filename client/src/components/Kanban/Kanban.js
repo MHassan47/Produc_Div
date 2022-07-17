@@ -15,7 +15,14 @@ import { getThemeProps } from "@material-ui/styles";
 //   { id: 2, name: "two" },
 // ];
 
-const Kanban = ({ state, setState, currentProject, setCurrentProject }) => {
+const Kanban = ({
+  state,
+  setState,
+  currentProject,
+  setCurrentProject,
+  updateCard,
+  addUserToCard,
+}) => {
   // const state = props.state;
   // const setState = props.setState;
   // const [project, setProject] = useState(1);
@@ -175,9 +182,12 @@ const Kanban = ({ state, setState, currentProject, setCurrentProject }) => {
                                   }}
                                 >
                                   <Card
+                                    key={task.id}
                                     state={state}
                                     setState={setState}
                                     task={task}
+                                    updateCard={updateCard}
+                                    addUserToCard={addUserToCard}
                                   >
                                     {task.name}
                                   </Card>

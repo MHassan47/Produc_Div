@@ -66,7 +66,8 @@ import Header from "./components/Header/Header";
 //   },
 // }));
 export default function App() {
-  const { isFetching, state, setState } = useApplicationData();
+  const { isFetching, state, setState, updateCard, addUserToCard } =
+    useApplicationData();
   const [user, setUser] = useState(state.user[0]);
   const [loading, setLoading] = useState(true);
 
@@ -118,7 +119,13 @@ export default function App() {
           <Route
             path="/dashboard"
             element={
-              <Dashboard user={user} state={state} setState={setState} />
+              <Dashboard
+                user={user}
+                state={state}
+                setState={setState}
+                updateCard={updateCard}
+                addUserToCard={addUserToCard}
+              />
             }
           />
           <Route path="/" element={<HomePage />} />

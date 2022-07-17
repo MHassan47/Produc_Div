@@ -45,9 +45,46 @@ export default function useApplicationData(props) {
     });
   }, []);
 
+  // Update card details
+  function updateCard(value, taskID) {
+    return axios
+      .post(
+        `http://localhost:8080/api/tasks/edit/${taskID}`,
+        { value: value },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        console.log({ response });
+        setState({
+          ...state,
+          tasks: [...state.tasks, response.data],
+        });
+      });
+  }
+
+  // Adding user to card
+  function addUserToCard(userID, taskID) {
+    return axios
+      .post(
+        `http://localhost:8080/api/tasks/users_to_tasks/${userID}/${taskID}`
+      )
+
+      .then((response) => {
+        console.log("===============", response);
+        setState({
+          ...state,
+          users_to_tasks: [...state.users_to_tasks, response.data],
+        });
+      });
+  }
+
   return {
     isFetching,
     state,
     setState,
+    updateCard,
+    addUserToCard,
   };
 }
