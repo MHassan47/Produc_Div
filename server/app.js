@@ -4,8 +4,33 @@ const express = require("express");
 const morgan = require("morgan");
 // import session = require('express-session');
 const cookieSession = require("cookie-session");
-const PORT = 8080;
 const cors = require("cors");
+const httpServer = require("http");
+const socketIO = require("socket.io");
+// db connection
+const db = require("./configs/db.config");
+
+// routes import
+const usersRoutes = require("./routes/usersRoutes");
+const tasksRoutes = require("./routes/tasksRoutes");
+const projectsRoutes = require("./routes/projectsRoutes");
+// const messagesRoutes = require("./routes/messageRoutes");
+
+const PORT = 8080;
+const app = express();
+const server = httpServer.createServer(app);
+const io = socketIO(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  }
+});
+
+
+app.use(cors());
+
+
+
 // const twilio = require('twilio');
 
 // webpack/node-style require
@@ -43,16 +68,7 @@ const cors = require("cors");
 
 
 
-// db connection
-const db = require("./configs/db.config");
 
-// routes import
-const usersRoutes = require("./routes/usersRoutes");
-const tasksRoutes = require("./routes/tasksRoutes");
-const projectsRoutes = require("./routes/projectsRoutes");
-// const messagesRoutes = require("./routes/messageRoutes");
-
-const app = express();
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 // middleware setup
 app.use(morgan(ENVIROMENT));
@@ -81,4 +97,27 @@ app.use("/api/projects", projectsRoutes(db));
 //   res.json({ greetings: "hello world" });
 // });
 
-app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+
+
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+  });
+
+  socket.on("send_message", (data) => {
+    console.log("message?", data);
+    socket.to(data.room).emit("receive_message", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User Disconected", socket.id);
+  });
+});
+
+
+
+server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));

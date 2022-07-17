@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js index.js ",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:reset": "node db/scripts/resetdb.js"
   },
@@ -25,10 +25,13 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.7.3",
+    "socket.io": "^2.5.0",
+    "socket.io-server": "*",
     "twilio": "^3.79.0",
     "twilio-video": "^2.22.1"
   },
   "devDependencies": {
+    "@types/socket.io": "^3.0.2",
     "nodemon": "^2.0.19"
   }
 }

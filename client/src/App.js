@@ -1,4 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import "./App.css";
+import io from "socket.io-client";
 // import { CssBaseline } from "@material-ui/core";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
@@ -6,7 +8,6 @@ import SignIn from "./components/Auth/SignIn";
 import Chat from "./components/Chat/Chat";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import "./App.css";
 import Kanban from "./components//Kanban/Kanban";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Form from "./components/Task/Form";
@@ -18,24 +19,31 @@ import SideBar from "./components/SideBar/SideBar";
 import Header from "./components/Header/Header";
 import { Button } from "@material-ui/core";
 import VideoCall from "./components/Conference/VideoCall";
-import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
+import {
+  AgoraVideoPlayer,
+  createClient,
+  createMicrophoneAndCameraTracks,
+} from "agora-rtc-react";
 import Conference from "./components/Conference/Conference";
-import io from 'socket.io-client';
 // const { connect } = require('twilio-video');
 // import DailyIframe from '@daily-co/daily-js';
 // let callFrame = DailyIframe.wrap(MY_IFRAME);
 
-const socket = io.connect("http://localhost:3000/chat");
+const socket = io("http://localhost:3000");
+socket.on("connection", function () {
+  console.log("connected:", socket.connected);
+});
+window.asdf = io;
+setTimeout(() => console.log("socket:", socket), 2000);
 
-const config = {mode: "rtc", codec: "vp8"}
+
+
+const config = { mode: "rtc", codec: "vp8" };
 
 const useClient = createClient(config);
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
-
-
 export default function App() {
-
   // for socket.io chat:
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
@@ -54,7 +62,6 @@ export default function App() {
   const [inCall, setInCall] = useState(false);
   const { state, setState } = useApplicationData();
   console.log("////////\\\\\\\\", state);
-
 
   const [user, setUser] = useState({
     first_name: "",
@@ -98,13 +105,13 @@ export default function App() {
         <SideBar /> */}
 
         {/* <CssBaseline /> */}
-      
+
         <Routes>
           <Route
             path="/dashboard"
             element={<Dashboard state={state} setState={setState} />}
           />
-           <Route
+          <Route
             path="/conference"
             element={<Conference state={state} setState={setState} />}
           />
@@ -117,28 +124,14 @@ export default function App() {
             path="/sign-in"
             element={<SignIn state={state} setState={setState} />}
           />
-          <Route 
+          <Route
             path="/chat"
             element={<Chat state={state} setState={setState} />}
           />
-          {/* <div className="Chat">
-            {!showChat ? (
-            <div className="chat_container">
-              <h3>Join Chat</h3>
-              <input type="text" placeholder="Team member..." onChange={(event) => {
-                setUsername(event.target.value);
-              }} />
-              <input type="text" placeholder="Room ID..." onChange={(event) => {
-                setRoom(event.target.value);
-              }} />
-              <button onClick={joinRoom}>Join Room</button>
-             </div> 
-             )
-            : (
-              <Chat socket={socket} username={username} room={room}/>
-              )}
-          </div> */}
-         
+          {/* <Route
+            path="/chat"
+          />
+          */}
         </Routes>
         {/* </div> */}
       </BrowserRouter>

@@ -189,3 +189,30 @@ body {
 .hide {
   opacity: 0 !important;
 }
+
+
+.conference_container {
+  display: flex;
+
+  flex-direction: column;
+}
+.conference_header {
+  display: flex;
+  height: 10vh;
+}
+
+.conference_content {
+  display: flex;
+  height: 87vh;
+
+  margin: 1rem;
+}
+
+.conference_call {
+  display: flex;
+  padding-top: 4rem;
+  padding-left: 9rem;
+  padding-right: 11rem;
+  background-color: white;
+  border-radius: 3%;
+}
