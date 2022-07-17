@@ -24,19 +24,18 @@ const AddUsers = ({
   const handleCheckClick = (e) => {
     e.preventDefault();
 
-    // if (!state.users_to_tasks[taskID - 1].assigned_users.includes(user.id))
-
-    Promise.resolve(addUserToCard(user.id, taskID))
-      .then(() =>
-        setTimeout(() => {
-          setAdd(false);
-          setTest((prev) => !prev);
-          renderListContainer();
-          console.log("DONE");
-        }, 5000)
-      )
-      // .then(setAdd(false), setTest(true), renderListContainer())
-      .catch((error) => console.log(error));
+    if (!state.users_to_tasks[taskID - 1].assigned_users.includes(user.id))
+      Promise.resolve(addUserToCard(user.id, taskID))
+        .then(() =>
+          setTimeout(() => {
+            setAdd(false);
+            setTest((prev) => !prev);
+            renderListContainer();
+            console.log("DONE");
+          }, 5000)
+        )
+        // .then(setAdd(false), setTest(true), renderListContainer())
+        .catch((error) => console.log(error));
 
     // .then((response) => {
     //   console.log("===============", response);
