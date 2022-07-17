@@ -35,10 +35,11 @@ const runSeeds = async (db) => {
 };
 
 const resetDB = async () => {
+  console.log("Running DB Reset...");
+  console.log("Establishing DB connection: ");
+  const client = new Client(connObj);
+
   try {
-    console.log("Running DB Reset...");
-    console.log("Establishing DB connection: ");
-    const client = new Client(connObj);
     await client.connect();
     console.log("connection established!\n");
 
