@@ -1,15 +1,18 @@
 import React, { useContext, useState } from "react";
-// import PropTypes from 'prop-types';
-// import { Button } from './Button';
+
 import "./Header.css";
 import { Navigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
-// import { useState } from "react";
+import DropDown from "./DropDown";
 
 export default function Header(props) {
   const { user } = useContext(AuthContext);
   return (
     <header className="header">
+      <DropDown
+        currentProject={props.currentProject}
+        setCurrentProject={props.setCurrentProject}
+      />
       <div className="header_title">
         {props.state.projects.map((project) => {
           if (project.id === props.currentProject)
