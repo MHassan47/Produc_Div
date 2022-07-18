@@ -16,7 +16,7 @@ return (
       <Header state={state} />
     </div>
     <div className="conference_content">
-      <div>
+      <div className="conference_sidebar">
         <SideBar />
       </div>
       <div className="conference_call">
@@ -25,8 +25,9 @@ return (
       :  
       
       <Button id="join_button" style={{ justifyContent: 'centre', marginTop: '100px', width: '100%'}} variant="contained" color="primary" onClick={() => setInCall(true)}>
-        Join Call
-      </Button>}
+      Join Call
+    </Button>}
+      
       </div>
     </div>
   </div>

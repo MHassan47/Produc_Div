@@ -3,8 +3,56 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import axios from "./api/axios";
 import "./Register.css";
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
+import { NavLink } from "react-router-dom";
+import Typical from 'react-typical'
+
+
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    fontFamily: 'monospace',
+    fontSize: '1.2em',
+    background: "#000"
+  },
+  appbar: {
+    background: '#323132',
+  },
+  appbarWrapper: {
+    width: '80%',
+    margin: '0 auto',
+  },
+  appbarTitle: {
+    flexGrow: '1',
+  },
+  icon: {
+    color: '#fff',
+    fontSize: '2rem',
+  },
+  colorText: {
+    fontFamily: 'monospace',
+    fontSize: '2.5rem',
+    color: '#a425ff',
+  },
+  container: {
+    textAlign: 'center',
+  },
+  title: {
+    color: '#000',
+    fontSize: '4.5rem',
+  },
+}));
+
+
 
 export default function Register({ state, setState }) {
+  const classes = useStyles();
   const navigate = useNavigate();
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
@@ -66,9 +114,36 @@ export default function Register({ state, setState }) {
   };
 
   return (
-    <div className="body">
+    <div>
+       <AppBar className={classes.appbar} elevation={0}>
+        <Toolbar className={classes.appbarWrapper}>
+          <h1 className={classes.appbarTitle}>
+            <span className={classes.colorText}>Produc_Div</span>
+          </h1>
+          <NavLink to='/sign-in' >
+            <button className='buttons'>Sign In</button>
+          </NavLink>
+          <NavLink to='/register'> <button className='buttons'>Register</button></NavLink>
+        
+        </Toolbar>
+      </AppBar>
       <div className="form_layout">
         <div className="form">
+        <p className="h1-title">
+          <Typical
+        loop={Infinity}
+        wrapper="l"
+        steps={[
+          ' ',
+          1000,
+          'Register', 
+          6000,
+        ]}
+        />
+        </p>
+          {/* <p className="h1-title">
+            <h1>Register</h1>
+          </p> */}
           <form onSubmit={handleSubmit}>
             <div className="form-body">
               <div className="username">
@@ -77,6 +152,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
                   type="text"
                   id="firstName"
                   placeholder="First Name"
@@ -93,6 +169,7 @@ export default function Register({ state, setState }) {
                   name=""
                   id="lastName"
                   className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
                   placeholder="LastName"
                   onChange={(event) => setLastName(event.target.value)}
                   required
@@ -106,6 +183,7 @@ export default function Register({ state, setState }) {
                   type="email"
                   id="email"
                   className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
                   placeholder="Email"
                   onChange={(event) => setEmail(event.target.value)}
                   required
@@ -117,6 +195,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
                   type="password"
                   id="password"
                   placeholder="Password"
@@ -130,6 +209,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
                   type="password"
                   id="confirmPassword"
                   placeholder="Confirm Password"
@@ -143,6 +223,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
                   type="url"
                   id="photo_url"
                   placeholder="enter photo_url"
@@ -156,6 +237,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
                   type="text"
                   id="role"
                   placeholder="enter role "
@@ -164,7 +246,7 @@ export default function Register({ state, setState }) {
                 />
               </div>
             </div>
-            <div className="footer">
+            <div className="footer-reg">
               <button
                 type="submit"
                 className="btn"

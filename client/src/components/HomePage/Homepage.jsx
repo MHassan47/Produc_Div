@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     fontFamily: 'monospace',
     fontSize: '1.2em',
-    background: "#000000"
+    background: "#000"
   },
   appbar: {
-    background: '#2c2c2c',
+    background: '#323132',
   },
   appbarWrapper: {
     width: '80%',
@@ -37,13 +37,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '2rem',
   },
   colorText: {
-    color: '#fff',
+    color: '#a425ff',
   },
   container: {
     textAlign: 'center',
   },
   title: {
-    color: '#fff',
+    color: '#000',
     fontSize: '4.5rem',
   },
   goDown: {
@@ -68,13 +68,13 @@ export default function Homepage() {
           <span className={classes.colorText}>Produc_Div</span>
           </h1>
        <NavLink to='/sign-in' >
-         <button className='buttons'>Login</button>
+         <button className='buttons'>Sign In</button>
           </NavLink>
         <NavLink to='/register'> <button className='buttons'>Register</button></NavLink> 
-
+{/* 
           <IconButton>
             <SortIcon className={classes.icon} />
-          </IconButton>
+          </IconButton> */}
 
         </Toolbar>
       </AppBar>
@@ -86,7 +86,6 @@ export default function Homepage() {
         <div id="console-container">
           <br />
           <p>
-          Welcome to 
           <Typical
         loop={Infinity}
         wrapper="p"
@@ -95,53 +94,9 @@ export default function Homepage() {
           1000,
           '< Produc_Div />', 
           2000,
-          // 500,
-          // '< P', 
-          // 500, 
-          // '< Pr', 
-          // 500, 
-          // '< Pro', 
-          // 500, 
-          // '< Prod', 
-          // 500, 
-          // '< Produ', 
-          // 500, 
-          // '< Produc', 
-          // 500, 
-          // '< Produc_', 
-          // 500, 
-          // '< Produc_D', 
-          // 500, 
-          // '< Produc_Di', 
-          // 500, 
-          // '< Produc_Div', 
-          // 500, 
-          // '< Produc_Div />', 
-          // 500, 
-          // '< Produc_Div ', 
-          // 500, 
-          // '< Produc_Div /', 
-          // 500, 
-          // '< Produc_Div />', 
-          // 500, 
-          // '< Produc_Div />', 
-          // 500, 
         ]}
         />
         </p>
-          {/* <h1 className={classes.title}>
-            Welcome to <br />
-            <span className={classes.colorText}>Produc_Div</span>
-          </h1> */}
-          <div>
-
-              <NavLink to='/dashboard'> 
-            <IconButton>
-              <ExpandMoreIcon className={classes.goDown} 
-              />
-            </IconButton>
-               </NavLink> 
-              </div>
         </div>
       </Collapse>
     </div>
