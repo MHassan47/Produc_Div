@@ -13,7 +13,7 @@ const Logout = (props) => {
     axios
       .post("http://localhost:8080/users/logout", { withCredentials: false })
       .then(() => {
-        logout();
+        logout(user);
       })
       .then(() => navigate("/", { replace: true }))
       .catch((error) => console.log(error));
