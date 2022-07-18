@@ -43,10 +43,11 @@ export default function useApplicationData(props) {
       });
       setIsFetching(false);
     });
-  }, []);
+  }, [isFetching]);
 
   // Update card details
   function updateCard(value, taskID) {
+    setIsFetching(true);
     return axios
       .post(
         `http://localhost:8080/api/tasks/edit/${taskID}`,
@@ -61,11 +62,13 @@ export default function useApplicationData(props) {
           ...state,
           tasks: [...state.tasks, response.data],
         });
-      });
+      })
+      .then(() => setIsFetching(false));
   }
 
   // Adding user to card
   function addUserToCard(userID, taskID) {
+    setIsFetching(true);
     return axios
       .post(
         `http://localhost:8080/api/tasks/users_to_tasks/${userID}/${taskID}`
@@ -77,7 +80,8 @@ export default function useApplicationData(props) {
           ...state,
           users_to_tasks: [...state.users_to_tasks, response.data],
         });
-      });
+      })
+      .then(() => setIsFetching(false));
   }
 
   return {
