@@ -76,7 +76,7 @@ export default function App() {
       setLoading(false);
       setUser(state.user[0]);
     }
-  }, [isFetching]);
+  }, [isFetching, state.user[0]]);
 
   const login = (data) => {
     setUser({
