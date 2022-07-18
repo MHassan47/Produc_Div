@@ -6,6 +6,7 @@ import SortIcon from '@material-ui/icons/Sort';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { NavLink } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import Typical from 'react-typical'
 // import { Link as Scroll } from 'react-scroll';
 import Header from '../Header/Header';
 import "./homepage.css"
@@ -17,10 +18,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    fontFamily: 'Nunito',
+    fontFamily: 'monospace',
+    fontSize: '1.2em',
+    background: "#000000"
   },
   appbar: {
-    background: '#cab7ff',
+    background: '#2c2c2c',
   },
   appbarWrapper: {
     width: '80%',
@@ -34,17 +37,17 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '2rem',
   },
   colorText: {
-    color: '#685aa4',
+    color: '#fff',
   },
   container: {
     textAlign: 'center',
   },
   title: {
-    color: '#cab7ff',
+    color: '#fff',
     fontSize: '4.5rem',
   },
   goDown: {
-    color: '#685aa4',
+    color: '#fff',
     fontSize: '4rem',
   }
 }));
@@ -80,11 +83,56 @@ export default function Homepage() {
         {...(checked ? { timeout: 1000 } : {})}
         collapsedSize={50}
       >
-        <div id="console-container" className={classes.container}>
-          <h1 className={classes.title}>
+        <div id="console-container">
+          <br />
+          <p>
+          Welcome to 
+          <Typical
+        loop={Infinity}
+        wrapper="p"
+        steps={[
+          '<',
+          1000,
+          '< Produc_Div />', 
+          2000,
+          // 500,
+          // '< P', 
+          // 500, 
+          // '< Pr', 
+          // 500, 
+          // '< Pro', 
+          // 500, 
+          // '< Prod', 
+          // 500, 
+          // '< Produ', 
+          // 500, 
+          // '< Produc', 
+          // 500, 
+          // '< Produc_', 
+          // 500, 
+          // '< Produc_D', 
+          // 500, 
+          // '< Produc_Di', 
+          // 500, 
+          // '< Produc_Div', 
+          // 500, 
+          // '< Produc_Div />', 
+          // 500, 
+          // '< Produc_Div ', 
+          // 500, 
+          // '< Produc_Div /', 
+          // 500, 
+          // '< Produc_Div />', 
+          // 500, 
+          // '< Produc_Div />', 
+          // 500, 
+        ]}
+        />
+        </p>
+          {/* <h1 className={classes.title}>
             Welcome to <br />
             <span className={classes.colorText}>Produc_Div</span>
-          </h1>
+          </h1> */}
           <div>
 
               <NavLink to='/dashboard'> 

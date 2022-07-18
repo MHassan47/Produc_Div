@@ -55,7 +55,7 @@ export default function SignIn({ state, setState }) {
 
       .then(
         ({ data }) => {
-          // localStorage.setItem("user", JSON.stringify(data.user))
+          localStorage.setItem("user", JSON.stringify(data.user))
           // console.log("//////DATA//////", data)
           // userStateArray.map((user) => {
           //   if (user.email === email) {
@@ -75,40 +75,38 @@ export default function SignIn({ state, setState }) {
   };
 
   return (
-    <>
-      {success ? (
-        <section>
-          <h1>You have loggin in!</h1>
-          <br />
-          <p>
-          <NavLink to='/dashboard' >
-          Go to Project Dashboard
-          </NavLink>
-          </p>
-        </section>
-      ) : (
-        <section>
+   
+        <section className="signIn_form">
           <h1>Sign In</h1>
-          {/* <div>{errMsg ? <div>{errMsg}<div> : <div></div>} </div> */}
+          <div className="signIn_form">
+
+          
           <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="text"
-              id="email"
-              ref={userRef}
-              autoComplete="off"
-              onChange={(event) => setEmail(event.target.value)}
-              value={email}
-              required
-            />
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              onChange={(event) => setPassword(event.target.value)}
-              value={password}
-              required
-            />
+            <div>
+
+              <label htmlFor="email">Email:</label>
+              <input
+                type="text"
+                id="email"
+                ref={userRef}
+                autoComplete="off"
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
+                required
+              />
+            </div>
+            < br />
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                onChange={(event) => setPassword(event.target.value)}
+                value={password}
+                required
+              />
+            </div>
+            <br />
             <button
               type="submit"
               className="btn"
@@ -127,13 +125,7 @@ export default function SignIn({ state, setState }) {
                 onClick={(event) => handleSubmit()}> <a href="/register">Register</a> </button>
             </span>
           </p>
-          <p className="remember">
-            <input type="checkbox" id="remember" name="remember" value="1" />
-            <label htmlFor="remember">Remember me</label>
-          </p>
-
+          </div>
         </section>
-      )}
-    </>
   );
 }

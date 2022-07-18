@@ -125,23 +125,6 @@ export default function App() {
             path="/chat"
             element={<Chat state={state} setState={setState} />}
           />
-          {/* <div className="Chat">
-            {!showChat ? (
-            <div className="chat_container">
-              <h3>Join Chat</h3>
-              <input type="text" placeholder="Team member..." onChange={(event) => {
-                setUsername(event.target.value);
-              }} />
-              <input type="text" placeholder="Room ID..." onChange={(event) => {
-                setRoom(event.target.value);
-              }} />
-              <button onClick={joinRoom}>Join Room</button>
-             </div> 
-             )
-            : (
-              <Chat socket={socket} username={username} room={room}/>
-              )}
-          </div> */}
          
         </Routes>
         {/* </div> */}

@@ -12,8 +12,8 @@ export default function Header(props) {
   const { user } = useContext(AuthContext);
   return (
     <header className="header">
-      <div className="logo">
-      <img src={require("../../Docs/ProducDiv_logo.png")} alt={"ProducDiv"}/> 
+      <div>
+      <img className="logo" src={require("../../Docs/ProducDiv_logo.png")} alt={"ProducDiv"}/> 
       </div>
       <div>
         <div className="header_title">

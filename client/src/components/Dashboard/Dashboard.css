@@ -10,7 +10,7 @@
 
 .dashboard_content {
   display: flex;
-  height: 87vh;
+  height: 80vh;
 
   margin: 1rem;
 }
@@ -18,11 +18,12 @@
 .dashboard_kanban {
   display: flex;
   width: 65%;
-  padding-top: 4rem;
-  padding-left: 9rem;
-  padding-right: 11rem;
-  background-color: white;
-  border-radius: 3%;
+  padding-top: 5rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  background-color: rgb(176, 170, 189);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 

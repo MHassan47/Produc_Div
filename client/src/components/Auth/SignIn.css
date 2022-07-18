@@ -1,0 +1,9 @@
+.signIn {
+  display: flex;
+}
+
+.signIn_form {
+  flex-direction: row;
+ 
+  margin-left: 150px;
+}

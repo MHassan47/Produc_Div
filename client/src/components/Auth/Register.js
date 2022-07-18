@@ -66,112 +66,116 @@ export default function Register({ state, setState }) {
   };
 
   return (
-    <div className="form">
-      <form onSubmit={handleSubmit}>
-        <div className="form-body">
-          <div className="username">
-            <label className="form__label" htmlFor="firstName">
-              First Name{" "}
-            </label>
-            <input
-              className="form__input"
-              type="text"
-              id="firstName"
-              placeholder="First Name"
-              onChange={(event) => setFirstName(event.target.value)}
-              required
-            />
-          </div>
-          <div className="lastname">
-            <label className="form__label" htmlFor="lastName">
-              Last Name{" "}
-            </label>
-            <input
-              type="text"
-              name=""
-              id="lastName"
-              className="form__input"
-              placeholder="LastName"
-              onChange={(event) => setLastName(event.target.value)}
-              required
-            />
-          </div>
-          <div className="email">
-            <label className="form__label" htmlFor="email">
-              Email{" "}
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="form__input"
-              placeholder="Email"
-              onChange={(event) => setEmail(event.target.value)}
-              required
-            />
-          </div>
-          <div className="password">
-            <label className="form__label" htmlFor="password">
-              Password{" "}
-            </label>
-            <input
-              className="form__input"
-              type="password"
-              id="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="confirm-password">
-            <label className="form__label" htmlFor="confirmPassword">
-              Confirm Password{" "}
-            </label>
-            <input
-              className="form__input"
-              type="password"
-              id="confirmPassword"
-              placeholder="Confirm Password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="photo_url">
-            <label className="form__label" htmlFor="photo_url">
-              Photo URL{" "}
-            </label>
-            <input
-              className="form__input"
-              type="url"
-              id="photo_url"
-              placeholder="enter photo_url"
-              onChange={(e) => setPhoto_url(e.target.value)}
-              required
-            />
-          </div>
-          <div className="role">
-            <label className="form__label" htmlFor="role">
-              role{" "}
-            </label>
-            <input
-              className="form__input"
-              type="text"
-              id="role"
-              placeholder="enter role "
-              onChange={(e) => setRole(e.target.value)}
-              required
-            />
-          </div>
+    <div className="body">
+      <div className="form_layout">
+        <div className="form">
+          <form onSubmit={handleSubmit}>
+            <div className="form-body">
+              <div className="username">
+                <label className="form__label" htmlFor="firstName">
+                  First Name{" "}
+                </label>
+                <input
+                  className="form__input"
+                  type="text"
+                  id="firstName"
+                  placeholder="First Name"
+                  onChange={(event) => setFirstName(event.target.value)}
+                  required
+                />
+              </div>
+              <div className="lastname">
+                <label className="form__label" htmlFor="lastName">
+                  Last Name{" "}
+                </label>
+                <input
+                  type="text"
+                  name=""
+                  id="lastName"
+                  className="form__input"
+                  placeholder="LastName"
+                  onChange={(event) => setLastName(event.target.value)}
+                  required
+                />
+              </div>
+              <div className="email">
+                <label className="form__label" htmlFor="email">
+                  Email{" "}
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="form__input"
+                  placeholder="Email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                />
+              </div>
+              <div className="password">
+                <label className="form__label" htmlFor="password">
+                  Password{" "}
+                </label>
+                <input
+                  className="form__input"
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="confirm-password">
+                <label className="form__label" htmlFor="confirmPassword">
+                  Confirm Password{" "}
+                </label>
+                <input
+                  className="form__input"
+                  type="password"
+                  id="confirmPassword"
+                  placeholder="Confirm Password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="photo_url">
+                <label className="form__label" htmlFor="photo_url">
+                  Photo URL{" "}
+                </label>
+                <input
+                  className="form__input"
+                  type="url"
+                  id="photo_url"
+                  placeholder="enter photo_url"
+                  onChange={(e) => setPhoto_url(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="role">
+                <label className="form__label" htmlFor="role">
+                  role{" "}
+                </label>
+                <input
+                  className="form__input"
+                  type="text"
+                  id="role"
+                  placeholder="enter role "
+                  onChange={(e) => setRole(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div className="footer">
+              <button
+                type="submit"
+                className="btn"
+              // onClick={(event) => handleSubmit()}
+              >
+                Register
+              </button>
+            </div>
+          </form>
         </div>
-        <div className="footer">
-          <button
-            type="submit"
-            className="btn"
-            // onClick={(event) => handleSubmit()}
-          >
-            Register
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }

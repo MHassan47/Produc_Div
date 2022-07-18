@@ -68,7 +68,7 @@ const Kanban = ({ state, setState }) => {
   };
 
   return (
-    <div>
+    <div className="div">
       <section>
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="kanban">
