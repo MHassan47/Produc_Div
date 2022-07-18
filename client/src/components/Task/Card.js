@@ -11,11 +11,9 @@ const Card = (props) => {
   const [photoListContainer, setPhotoListContainer] = useState([]);
   const [edit, setEdit] = useState("");
   const [value, setValue] = useState(props.children);
-  const [change, setChange] = useState(false);
-  const [test, setTest] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   const handleEditClick = (e) => {
-    // console.log("[[[[[[[[[[", value);
     e.preventDefault();
     Promise.resolve(props.updateCard(value, props.task.id))
       .then(() => setEdit(false))
@@ -23,29 +21,21 @@ const Card = (props) => {
   };
 
   const renderListContainer = () => {
-    setChange(false);
     const renderedListContainer =
       props.state.users_to_tasks &&
       props.state.users_to_tasks.map((assignment) => {
-        let test = [];
+        let photoList = [];
         if (assignment.task_id === props.task.id) {
-          // console.log("TRUE FALSE", assignment.task_id === props.task.id);
           assignment.assigned_users.map((assigned_user) => {
-            // console.log("RETURN", assigned_user);
-            test.push(props.state.users[assigned_user].photo_url);
-            // console.log(props.state.users[assigned_user].photo_url);
+            photoList.push(props.state.users[assigned_user].photo_url);
           });
-          return (
-            <PhotoUrl photolist={test} change={change} setChange={setChange} />
-          );
-          // return <div>hi</div>;
+          return <PhotoUrl photoList={photoList} />;
         }
       });
     setPhotoListContainer(renderedListContainer);
   };
 
-  // useEffect(() => console.log("hi"), [photoListContainer]);
-  useEffect(() => renderListContainer(), [test]);
+  useEffect(() => renderListContainer(), [update]);
 
   return (
     <div className="card-container">
@@ -81,7 +71,8 @@ const Card = (props) => {
           <AddUsers
             renderListContainer={renderListContainer}
             taskID={props.task.id}
-            setTest={setTest}
+            state={props.state}
+            setUpdate={setUpdate}
             addUserToCard={props.addUserToCard}
           />
         </div>
