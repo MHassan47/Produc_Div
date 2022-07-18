@@ -50,7 +50,7 @@ export default function VideoCall(props) {
       //   console.log("+++++++++++++++++line 46 (join channel):", error)
       // }
 
-      if (tracks) await client.publish([tracks[0], tracks[1]]);
+      if (tracks) await client.publish([tracks[0], tracks[1]])
       setStart(true);
     };
     
@@ -70,7 +70,7 @@ export default function VideoCall(props) {
           <Controls tracks={tracks} setStart={setStart} setInCall={setInCall}/> 
           )}
         </Grid>
-      <Grid item style={{ height: "95%" }}>
+      <Grid item style={{ marging: "5px", height: "95%" }}>
       { start && tracks && (<Video tracks={tracks} users={users}/>)}
       </Grid>
     </Grid>)

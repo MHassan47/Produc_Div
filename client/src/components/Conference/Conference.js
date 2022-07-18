@@ -20,13 +20,14 @@ return (
         <SideBar />
       </div>
       <div className="conference_call">
-        {/* <Conference state={state} setState={setState} /> */}
-      {inCall ?
-      <VideoCall setInCall={ setInCall } /> 
+
+      {inCall ? <VideoCall setInCall={ setInCall } /> 
       :  
-      <Button variant="contained" color="primary" onClick={() => setInCall(true)}>
-        Join Call
-      </Button>}
+      
+      <Button id="join_button" style={{ justifyContent: 'centre', marginTop: '100px', width: '100%'}} variant="contained" color="primary" onClick={() => setInCall(true)}>
+      Join Call
+    </Button>}
+      
       </div>
     </div>
   </div>
