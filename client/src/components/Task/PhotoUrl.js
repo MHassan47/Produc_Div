@@ -1,6 +1,6 @@
 const PhotoUrl = (props) => {
   // console.log("-----///////", props.photolist);
-  let photoMap = props.photolist.map((photo) => {
+  let photoMap = props.photoList.map((photo) => {
     return (
       <li className="list_photo">
         <img
