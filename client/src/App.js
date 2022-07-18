@@ -1,49 +1,39 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState, Component, useRef } from "react";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
 import SignIn from "./components/Auth/SignIn";
-import Chat from "./components/Chat/Chat";
 // import { NavLink } from "react-router-dom";
-import { useState } from "react";
 import "./App.css";
 import Kanban from "./components//Kanban/Kanban";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Form from "./components/Task/Form";
-import useApplicationData from "./hooks/useApplicationData";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AuthContext } from "./context/AuthProvider";
 import SideBar from "./components/SideBar/SideBar";
 import Header from "./components/Header/Header";
+import Chat from "./components/Chat/Chat";
+import Conference from "./components/Conference/Conference";
+// import { NavLink } from "react-router-dom";
+import useApplicationData from "./hooks/useApplicationData";
+import useChatSocket from "./hooks/useChatSocket";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AuthContext } from "./context/AuthProvider";
 import { Button } from "@material-ui/core";
 import VideoCall from "./components/Conference/VideoCall";
 import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
-import Conference from "./components/Conference/Conference";
 import io from 'socket.io-client';
 
 
-const socket = io.connect("http://localhost:3000/chat");
 
-const config = {mode: "rtc", codec: "vp8"}
+
+const config = { mode: "rtc", codec: "vp8" };
 
 const useClient = createClient(config);
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
-
-
 export default function App() {
-
-  // for socket.io chat:
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
 
-  const joinRoom = () => {
-    if (username !== "" && room !== "") {
-      socket.emit("join_room", room);
-      setShowChat(true);
-    }
-  };
 
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
@@ -87,20 +77,17 @@ export default function App() {
       auth: false,
     });
   };
-
+  
+  const { sendChatMessage, chatMessages } = useChatSocket(user.first_name);
   if (loading) {
     return <p>Loading</p>;
   }
   console.log({ user });
+
+
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       <BrowserRouter>
-        {/* <div className={classes.root}> */}
-        {/* <Header />
-        <SideBar /> */}
-
-        {/* <CssBaseline /> */}
-      
         <Routes>
           <Route
             path="/dashboard"
@@ -114,7 +101,7 @@ export default function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/conference"
             element={<Conference state={state} setState={setState} />}
           />
@@ -127,11 +114,21 @@ export default function App() {
             path="/sign-in"
             element={<SignIn state={state} setState={setState} />}
           />
-          <Route 
+          <Route
             path="/chat"
-            element={<Chat state={state} setState={setState} />}
+            element={
+              <Chat
+                state={state}
+                setState={setState}
+                sendChatMessage={sendChatMessage}
+                chatMessages={chatMessages}
+              />
+            }
           />
-         
+          {/* <Route
+            path="/chat"
+          />
+          */}
         </Routes>
         {/* </div> */}
       </BrowserRouter>
