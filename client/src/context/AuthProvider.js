@@ -1,18 +1,6 @@
-import { createContext} from "react";
+import { createContext } from "react";
 
-
-export const AuthContext = createContext({
-  id: "",
-  first_name: "",
-  last_name: "",
-  email: "",
-  password: "",
-  photo_url:"",
-  role: "",
-  auth: false
-})
-console.log("}}}}}}}AuthProvider{{{{{{{")
-
+export const AuthContext = createContext({});
 
 // export const AuthProvider = ({ children }) => {
 
@@ -26,4 +14,3 @@ console.log("}}}}}}}AuthProvider{{{{{{{")
 // }
 
 // export default AuthContext;
-

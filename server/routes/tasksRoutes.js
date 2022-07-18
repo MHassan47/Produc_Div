@@ -22,13 +22,13 @@ module.exports = (db) => {
   });
 
   //   Edits a task card
-  router.patch("/edit/:id", (req, res) => {
-    const { name } = req.body;
-    const task_id = req.params;
+  router.post("/edit/:id", (req, res) => {
+    const value = req.body.value;
+    const task_id = req.params.id;
     db.query(
       `UPDATE tasks SET name = $1
-      WHERE tasks.id = $2`,
-      [name, task_id]
+      WHERE tasks.id = $2;`,
+      [value, task_id]
     )
       .then((data) => {
         res.json(data.rows);
@@ -96,5 +96,35 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.get("/users_to_tasks", (req, res) => {
+    db.query(
+      `SELECT task_id, array_agg(user_id) as assigned_users FROM users_to_tasks GROUP BY task_id ORDER BY task_id;`
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post("/users_to_tasks/:id/:taskID", (req, res) => {
+    const user_id = req.params.id;
+    const task_id = req.params.taskID;
+    console.log("////////////////", req.params);
+    db.query(
+      `INSERT INTO users_to_tasks (user_id, task_id) 
+      VALUES ($1, $2) RETURNING *;`,
+      [user_id, task_id]
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };

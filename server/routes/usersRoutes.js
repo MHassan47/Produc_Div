@@ -85,6 +85,7 @@ module.exports = (db) => {
         if (user) correctPassword = bcrypt.compareSync(password, user.password);
         if (correctPassword) {
           req.session.id = user.id;
+          console.log(req.session);
           return res.json({ user });
         } else {
           return res.status(401).send({ error: "Incorrect email/password" });
@@ -95,7 +96,7 @@ module.exports = (db) => {
 
   router.post("/logout", (req, res) => {
     req.session.id = null;
-    return res.status(200).send();
+    return res.status(204).send();
   });
   return router;
 };

@@ -26,9 +26,9 @@ export const SidebarData = [
     icon: <GroupIcon />,
     link: "/conference",
   },
-  {
-    title: "Logout",
-    icon: <MdLogout className="md_logout_icon" />,
-    link: "/",
-  },
+  // {
+  //   title: "Logout",
+  //   icon: <MdLogout className="md_logout_icon" onClick={}/>,
+  //   link: "/",
+  // },
 ];

@@ -2,14 +2,14 @@ import React, { useContext, useState } from "react";
 import "./SideBar.css";
 // import Logout from "../Auth/Logout";
 import { SidebarData } from "./SideBarData";
-// import Logout from "../Auth/Logout";
+import Logout from "../Auth/Logout";
 import { useSearchParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 export default function SideBar() {
   const { user } = useContext(AuthContext);
-  console.log("////USER////", user)
-    return (
+  console.log("/+/+/+", user);
+  return user ? (
     <div className="Sidebar">
       <ul className="SidebarList">
         <div className="user_profile">
@@ -34,7 +34,12 @@ export default function SideBar() {
             </li>
           );
         })}
+        <li className="row">
+          <Logout />
+        </li>
       </ul>
     </div>
+  ) : (
+    <></>
   );
 }

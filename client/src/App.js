@@ -1,10 +1,10 @@
-import React, {Component} from "react";
-// import { CssBaseline } from "@material-ui/core";
+
+import React, { useEffect } from "react";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
 import SignIn from "./components/Auth/SignIn";
 import Chat from "./components/Chat/Chat";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 import Kanban from "./components//Kanban/Kanban";
@@ -12,7 +12,6 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Form from "./components/Task/Form";
 import useApplicationData from "./hooks/useApplicationData";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import { makeStyles } from "@material-ui/core/styles";
 import { AuthContext } from "./context/AuthProvider";
 import SideBar from "./components/SideBar/SideBar";
 import Header from "./components/Header/Header";
@@ -21,9 +20,7 @@ import VideoCall from "./components/Conference/VideoCall";
 import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
 import Conference from "./components/Conference/Conference";
 import io from 'socket.io-client';
-// const { connect } = require('twilio-video');
-// import DailyIframe from '@daily-co/daily-js';
-// let callFrame = DailyIframe.wrap(MY_IFRAME);
+
 
 const socket = io.connect("http://localhost:3000/chat");
 
@@ -50,23 +47,20 @@ export default function App() {
 
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
-
   const [inCall, setInCall] = useState(false);
-  const { state, setState } = useApplicationData();
-  console.log("////////\\\\\\\\", state);
 
 
-  const [user, setUser] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    photo_url: "",
-    role: "",
-  });
 
-  const userData = localStorage.getItem("user")
-  console.log("+++++++++UserData++++++++++++", userData);
+  const { isFetching, state, setState, updateCard, addUserToCard } = useApplicationData();
+  const [user, setUser] = useState(state.user[0]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isFetching) {
+      setLoading(false);
+      setUser(state.user[0]);
+    }
+  }, [state.user, isFetching]);
 
 
   const login = (data) => {
@@ -82,7 +76,7 @@ export default function App() {
     });
   };
 
-  const logout = (data) => {
+  const logout = () => {
     setUser({
       first_name: "",
       last_name: "",
@@ -90,10 +84,14 @@ export default function App() {
       password: "",
       photo_url: "",
       role: "",
+      auth: false,
     });
   };
 
-  // const classes = useStyles();
+  if (loading) {
+    return <p>Loading</p>;
+  }
+  console.log({ user });
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       <BrowserRouter>
@@ -106,7 +104,15 @@ export default function App() {
         <Routes>
           <Route
             path="/dashboard"
-            element={<Dashboard state={state} setState={setState} />}
+            element={
+              <Dashboard
+                user={user}
+                state={state}
+                setState={setState}
+                updateCard={updateCard}
+                addUserToCard={addUserToCard}
+              />
+            }
           />
            <Route
             path="/conference"

@@ -2,12 +2,60 @@ import axios from "axios";
 import { useRef, useState, useEffect, useContext, React } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
+import "./SignIn.css"
 import { AuthContext } from "../../context/AuthProvider";
-// import useApplicationData from "./hooks/useApplicationData";
-// import axios from "axios";
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
+import Typical from 'react-typical'
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    fontFamily: 'monospace',
+    fontSize: '1.2em',
+    background: "#000"
+  },
+  appbar: {
+    background: '#323132',
+  },
+  appbarWrapper: {
+    width: '80%',
+    margin: '0 auto',
+  },
+  appbarTitle: {
+    flexGrow: '1',
+  },
+  icon: {
+    color: '#fff',
+    fontSize: '2rem',
+  },
+  colorText: {
+    fontFamily: 'monospace',
+    fontSize: '2.5rem',
+    color: '#a425ff',
+  },
+  container: {
+    textAlign: 'center',
+  },
+  title: {
+    color: '#000',
+    fontSize: '4.5rem',
+  },
+  goDown: {
+    color: '#fff',
+    fontSize: '4rem',
+  }
+}));
+
+
+
 
 export default function SignIn({ state, setState }) {
+  const classes = useStyles();
   const navigate = useNavigate();
   const { login, logout } = useContext(AuthContext);
   const [email, setEmail] = useState("");
@@ -50,7 +98,9 @@ export default function SignIn({ state, setState }) {
       password,
     };
     axios
-      .post("http://localhost:8080/users/sign-in", body)
+      .post("http://localhost:8080/users/sign-in", body, {
+        withCredentials: true,
+      })
       // const userArr = [];
 
       .then(
@@ -75,19 +125,47 @@ export default function SignIn({ state, setState }) {
   };
 
   return (
-   
-        <section className="signIn_form">
-          <h1>Sign In</h1>
-          <div className="signIn_form">
 
-          
-          <form onSubmit={handleSubmit}>
-            <div>
+    <div className="background-colour">
+      <AppBar className={classes.appbar} elevation={0}>
+        <Toolbar className={classes.appbarWrapper}>
+          <h1 className={classes.appbarTitle}>
+            <span href="/Homepage" className={classes.colorText}>Produc_Div</span>
+          </h1>
+          <NavLink to='/sign-in' >
+            <button className='buttons'>Sign In</button>
+          </NavLink>
+          <NavLink to='/register'> <button className='buttons'>Register</button></NavLink>
+          {/* 
+          <IconButton>
+            <SortIcon className={classes.icon} />
+          </IconButton> */}
 
-              <label htmlFor="email">Email:</label>
+        </Toolbar>
+      </AppBar>
+      <section className="section"  >
+        <div className="sign-in-h1">
+          {/* <h1>Sign In</h1> */}
+          <Typical
+        loop={Infinity}
+        wrapper="l"
+        steps={[
+          ' ',
+          1000,
+          'Sign In', 
+          6000,
+        ]}
+        />
+        </div>
+        <div >
+          <form className="signIn_form" onSubmit={handleSubmit}>
+            <div >
+              <label className="yt-font" htmlFor="email">Email:&nbsp;&nbsp;&nbsp; </label>
               <input
                 type="text"
                 id="email"
+                fontSize="2em"
+                style={{ height: '2.5em', width: '40%'}}
                 ref={userRef}
                 autoComplete="off"
                 onChange={(event) => setEmail(event.target.value)}
@@ -97,35 +175,48 @@ export default function SignIn({ state, setState }) {
             </div>
             < br />
             <div>
-              <label htmlFor="password">Password:</label>
+              <label className="yt-font" htmlFor="password">Password:&nbsp;&nbsp;&nbsp;</label>
               <input
                 type="password"
                 id="password"
+                style={{ height: '2.5em', width: '40%'}}
+
                 onChange={(event) => setPassword(event.target.value)}
                 value={password}
                 required
               />
             </div>
             <br />
-            <button
-              type="submit"
-              className="btn"
-            // onClick={(event) => handleSubmit()}
-            >
-              Sign In
-            </button>
-          </form>
-          <p>
-            Don't have an account?
-            <br />
-            <span className="link">
-              {/* put router link here */}
-              <button type="button"
+            <div>
+              <button
+                type="submit"
                 className="btn"
-                onClick={(event) => handleSubmit()}> <a href="/register">Register</a> </button>
-            </span>
-          </p>
-          </div>
-        </section>
+                style={{ marginLeft: '8em'}}
+              // onClick={(event) => handleSubmit()}
+              >
+                Sign In
+              </button>
+            </div>
+          </form>
+
+            <p className="footer">
+              Don't have an account?
+                </p>
+              <br />
+              <span className="link">
+                {/* put router link here */}
+                <button
+                  type="button"
+                  className="btn"
+                  style={{ marginLeft: '18em'}}
+                  onClick={(event) => handleSubmit()}
+                >
+                  {" "}
+                  <a className="register-btn " href="/register">Register</a>{" "}
+                </button>
+              </span>
+        </div>
+      </section>
+    </div>
   );
 }

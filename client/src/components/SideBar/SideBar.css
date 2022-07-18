@@ -1,10 +1,10 @@
 .Sidebar {
-  height: 100%;
+  height: 150%;
   width: 250px;
-  background-color: #c1bfe1;
+  background-color: #323132;
   /* border-radius: 20px; */
-  border-bottom-left-radius: 20px ;
-  border-top-left-radius: 20px;
+  /* border-bottom-left-radius: 20px ;
+  border-top-left-radius: 20px; */
 
 }
 
@@ -25,7 +25,7 @@
   display: flex;
 
   flex-direction: row;
-  color: rgb(255, 253, 253);
+  color: #a425ff;
   justify-content: center;
   align-items: center;
   font-family: monospace;
@@ -36,8 +36,9 @@
 
 .SidebarList .row:hover {
   cursor: pointer;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   /* background-color: #293846; */
-  background-color: #7e7ebb;
+  background-color: #bd88ef;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
   /* border-bottom-right-radius: 10px;
@@ -46,14 +47,14 @@
 .SidebarList #active {
   /* background-color: #293846; */
   /* background-color: #8c77be; */
-  background-color: #5151c8;
+  background-color: #000000;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
 
 .SidebarList li:last-child {
   display: flex;
-  margin-top: 20rem;
+  margin-top: 22rem;
 }
 
 .row #icon {
@@ -71,17 +72,24 @@
 }
 
 .user_profile {
-  margin-left: 1.5rem;
   display: flex;
+  margin-left: 1.5rem;
+  /* justify-content: center; */
+  align-items: center;
   gap: 2rem;
   width: 200px;
+  border-radius: 10px;
   height: 50px;
-  background-color: #d9d3e2;
+  background-color: #bd88ef;
   border-radius: 10px;
 }
 
 img {
   border-radius: 50px;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
+}
+
+.logout_icon {
+  font-size: 28px;
 }
