@@ -1,42 +1,39 @@
 import React, { Component } from "react";
 import "./App.css";
-import io from "socket.io-client";
 // import { CssBaseline } from "@material-ui/core";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
 import SignIn from "./components/Auth/SignIn";
-import Chat from "./components/Chat/Chat";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import Kanban from "./components//Kanban/Kanban";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Form from "./components/Task/Form";
+import SideBar from "./components/SideBar/SideBar";
+import Header from "./components/Header/Header";
+import Chat from "./components/Chat/Chat";
+import Conference from "./components/Conference/Conference";
+// import { NavLink } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+// import Kanban from "./components//Kanban/Kanban";
+// import Form from "./components/Task/Form";
 import useApplicationData from "./hooks/useApplicationData";
+import useChatSocket from "./hooks/useChatSocket";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import { makeStyles } from "@material-ui/core/styles";
 import { AuthContext } from "./context/AuthProvider";
-import SideBar from "./components/SideBar/SideBar";
-import Header from "./components/Header/Header";
-import { Button } from "@material-ui/core";
-import VideoCall from "./components/Conference/VideoCall";
+// import { Button } from "@material-ui/core";
+// import VideoCall from "./components/Conference/VideoCall";
 import {
   AgoraVideoPlayer,
   createClient,
   createMicrophoneAndCameraTracks,
 } from "agora-rtc-react";
-import Conference from "./components/Conference/Conference";
 // const { connect } = require('twilio-video');
 // import DailyIframe from '@daily-co/daily-js';
 // let callFrame = DailyIframe.wrap(MY_IFRAME);
 
-const socket = io("http://localhost:3000");
-socket.on("connection", function () {
-  console.log("connected:", socket.connected);
-});
-window.asdf = io;
-setTimeout(() => console.log("socket:", socket), 2000);
-
-
+// const socket = io("http://localhost:8080");
+// socket.on("connection", function () {
+//   console.log("connected:", socket.connected);
+// });
+// setTimeout(() => console.log("socket:", socket), 2000);
 
 const config = { mode: "rtc", codec: "vp8" };
 
@@ -44,20 +41,18 @@ const useClient = createClient(config);
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 export default function App() {
-  // for socket.io chat:
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
+  // const joinRoom = () => {
+  //   if (username !== "" && room !== "") {
+  //     socket.emit("join_room", room);
+  //     setShowChat(true);
+  //   }
+  // };
 
-  const joinRoom = () => {
-    if (username !== "" && room !== "") {
-      socket.emit("join_room", room);
-      setShowChat(true);
-    }
-  };
-
-  const client = useClient();
-  const { ready, tracks } = useMicrophoneAndCameraTracks();
+  // const client = useClient();
+  // const { ready, tracks } = useMicrophoneAndCameraTracks();
 
   const [inCall, setInCall] = useState(false);
   const { state, setState } = useApplicationData();
@@ -96,12 +91,14 @@ export default function App() {
     });
   };
 
+  // 
+  const { sendChatMessage, chatMessages } = useChatSocket(user.first_name);
   // const classes = useStyles();
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       <BrowserRouter>
         {/* <div className={classes.root}> */}
-        {/* <Header />
+        {/* <Header state={state} />
         <SideBar /> */}
 
         {/* <CssBaseline /> */}
@@ -126,7 +123,14 @@ export default function App() {
           />
           <Route
             path="/chat"
-            element={<Chat state={state} setState={setState} />}
+            element={
+              <Chat
+                state={state}
+                setState={setState}
+                sendChatMessage={sendChatMessage}
+                chatMessages={chatMessages}
+              />
+            }
           />
           {/* <Route
             path="/chat"

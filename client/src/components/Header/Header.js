@@ -13,7 +13,7 @@ export default function Header(props) {
     <header className="header">
       <div>
         <div className="header_title">
-          {props.state.projects.map((project) => {
+          {props.state?.projects?.map((project) => {
             if (project.id === currentproject)
               return <div className="header_title_text">{project.name} </div>;
           })}

@@ -5,8 +5,10 @@ const morgan = require("morgan");
 // import session = require('express-session');
 const cookieSession = require("cookie-session");
 const cors = require("cors");
-const httpServer = require("http");
-const socketIO = require("socket.io");
+
+const ws = require("ws");
+// const httpServer = require("http");
+// const socketIO = require("socket.io");
 // db connection
 const db = require("./configs/db.config");
 
@@ -18,18 +20,34 @@ const projectsRoutes = require("./routes/projectsRoutes");
 
 const PORT = 8080;
 const app = express();
-const server = httpServer.createServer(app);
-const io = socketIO(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  }
-});
+// const server = httpServer.createServer(app);
+// const io = socketIO(server, {
+//   path: "/socket.io",
+//   serveClient: false,
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"],
+//   }
+// });
+// io.on("connection", (socket) => {
+//   console.log(`User Connected: ${socket.id}`);
 
+//   socket.on("join_room", (data) => {
+//     socket.join(data);
+//     console.log(`User with ID: ${socket.id} joined room: ${data}`);
+//   });
+
+//   socket.on("send_message", (data) => {
+//     console.log("message?", data);
+//     socket.to(data.room).emit("receive_message", data);
+//   });
+
+//   socket.on("disconnect", () => {
+//     console.log("User Disconected:", socket.id);
+//   });
+// });
 
 app.use(cors());
-
-
 
 // const twilio = require('twilio');
 
@@ -49,8 +67,6 @@ app.use(cors());
 //   },
 // });
 
-
-
 // const accountSid = 'ACa1da19cc2a396d15f6c95f67a31b9b8e'; // Your Account SID from www.twilio.com/console
 // const authToken = '4484649d1b0100761ae567a2c9db0e0b'; // Your Auth Token from www.twilio.com/console
 
@@ -65,11 +81,7 @@ app.use(cors());
 //   })
 //   .then((message) => console.log(message.sid));
 
-
-
-
-
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+// app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 // middleware setup
 app.use(morgan(ENVIROMENT));
 
@@ -97,27 +109,39 @@ app.use("/api/projects", projectsRoutes(db));
 //   res.json({ greetings: "hello world" });
 // });
 
+// where db r/w could go
+const chatMessages = [];
+const wsServer = new ws.Server({ noServer: true });
+wsServer.on("connection", (socket) => {
+  // Send the full list of messages so far as soon as the client connects
+  socket.send(JSON.stringify(chatMessages));
 
+  
+  socket.on("message", (message) => {
+    /*
+    Stuff you can do when you receive a message:
+      • Console log it
+      • Broadcast it to everybody in the chat
+      • Write it to a database
+    */
+    console.log("*** " + message);
+    // save to array
+    chatMessages.push(JSON.parse(message));
 
-
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-
-  socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`);
-  });
-
-  socket.on("send_message", (data) => {
-    console.log("message?", data);
-    socket.to(data.room).emit("receive_message", data);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("User Disconected", socket.id);
+    // log of messages everyone can see
+    wsServer.clients.forEach((client) => {
+      if (client.readyState === socket.OPEN) {
+        client.send(JSON.stringify(chatMessages));
+      }
+    });
   });
 });
 
-
-
-server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+const server = app.listen(PORT, () =>
+  console.log(`Server is listening on port ${PORT}`)
+);
+server.on("upgrade", (request, socket, head) => {
+  wsServer.handleUpgrade(request, socket, head, (socket) => {
+    wsServer.emit("connection", socket, request);
+  });
+});
