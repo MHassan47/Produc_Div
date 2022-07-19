@@ -3,8 +3,8 @@ import React, { useContext, useState } from "react";
 import "./Header.css";
 import { Navigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
-import "../../Docs/Logo.css"
-// import { useState } from "react";
+import "../../Docs/Logo.css";
+
 import DropDown from "./DropDown";
 
 export default function Header(props) {
@@ -12,20 +12,16 @@ export default function Header(props) {
   return (
     <header className="header">
       <div>
-      <img className="logo" src={require("../../Docs/logo-img.png")} 
-      alt={"ProducDiv"}/> 
+        <img
+          className="logo"
+          src={require("../../Docs/logo-img.png")}
+          alt={"ProducDiv"}
+        />
         <p>
-        <h1 style={{ fontFamily: 'monospace', }}>Produc_Div</h1>
+          <h1 style={{ fontFamily: "monospace" }}>Produc_Div</h1>
         </p>
       </div>
-{/*       
-        <div className="header_title">
-          {props.state.projects.map((project) => {
-            if (project.id === props.currentproject)
-              return <div key={project.id} className="header_title_text">{project.name} </div>;
 
-          })}
-        </div> */}
       <DropDown
         className="dropdown"
         currentProject={props.currentProject}
@@ -39,5 +35,5 @@ export default function Header(props) {
       </div>
       <div className="project_members"></div>
     </header>
-   
-  )};
+  );
+}

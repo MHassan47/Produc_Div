@@ -16,13 +16,12 @@
   justify-content: end;
   flex-direction: row;
   width: 100%;
-  /* padding-bottom: 1rem; */
-  /* padding-top: 1rem; */
+
   font-weight: 400;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   align-items: center;
-  /* background-color: #8c77be; */
+
   background-color: #a425ff;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
@@ -47,17 +46,16 @@
   height: fit-content;
   border-radius: 15px;
   border: 100px rgb(232, 231, 231);
-  /* background-color: #c9bfe0; */
+
   background-color: #323132;
   width: 325px;
-  /* height: 900px; */
+
   height: max-content;
   max-height: 720px;
   overflow-y: auto;
   border-radius: 15px;
   border: 10px black;
-  /* background-color: #c9bfe0; */
-  /* background-color: #f3f1f8; */
+
   box-shadow: 10px 0 10px rgba(170, 123, 199, 0.2);
 }
 
@@ -86,9 +84,3 @@
   border-radius: 15px;
   border: 10px black;
 }
-/* 
-.div {
-
-  margin-left: 23%;
-
-} */

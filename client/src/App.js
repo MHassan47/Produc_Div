@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState, useRef } from "react";
 import "./App.css";
-// import { CssBaseline } from "@material-ui/core";
+
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
 import SignIn from "./components/Auth/SignIn";
@@ -30,15 +30,6 @@ const useClient = createClient(config);
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 export default function App() {
-  // const [username, setUsername] = useState("");
-  // const [room, setRoom] = useState("");
-  // const [showChat, setShowChat] = useState(false);
-
-  // const client = useClient();
-  // const { ready, tracks } = useMicrophoneAndCameraTracks();
-  // const [inCall, setInCall] = useState(false);
-
-  // const { sendChatMessage, chatMessages } =
   const { isFetching, state, setState, updateCard, addUserToCard } =
     useApplicationData();
   const [user, setUser] = useState(state.user[0]);
@@ -76,9 +67,6 @@ export default function App() {
     });
   };
 
-  //
-  // console.log({ user });
-
   if (loading) {
     return <p>Loading</p>;
   }
@@ -113,14 +101,7 @@ export default function App() {
           />
           <Route
             path="/chat"
-            element={
-              <Chat
-                state={state}
-                setState={setState}
-                // sendChatMessage={sendChatMessage}
-                // chatMessages={chatMessages}
-              />
-            }
+            element={<Chat state={state} setState={setState} />}
           />
         </Routes>
       </BrowserRouter>
