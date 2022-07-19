@@ -20,16 +20,10 @@ export default function Header(props) {
       </div>
 {/*       
         <div className="header_title">
-<<<<<<< HEAD
-          {props.state?.projects?.map((project) => {
-            if (project.id === currentproject)
-              return <div className="header_title_text">{project.name} </div>;
-=======
           {props.state.projects.map((project) => {
             if (project.id === props.currentproject)
               return <div key={project.id} className="header_title_text">{project.name} </div>;
 
->>>>>>> 8ebd4053f758970a130601c268ba64dc61d97793
           })}
         </div> */}
       <DropDown

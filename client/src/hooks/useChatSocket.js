@@ -9,7 +9,6 @@ export default function useChatSocket(username) {
   useEffect(() => {
     const _socket = new WebSocket("ws://localhost:8080");
     socket.current = _socket;
-
     // Just FYI, you could delete "error" and "open" if you want
     _socket.addEventListener("error", (e) =>
       console.log("Websocket error:", e)
