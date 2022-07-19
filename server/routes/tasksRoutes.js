@@ -22,13 +22,13 @@ module.exports = (db) => {
   });
 
   //   Edits a task card
-  router.patch("/edit/:id", (req, res) => {
-    const { name } = req.body;
-    const task_id = req.params;
+  router.post("/edit/:id", (req, res) => {
+    const value = req.body.value;
+    const task_id = req.params.id;
     db.query(
       `UPDATE tasks SET name = $1
-      WHERE tasks.id = $2`,
-      [name, task_id]
+      WHERE tasks.id = $2;`,
+      [value, task_id]
     )
       .then((data) => {
         res.json(data.rows);
@@ -37,7 +37,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  //   Delets a task card
+  //   Deletes a task card
   router.delete("/delete/:id", (req, res) => {
     const task_id = req.params.id;
 
@@ -50,25 +50,28 @@ module.exports = (db) => {
       });
   });
 
-  //   Creats a task card
-  router.post("new/:projectID/:column", (req, res) => {
-    const { name, created_at } = req.body;
+  //   Creates a task card
+  router.post("/new/:projectID", (req, res) => {
+    console.log("reached");
+    const { name, created_at, owner_id, col } = req.body;
     const project_id = req.params.projectID;
-    const column_name = req.params.col;
-    const owner_id = req.session.user_id;
+    // const column_name = req.params.col;
+    // const owner_id = req.session.user_id;
 
     db.query(
       `INSERT INTO tasks(name, created_at, owner_id, col, project_id) VALUES($1, $2, $3, $4, $5)
-        RETURNING tasks;`,
-      [name, created_at, owner_id, column_name, project_id]
+        RETURNING *;`,
+      [name, created_at, owner_id, col, project_id]
     )
       // .then(db.query(`INSERT INTO`)) --- inserting multiple users to users_to_tasks
-      .then(({ rows: tasks }) => {
+      .then((response) => {
+        console.log("done");
         res.json(
-          tasks.reduce(
-            (previous, current) => ({ ...previous, [current.id]: current }),
-            {}
-          )
+          response.rows[0]
+          // tasks.reduce(
+          //   (previous, current) => ({ ...previous, [current.id]: current }),
+          //   {}
+          // )
         );
       })
       .catch((err) => {
@@ -93,5 +96,35 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.get("/users_to_tasks", (req, res) => {
+    db.query(
+      `SELECT task_id, array_agg(user_id) as assigned_users FROM users_to_tasks GROUP BY task_id ORDER BY task_id;`
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post("/users_to_tasks/:id/:taskID", (req, res) => {
+    const user_id = req.params.id;
+    const task_id = req.params.taskID;
+    console.log("////////////////", req.params);
+    db.query(
+      `INSERT INTO users_to_tasks (user_id, task_id) 
+      VALUES ($1, $2) RETURNING *;`,
+      [user_id, task_id]
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };

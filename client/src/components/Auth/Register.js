@@ -1,257 +1,263 @@
-import React from "react";
-import { useRef, useState, useEffect } from "react";
-// import { FiCheck } from "react-icons/fi";
-// import { FaAsterisk } from "react-icons/fa";
+import React, { useRef, useState, useEffect, setState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import axios from "./api/axios";
+import "./Register.css";
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
+import { NavLink } from "react-router-dom";
+import Typical from 'react-typical'
 
-// const validEmail = function ValidateEmail(input) {
-//   const userRegValidation =
-//     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-//   if (input.value.match(userRegValidation)) {
-//     alert("Valid email address!");
-//     document.form1.text1.focus();
-//     return true;
-//   } else {
-//     alert("Invalid email address!");
-//     document.form1.text1.focus();
-//     return false;
-//   }
-// };
-const validEmail =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-// const validPwd  =
-// /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-// const validPwd = function ValidatePwd(input) {
-//   const passwordValidation =
-//     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-//   if (input.value.match(passwordValidation)) {
-//     alert("Valid password address!");
-//     document.form1.text1.focus();
-//     return true;
-//   } else {
-//     alert("Invalid password address!");
-//     document.form1.text1.focus();
-//     return false;
-//   }
-// };
 
-export default function Register() {
-  // user input, allow us to set focus to user input when the component loads
-  const userRef = useRef();
-  // for the error message, so if we get an error it can be announced by a screen reader for accessibility
-  const errRef = useRef();
 
-  // tied to the user input
-  const [user, setUser] = useState("");
-  // boolean tied to whether the name vaildates or not
-  const [validatedEmail, setValidatedEmail] = useState(false);
-  // boolean tied to whether we have focus on that input field or not
-  const [userFocus, setUserFocus] = useState(false);
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    fontFamily: 'monospace',
+    fontSize: '1.2em',
+    background: "#000"
+  },
+  appbar: {
+    background: '#323132',
+  },
+  appbarWrapper: {
+    width: '80%',
+    margin: '0 auto',
+  },
+  appbarTitle: {
+    flexGrow: '1',
+  },
+  icon: {
+    color: '#fff',
+    fontSize: '2rem',
+  },
+  colorText: {
+    fontFamily: 'monospace',
+    fontSize: '2.5rem',
+    color: '#a425ff',
+  },
+  container: {
+    textAlign: 'center',
+  },
+  title: {
+    color: '#000',
+    fontSize: '4.5rem',
+  },
+}));
 
+
+
+export default function Register({ state, setState }) {
+  const classes = useStyles();
+  const navigate = useNavigate();
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [validatePwd, setValidatePwd] = useState(false);
-  const [passwordFocus, setPasswordFocus] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [photo_url, setPhoto_url] = useState("");
+  const [role, setRole] = useState("");
+  const [error, setError] = useState("");
 
-  const [confirmedPwd, setConfirmedPwd] = useState("");
-  const [validateConfirmedPwd, setValidateConfirmedPwd] = useState(false);
-  const [confirmedPwdFocus, setConfirmedPwdFocus] = useState(false);
+  const validateRegistration = () => {
+    if (
+      !first_name ||
+      !last_name ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !photo_url
+    ) {
+      setError("Fields cannot be left blank");
+      alert(error);
+      return false;
+    }
+    return true;
+  };
 
-  const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validateRegistration())
+      console.log("**************SUBMIT LETS GOOOO**************");
+    const body = {
+      first_name,
+      last_name,
+      email,
+      password,
+      confirmPassword,
+      photo_url,
+      role,
+    };
 
-  // setting the focus on the userName when the component loads. userRef = refernce the user
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
+    axios
+      .post("http://localhost:8080/users/register", body)
+      .then((response) => {
+        console.log(response);
+        setState({
+          ...state,
+          users: {
+            ...state.users,
+            [response.data.user.id]: response.data.user,
+          },
+        });
+        console.log("NEW STATE----", state);
+      })
+      .then(() => navigate("/sign-in"))
+      .catch((error) => {
+        console.log("Registration error---", error);
+        alert("Email already exists");
+      });
+  };
 
-  // validate the username, add user state to the dependency arr.
-  useEffect(() => {
-    //.test is testing the user state against the vaildEmail and if it is validated then the result will be passed to the setValidatedName useState.
-    const result = user;
-    validEmail.test(user);
-    console.log(result);
-    console.log(user);
-    setValidatedEmail(result);
-  }, [user]);
-
-  // useEffect(() => {
-  //   const result = validPwd.test(password);
-  //   console.log(result);
-  //   console.log(password);
-  //   setValidatePwd(result);
-  //   const confirmed = password === confirmedPwd;
-  //   setValidateConfirmedPwd(confirmed);
-  //   //password state in the dependency array
-  // }, [password, confirmedPwd]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, password, confirmedPwd]);
-
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get("/api/users")
-  //   ])
-  // })
   return (
-    <section>
-      <h1>Register</h1>
-      {/* <p
-        ref={errRef}
-        className={errMsg ? "error message" : "offscreen"}
-        aria-live="assertive"
-      >
-        {errMsg}{" "}
-      </p> */}
-      <form>
-        <label htmlFor="first_name">
-          First Name:
-          <div>
-            {/* {validatedEmail ? <FiCheck /> : "hide"}
-         {validatedEmail || !user ? <FaAsterisk /> : "hide"} */}
-          </div>
-        </label>
-        <input
-          type="text"
-          // id of user name
-          id="first_name"
-          // allow us to set focus on teh input
-          ref={userRef}
-          // autoComplete is off because we don't want to see previous values suggested for this field.
-          autoComplete="off"
-          //ties the input to the userState
-          onChange={(event) => setUser(event.target.value)}
+    <div>
+       <AppBar className={classes.appbar} elevation={0}>
+        <Toolbar className={classes.appbarWrapper}>
+          <h1 className={classes.appbarTitle}>
+            <span className={classes.colorText}>Produc_Div</span>
+          </h1>
+          <NavLink to='/sign-in' >
+            <button className='buttons'>Sign In</button>
+          </NavLink>
+          <NavLink to='/register'> <button className='buttons'>Register</button></NavLink>
+        
+        </Toolbar>
+      </AppBar>
+      <div className="form_layout">
+        <div className="form">
+        <p className="h1-title">
+          <Typical
+        loop={Infinity}
+        wrapper="l"
+        steps={[
+          ' ',
+          1000,
+          'Register', 
+          6000,
+        ]}
         />
-        <br />
-
-        <label htmlFor="last_name">
-          Last Name:
-          <div>
-            {/* {validatedEmail ? <FiCheck /> : "hide"}
-         {validatedEmail || !user ? <FaAsterisk /> : "hide"} */}
-          </div>
-        </label>
-        <input
-          type="text"
-          // id of user name
-          id="last_name"
-          // allow us to set focus on teh input
-          ref={userRef}
-          // autoComplete is off because we don't want to see previous values suggested for this field.
-          autoComplete="off"
-          //ties the input to the userState
-          onChange={(event) => setUser(event.target.value)}
-        />
-        <br />
-        <label htmlFor="email">
-          Email:
-          <div>
-            {/* {validatedEmail ? <FiCheck /> : "hide"}
-         {validatedEmail || !user ? <FaAsterisk /> : "hide"} */}
-          </div>
-        </label>
-        <input
-          type="text"
-          // id of user name
-          id="email"
-          // allow us to set focus on teh input
-          ref={userRef}
-          // autoComplete is off because we don't want to see previous values suggested for this field.
-          autoComplete="off"
-          //ties the input to the userState
-          onChange={(event) => setUser(event.target.value)}
-          // input is also required
-          required
-          // if we do have a valid username the it is set to false it not the true. This lets a screen annoces if it need adjustment before submission
-
-          aria-invalid={validatedEmail ? "false" : "true"}
-          //
-          aria-describedby="uidnote"
-          onFocus={() => setUserFocus(true)}
-          // when you leave the input field
-          onBlur={() => setUserFocus(false)}
-        />
-        <p
-          id="uidnote"
-          className={
-            userFocus && user && !validatedEmail ? "instructions" : "offscreen"
-          }
-        >
-          {/* insert alert icon */}
-          Must be a vaild email.
-          <br />
         </p>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          aria-invalid={validatePwd ? "false" : "true"}
-          aria-describedby="pwdnote"
-          onFocus={() => setPasswordFocus(true)}
-          // when you leave the input field
-          onBlur={() => setPasswordFocus(false)}
-        />
-        {/* <p
-          id="pwdnote"
-          className={
-            passwordFocus && !validatePwd ? "instructions" : "offscreen"bdsbfd
-          }
-        >
-          8 to 24 characters.
-          <br />
-          Must include uppercase and lowercase letters, a number and a special
-          character.
-          <br />
-          Allowed special characters:{" "}
-          <span aria-label="exclamation mark">!</span>{" "}
-          <span aria-label="at symbol">@</span>{" "}
-          <span aria-label="hashtag">#</span>{" "}
-          <span aria-label="dollar sign">$</span>{" "}
-          <span aria-label="percent">%</span>
-        </p> */}
-        <br />
-        <label htmlFor="confirm_pwd">
-          Confirm Password:
-          {/* <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} /> */}
-        </label>
-        <input
-          type="password"
-          id="confirm_pwd"
-          onChange={(e) => setPassword(e.target.value)}
-          value={confirmedPwd}
-          required
-          // aria-invalid={validateConfirmedPwd ? "false" : "true"}
-          // aria-describedby="confirmnote"
-          onFocus={() => setConfirmedPwdFocus(true)}
-          onBlur={() => setConfirmedPwdFocus(false)}
-        />
-        {/* <p
-          id="confirmnote"
-          className={setConfirmedPwdFocus && ! confirmedPwd ? "instructions" : "offscreen"}
-        >
-          Must match the first password input field.
-        </p> */}
-
-        <button
-          disabled={
-            !validatedEmail || !validatePwd || !validateConfirmedPwd
-              ? true
-              : false
-          }
-        >
-          Register
-        </button>
-      </form>
-      <p>
-        Already registered?
-        <br />
-        <span className="line">
-          <a href="/signIn">Sign In</a>
-        </span>
-      </p>
-    </section>
+          {/* <p className="h1-title">
+            <h1>Register</h1>
+          </p> */}
+          <form onSubmit={handleSubmit}>
+            <div className="form-body">
+              <div className="username">
+                <label className="form__label" htmlFor="firstName">
+                  First Name{" "}
+                </label>
+                <input
+                  className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
+                  type="text"
+                  id="firstName"
+                  placeholder="First Name"
+                  onChange={(event) => setFirstName(event.target.value)}
+                  required
+                />
+              </div>
+              <div className="lastname">
+                <label className="form__label" htmlFor="lastName">
+                  Last Name{" "}
+                </label>
+                <input
+                  type="text"
+                  name=""
+                  id="lastName"
+                  className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
+                  placeholder="LastName"
+                  onChange={(event) => setLastName(event.target.value)}
+                  required
+                />
+              </div>
+              <div className="email">
+                <label className="form__label" htmlFor="email">
+                  Email{" "}
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
+                  placeholder="Email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                />
+              </div>
+              <div className="password">
+                <label className="form__label" htmlFor="password">
+                  Password{" "}
+                </label>
+                <input
+                  className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="confirm-password">
+                <label className="form__label" htmlFor="confirmPassword">
+                  Confirm Password{" "}
+                </label>
+                <input
+                  className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
+                  type="password"
+                  id="confirmPassword"
+                  placeholder="Confirm Password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="photo_url">
+                <label className="form__label" htmlFor="photo_url">
+                  Photo URL{" "}
+                </label>
+                <input
+                  className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
+                  type="url"
+                  id="photo_url"
+                  placeholder="enter photo_url"
+                  onChange={(e) => setPhoto_url(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="role">
+                <label className="form__label" htmlFor="role">
+                  role{" "}
+                </label>
+                <input
+                  className="form__input"
+                  style={{ height: '2.5em', width: '60%'}}
+                  type="text"
+                  id="role"
+                  placeholder="enter role "
+                  onChange={(e) => setRole(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div className="footer-reg">
+              <button
+                type="submit"
+                className="btn"
+              // onClick={(event) => handleSubmit()}
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
