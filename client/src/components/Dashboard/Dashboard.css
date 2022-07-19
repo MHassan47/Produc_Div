@@ -20,12 +20,12 @@
   width: 60%;
   box-shadow: 10px 0 15px rgba(33, 33, 33, 0.2);
   padding-top: 4rem;
-  padding-left: 9rem;
+  padding-left: 13rem;
   padding-right: 11rem;
   background-color: #1b1d1e;
   border-radius: 3%;
   z-index: 100;
 }
 .dashboard_kanban:hover {
-  box-shadow:10px 5px 5px rgb(132, 57, 253);
+  box-shadow:10px 2px 2px #a425ff;
 }

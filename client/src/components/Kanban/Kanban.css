@@ -16,10 +16,9 @@
   justify-content: end;
   flex-direction: row;
   width: 100%;
-
-  font-weight: 400;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  font-family: monospace;
   align-items: center;
 
   background-color: #a425ff;
@@ -42,13 +41,13 @@
 }
 
 .kanban__section {
-  width: 350px;
+  width: 375px;
   height: fit-content;
   border-radius: 15px;
   border: 100px rgb(232, 231, 231);
 
   background-color: #323132;
-  width: 325px;
+  /* width: 325px; */
 
   height: max-content;
   max-height: 720px;
@@ -56,12 +55,12 @@
   border-radius: 15px;
   border: 10px black;
 
-  box-shadow: 10px 0 10px rgba(170, 123, 199, 0.2);
+  box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .kanban__section:hover {
-  background-color: #6d6d6de7;
-  box-shadow: 10px 5px 5px #7e7ebb;
+  background-color: #4b4b4b;
+  box-shadow: 10px 5px 5px #a645fa;
 }
 
 .kanban__section__content {

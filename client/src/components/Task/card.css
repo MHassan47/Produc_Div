@@ -3,7 +3,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  width: 200px;
+  width: 250px;
   height: 90px;
   padding: 10px;
   background-color: #1b1d1e;
@@ -11,6 +11,7 @@
   margin-bottom: 1rem;
   z-index: 1;
 }
+
 .card_header {
   display: flex;
   width: 200px;

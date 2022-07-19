@@ -16,7 +16,8 @@
 }
 
 .conference_call { 
-  display: flex;
+  /* display: flex; */
+  /* position: absolute; */
   width: 60%;
   padding-top: 4rem;
   padding-left: 9rem;
@@ -27,7 +28,7 @@
  
 }
 .conference_call:hover {
-  box-shadow:10px 5px 5px rgb(132, 57, 253);
+  box-shadow:10px 2px 2px #a425ff;
 }
 #join_button {
   flex-direction: row;

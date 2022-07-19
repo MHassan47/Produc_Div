@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appbar: {
     background: '#323132',
+    
   },
   appbarWrapper: {
     width: '80%',
