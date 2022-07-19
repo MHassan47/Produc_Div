@@ -7,8 +7,6 @@ const cookieSession = require("cookie-session");
 const cors = require("cors");
 
 const ws = require("ws");
-// const httpServer = require("http");
-// const socketIO = require("socket.io");
 // db connection
 const db = require("./configs/db.config");
 
@@ -17,12 +15,12 @@ const usersRoutes = require("./routes/usersRoutes");
 const tasksRoutes = require("./routes/tasksRoutes");
 const projectsRoutes = require("./routes/projectsRoutes");
 const userRoutes = require("./routes/userRoutes");
-// const messagesRoutes = require("./routes/messageRoutes");
 
 const PORT = 8080;
 const app = express();
 
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+
 // middleware setup
 app.use(morgan(ENVIROMENT));
 app.use(express.urlencoded({ extended: false }));
