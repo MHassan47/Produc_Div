@@ -11,35 +11,31 @@ const Dashboard = ({ state, setState, updateCard, addUserToCard }) => {
   const { user } = useContext(AuthContext);
   return user ? (
     <div>
-
-    <div className="dashboard_container">
-      <div className="dashboard_header">
-        <Header
-          state={state}
-          currentProject={currentProject}
-          setCurrentProject={setCurrentProject}
-          />
-      </div>
-      <div className="dashboard_content">
-        <div className="dashboard_sidebar">
-          <SideBar />
-        </div>
-        <div className="dashboard_kanban">
-          <Kanban
+      <div className="dashboard_container">
+        <div className="dashboard_header">
+          <Header
             state={state}
-            setState={setState}
             currentProject={currentProject}
             setCurrentProject={setCurrentProject}
-            updateCard={updateCard}
-            addUserToCard={addUserToCard}
-            />
+          />
         </div>
-        {/* <div className="dashboard_conference">
-          <Conference state={state} setState={setState} />
-        </div> */}
+        <div className="dashboard_content">
+          <div className="dashboard_sidebar">
+            <SideBar />
+          </div>
+          <div className="dashboard_kanban">
+            <Kanban
+              state={state}
+              setState={setState}
+              currentProject={currentProject}
+              setCurrentProject={setCurrentProject}
+              updateCard={updateCard}
+              addUserToCard={addUserToCard}
+            />
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   ) : (
     <div>
       <NavLink to="/">Please Log in to proceed</NavLink>
