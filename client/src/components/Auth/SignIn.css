@@ -7,21 +7,20 @@
   padding-left: 12em;
   flex-direction: row;
   justify-content: center;
-  /* align-content: center; */
-  /* max-width: 50%;  */
+  
 }
 
 .section {
   width: 100%;
   font-family: monospace;
-  /* padding: 7em; */
+
   padding-top: 20em;
   padding-bottom: 1000px;
   text-align: center;
   display: block;
   flex-direction: column;
   justify-content: center;
-  background-color: black;
+  background-color: #1b1d1e;
 }
 
 .background-colour {

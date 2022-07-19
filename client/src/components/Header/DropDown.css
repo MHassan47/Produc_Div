@@ -1,0 +1,7 @@
+select {
+  display: flex;
+  align-self: flex-end;
+  background-color: #1b1d1e;
+  color: white;
+  height: 40px;
+}

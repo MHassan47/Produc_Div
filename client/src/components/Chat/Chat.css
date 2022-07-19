@@ -1,4 +1,4 @@
- .chat_container {
+.chat_container {
   display: flex;
 
   flex-direction: column;
@@ -15,14 +15,14 @@
 } 
 
  .chat_call {
+  
   display: flex;
   flex-direction: column;
-  /* padding-top: 4rem; */
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   background-color:white;
   border-radius: 3%;
-  width: 65%;
+  width: 60%;
 }
 
 .message-container {
@@ -49,7 +49,7 @@
  .send-chat {
   height: 2.5em;
   width: 5%;
-  /* border-radius: 3%; */
+ 
   background-color:blueviolet;
  }
 .type-2 {
@@ -57,7 +57,6 @@
   height: 2.5em;
   width: 93%;
   background-color: #fafafa;
-  /* border-radius: 3%; */
   border:0;
   box-shadow:0 0 4px rgba(0,0,0,0.3);
   transition: .3s box-shadow;

@@ -2,16 +2,11 @@
   height: 150%;
   width: 250px;
   background-color: #323132;
-  /* border-radius: 20px; */
-  /* border-bottom-left-radius: 20px ;
-  border-top-left-radius: 20px; */
-
 }
 
 .SidebarList {
   display: inline-block;
   vertical-align: top;
-  /* margin-top: 4em; */
   height: 100%;
   padding: 0;
   width: 100%;
@@ -29,25 +24,19 @@
   justify-content: center;
   align-items: center;
   font-family: monospace;
-  font-size: 20px
-  /* "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif; */
+  font-size: 20px;
+  
 }
 
 .SidebarList .row:hover {
   cursor: pointer;
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-  /* background-color: #293846; */
   background-color: #bd88ef;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
-  /* border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px; */
 }
 .SidebarList #active {
-  /* background-color: #293846; */
-  /* background-color: #8c77be; */
-  background-color: #000000;
+  background-color: #1b1d1e;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
@@ -74,13 +63,24 @@
 .user_profile {
   display: flex;
   margin-left: 1.5rem;
-  /* justify-content: center; */
   align-items: center;
   gap: 2rem;
   width: 200px;
   border-radius: 10px;
   height: 50px;
-  background-color: #bd88ef;
+
+  background-color: #1b1d1e;
+}
+.user_profile_picture {
+  margin: 5px;
+}
+.user_profile_name {
+  margin-left: -15px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 1.4em;
+  color: #bd88ef;
+  font-family: monospace;
   border-radius: 10px;
 }
 

@@ -19,11 +19,18 @@ export default function ChatRoom({
     setCurrentMessage("");
   };
 
+  const [currentProject, setCurrentProject] = useState(1);
+
+
   console.log("Chat messages: ", chatMessages);
   return (
     <div className="chat_body">
       <div className="chat_container">
-        {/* <Header state={state} /> */}
+        <Header 
+        state={state} 
+      currentProject={currentProject}
+      setCurrentProject={setCurrentProject}
+        />
 
         <div className="chat_content">
           <div>

@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
-  width: 220px;
-  height: 100px;
+  justify-content: space-between;
+  width: 200px;
+  height: 90px;
   padding: 10px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 15px;
+  background-color: #1b1d1e;
+  border-radius: 10px;
   margin-bottom: 1rem;
   z-index: 1;
 }
@@ -15,7 +15,7 @@
   display: flex;
   width: 200px;
   height: max-content;
-  background-color: #f3f1f8;
+  background-color: rgb(39, 41, 44);
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
   border-bottom: 2px solid #afaac2e7;
@@ -26,6 +26,7 @@
   align-items: flex-start;
   font-weight: 500;
   font-size: 14px;
+  color: white;
   margin-left: 3px;
   margin-bottom: 5px;
 }
@@ -42,10 +43,15 @@
 .card_description_edit_submit:hover {
   color: #afaac2e7;
 }
+#edit_description {
+  background-color: rgb(39, 41, 44);
+  color: white;
+}
 .card__option {
   display: flex;
   justify-content: end;
   z-index: 100;
+  color: white;
   cursor: pointer;
 }
 .card__footer {
@@ -62,7 +68,7 @@
 }
 .list_photo {
   display: flex;
-  /* flex-direction: column; */
+
   width: max-content;
   height: fit-content;
   list-style-type: none;
@@ -82,14 +88,15 @@
   height: 32px;
   justify-content: center;
   align-items: center;
-  background-color: #f3f1f8;
+  background-color: rgb(39, 41, 44);
+  color: white;
   border-radius: 50%;
   margin-left: -6px;
   z-index: 10;
   cursor: pointer;
 }
 .card_add_members:hover {
-  background-color: #b2a4d4;
+  background-color: rgb(71, 66, 89);
 }
 .card_add_members_icon {
   display: flex;
@@ -123,7 +130,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  /* height: 15px; */
 }
 .card_edit_close {
   display: flex;

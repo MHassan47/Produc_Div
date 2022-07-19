@@ -43,12 +43,6 @@ export default function VideoCall(props) {
       })
 
       await client.join(config.appId, name, config.token, null)
-      // try {
-      //   await client.join(config.appId, name, config.token, null)
-        
-      // } catch (error) {
-      //   console.log("+++++++++++++++++line 46 (join channel):", error)
-      // }
 
       if (tracks) await client.publish([tracks[0], tracks[1]])
       setStart(true);

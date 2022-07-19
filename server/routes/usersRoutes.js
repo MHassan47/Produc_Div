@@ -59,9 +59,7 @@ module.exports = (db) => {
     )
       .then((result) => {
         const user = result.rows[0];
-        // console.log("user.result: ", user);
-        // res.status(200).send({ user });
-        // res.redirect("/");
+       
 
         res.json({ user });
       })
@@ -72,10 +70,6 @@ module.exports = (db) => {
     return router;
   });
 
-  // router.get("/sign-in", (req, res) => {
-  //   res.render("sign-in");
-  //   res.status(200).send("sign-in path is working");
-  // });
 
   router.post("/sign-in", (req, res) => {
     const { email, password } = req.body;

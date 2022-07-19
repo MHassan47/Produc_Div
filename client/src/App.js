@@ -14,6 +14,7 @@ import { AuthContext } from "./context/AuthProvider";
 //   createMicrophoneAndCameraTracks,
 // } from "agora-rtc-react";
 // import io from "socket.io-client";
+// import { createClient, createMicrophoneAndCameraTracks} from "agora-rtc-react";
 
 // const config = { mode: "rtc", codec: "vp8" };
 
@@ -32,7 +33,7 @@ export default function App() {
       setLoading(false);
       setUser(state.user[0]);
     }
-  }, [state.user, isFetching]);
+  }, [isFetching, state.user[0]]);
 
   const login = (data) => {
     setUser({
@@ -93,12 +94,7 @@ export default function App() {
           />
           <Route
             path="/chat"
-            element={
-              <Chat
-                state={state}
-                setState={setState}
-              />
-            }
+            element={<Chat state={state} setState={setState} />}
           />
         </Routes>
       </BrowserRouter>
