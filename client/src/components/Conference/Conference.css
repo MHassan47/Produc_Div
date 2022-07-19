@@ -1,0 +1,98 @@
+.conference_container {
+  display: flex;
+  flex-direction: column;
+}
+.conference_header {
+  display: flex;
+  height: 10vh;
+}
+
+/* .conference_sidebar {
+  display: flex;
+  padding-top: 4rem;
+  padding-left: 9rem;
+  padding-right: 11rem;
+  background-color: #323132;
+  border-radius: 3%;
+} */
+.conference_content {
+  display: flex;
+  height: 87vh;
+
+  margin: 1rem;
+}
+
+.conference_call {
+  display: flex;
+  width: 65%;
+  padding-top: 4rem;
+  padding-left: 9rem;
+  padding-right: 11rem;
+  /* border-bottom-right-radius: 2px solid #581845; */
+  background-color: rgb(0, 0, 0);
+  /* border-radius: 3em; */
+ 
+}
+.conference_call:hover {
+  box-shadow:10px 5px 5px rgb(213, 187, 255);
+}
+#join_button {
+  height: 8%;
+  margin: 1em;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #bd88ef;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+#grid {
+  display: grid;
+  height: 200px;
+  margin-top: 15px;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  gap: 2.5em;
+}
+
+#grid > div {
+  /* border: 1px solid green;
+  background-color: rgb(222, 142, 246); */
+  height: 45vh;
+  width: 45vw;
+  
+}
+
+/* 
+.video_call {
+  display: flex;
+  justify-content: "space-between"
+} */
+/* 
+#local-video {
+  display: flex;
+  z-index: 1;
+  /* height: 20vh;
+  max-width: 100%; */
+  /* width: "35vw";
+  height: "35vh";
+  background-color: "green";
+} */
+/* 
+.remote-video {
+  display: flex;
+  z-index: 1;
+  /* height: 20vh;
+  max-width: 100%; */
+  /* width: "35vw";
+  height: "35vh";
+  background-color: "red";
+}  */

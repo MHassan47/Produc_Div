@@ -18,9 +18,6 @@
   width: 100%;
   /* padding-bottom: 1rem; */
   /* padding-top: 1rem; */
-  font-weight: 400;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
   align-items: center;
   /* background-color: #8c77be; */
   background-color: #a425ff;
@@ -31,7 +28,7 @@
 .kanban__section__count {
   display: flex;
   margin-left: 1rem;
-  color: rgba(225, 217, 217, 0.626);
+  color: #080808e7;
 }
 .kanban__section__add {
   justify-content: end;
@@ -58,13 +55,14 @@
   border: 10px black;
   /* background-color: #c9bfe0; */
   /* background-color: #f3f1f8; */
-  box-shadow: 10px 0 10px rgba(170, 123, 199, 0.2);
+  box-shadow: 15px 0 15px rgba(170, 123, 199, 0.2);
 }
 
 .kanban__section:hover {
   background-color: #e1d3f3e7;
-  box-shadow: 10px 5px 5px #7e7ebb;
+  box-shadow:10px 5px 5px #7e7ebb;
 }
+
 
 .kanban__section__content {
   display: flex;

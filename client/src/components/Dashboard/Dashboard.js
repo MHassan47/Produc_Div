@@ -10,13 +10,15 @@ const Dashboard = ({ state, setState, updateCard, addUserToCard }) => {
   const [currentProject, setCurrentProject] = useState(1);
   const { user } = useContext(AuthContext);
   return user ? (
+    <div>
+
     <div className="dashboard_container">
       <div className="dashboard_header">
         <Header
           state={state}
           currentProject={currentProject}
           setCurrentProject={setCurrentProject}
-        />
+          />
       </div>
       <div className="dashboard_content">
         <div className="dashboard_sidebar">
@@ -30,10 +32,14 @@ const Dashboard = ({ state, setState, updateCard, addUserToCard }) => {
             setCurrentProject={setCurrentProject}
             updateCard={updateCard}
             addUserToCard={addUserToCard}
-          />
+            />
         </div>
+        {/* <div className="dashboard_conference">
+          <Conference state={state} setState={setState} />
+        </div> */}
       </div>
     </div>
+  </div>
   ) : (
     <div>
       <NavLink to="/">Please Log in to proceed</NavLink>

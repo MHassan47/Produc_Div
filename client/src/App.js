@@ -1,76 +1,49 @@
-// import {React}from "react";
-// import { useState } from "react";
-// import "./App.css";
-// import Homepage from "./components/HomePage/Homepage"
-// import Kanban from "./components//Kanban/Kanban";
-// import useApplicationData from "./hooks/useApplicationData";
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import { makeStyles } from '@material-ui/core/styles';
-// import { CssBaseline } from '@material-ui/core';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     minHeight: '100vh',
-//     backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/homepagebackground.jpg'})`,
-//     backgroundRepeat: 'no-repeat',
-//     backgroundSize: 'cover',
-//   }
-// }));
-
-// function App() { const classes = useStyles();
-
-//   const { state, setState } = useApplicationData();
-//   return (
-/* <div className="App">
-  <BrowserRouter>
-    <Routes>
-      <Route
-        path="/dashboard"
-        element={<Kanban state={state} setState={setState} />} />
-      {<Route path="/" element={<Homepage />} />
-    /* <Route path="/register" element={<Register />} />
-    <Route path="/signin" element={<SignIn />} /> */
-//     </Routes>
-//   </BrowserRouter>
-// </div>
-//   ); */}
-
-// }
-
-// export default App;
-
-import React, { useEffect } from "react";
+import React, { Component, useEffect, useState, useRef } from "react";
+import "./App.css";
 // import { CssBaseline } from "@material-ui/core";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
 import SignIn from "./components/Auth/SignIn";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import "./App.css";
-import Kanban from "./components//Kanban/Kanban";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Form from "./components/Task/Form";
-import useApplicationData from "./hooks/useApplicationData";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import { makeStyles } from "@material-ui/core/styles";
-import { AuthContext } from "./context/AuthProvider";
-import SideBar from "./components/SideBar/SideBar";
-import Header from "./components/Header/Header";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     minHeight: "100vh",
-//     // backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/homepagebackground.jpg'})`,
-//     backgroundRepeat: "no-repeat",
-//     backgroundSize: "cover",
-//   },
-// }));
+import Kanban from "./components//Kanban/Kanban";
+import Header from "./components/Header/Header";
+import SideBar from "./components/SideBar/SideBar";
+import Chat from "./components/Chat/Chat";
+import Conference from "./components/Conference/Conference";
+import useApplicationData from "./hooks/useApplicationData";
+import useChatSocket from "./hooks/useChatSocket";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AuthContext } from "./context/AuthProvider";
+import { Button } from "@material-ui/core";
+import VideoCall from "./components/Conference/VideoCall";
+import {
+  AgoraVideoPlayer,
+  createClient,
+  createMicrophoneAndCameraTracks,
+} from "agora-rtc-react";
+import io from "socket.io-client";
+
+const config = { mode: "rtc", codec: "vp8" };
+
+const useClient = createClient(config);
+const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
+
 export default function App() {
+  // const [username, setUsername] = useState("");
+  // const [room, setRoom] = useState("");
+  // const [showChat, setShowChat] = useState(false);
+
+  // const client = useClient();
+  // const { ready, tracks } = useMicrophoneAndCameraTracks();
+  // const [inCall, setInCall] = useState(false);
+
+  // const { sendChatMessage, chatMessages } =
   const { isFetching, state, setState, updateCard, addUserToCard } =
     useApplicationData();
   const [user, setUser] = useState(state.user[0]);
   const [loading, setLoading] = useState(true);
-
+  console.log("state:", state);
   useEffect(() => {
     if (!isFetching) {
       setLoading(false);
@@ -103,18 +76,15 @@ export default function App() {
     });
   };
 
+  //
+  // console.log({ user });
+
   if (loading) {
     return <p>Loading</p>;
   }
-  console.log({ user });
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       <BrowserRouter>
-        {/* <div className={classes.root}> */}
-        {/* <Header />
-        <SideBar /> */}
-
-        {/* <CssBaseline /> */}
         <Routes>
           <Route
             path="/dashboard"
@@ -128,6 +98,10 @@ export default function App() {
               />
             }
           />
+          <Route
+            path="/conference"
+            element={<Conference state={state} setState={setState} />}
+          />
           <Route path="/" element={<HomePage />} />
           <Route
             path="/register"
@@ -137,8 +111,18 @@ export default function App() {
             path="/sign-in"
             element={<SignIn state={state} setState={setState} />}
           />
+          <Route
+            path="/chat"
+            element={
+              <Chat
+                state={state}
+                setState={setState}
+                // sendChatMessage={sendChatMessage}
+                // chatMessages={chatMessages}
+              />
+            }
+          />
         </Routes>
-        {/* </div> */}
       </BrowserRouter>
     </AuthContext.Provider>
   );

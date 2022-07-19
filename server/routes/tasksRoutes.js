@@ -37,7 +37,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  //   Delets a task card
+  //   Deletes a task card
   router.delete("/delete/:id", (req, res) => {
     const task_id = req.params.id;
 
@@ -50,7 +50,7 @@ module.exports = (db) => {
       });
   });
 
-  //   Creats a task card
+  //   Creates a task card
   router.post("/new/:projectID", (req, res) => {
     console.log("reached");
     const { name, created_at, owner_id, col } = req.body;
