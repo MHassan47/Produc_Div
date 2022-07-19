@@ -6,14 +6,11 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM tasks;`)
       .then((data) => {
-        // const users = data.rows;
+      
 
         res.json(
           data.rows
-          //   tasks.reduce(
-          //     (previous, current) => ({ ...previous, [current.id]: current }),
-          //     {}
-          //   )
+          
         );
       })
       .catch((err) => {
@@ -55,23 +52,19 @@ module.exports = (db) => {
     console.log("reached");
     const { name, created_at, owner_id, col } = req.body;
     const project_id = req.params.projectID;
-    // const column_name = req.params.col;
-    // const owner_id = req.session.user_id;
+  
 
     db.query(
       `INSERT INTO tasks(name, created_at, owner_id, col, project_id) VALUES($1, $2, $3, $4, $5)
         RETURNING *;`,
       [name, created_at, owner_id, col, project_id]
     )
-      // .then(db.query(`INSERT INTO`)) --- inserting multiple users to users_to_tasks
+     
       .then((response) => {
         console.log("done");
         res.json(
           response.rows[0]
-          // tasks.reduce(
-          //   (previous, current) => ({ ...previous, [current.id]: current }),
-          //   {}
-          // )
+          
         );
       })
       .catch((err) => {

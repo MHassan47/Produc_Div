@@ -1,14 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
-import SortIcon from '@material-ui/icons/Sort';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { AppBar, Toolbar, Collapse } from '@material-ui/core';
 import { NavLink } from "react-router-dom";
-import { Button } from "@material-ui/core";
 import Typical from 'react-typical'
-// import { Link as Scroll } from 'react-scroll';
-import Header from '../Header/Header';
 import "./homepage.css"
 
 
@@ -71,10 +66,7 @@ export default function Homepage() {
          <button className='buttons'>Sign In</button>
           </NavLink>
         <NavLink to='/register'> <button className='buttons'>Register</button></NavLink> 
-{/* 
-          <IconButton>
-            <SortIcon className={classes.icon} />
-          </IconButton> */}
+
 
         </Toolbar>
       </AppBar>
