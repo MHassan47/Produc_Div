@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthProvider";
 import { NavLink, useSearchParams } from "react-router-dom";
 
 const Dashboard = ({ state, setState, updateCard, addUserToCard }) => {
-  const [currentProject, setCurrentProject] = useState();
+  const [currentProject, setCurrentProject] = useState(1);
   const { user } = useContext(AuthContext);
   return user ? (
     <div className="dashboard_container">
