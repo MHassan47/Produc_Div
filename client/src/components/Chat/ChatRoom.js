@@ -37,7 +37,7 @@ export default function ChatRoom({
               {chatMessages?.map(({ message, username, timestamp }) => (
                 <div key={message + username} className="message-content">
                   <p>
-                    <small class="time-stamp">[{timestamp}] </small>
+                    <small className="time-stamp">[{timestamp}] </small>
                     <strong>{username}:</strong>
                     {message}{" "}
                   </p>

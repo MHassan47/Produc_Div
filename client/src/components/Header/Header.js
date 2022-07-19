@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import "./Header.css";
-import { Navigate, Link } from "react-router-dom";
+// import { Navigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
-import "../../Docs/Logo.css"
+import "../../Docs/Logo.css";
 // import { useState } from "react";
 import DropDown from "./DropDown";
 
@@ -12,13 +12,14 @@ export default function Header(props) {
   return (
     <header className="header">
       <div>
-      <img className="logo" src={require("../../Docs/logo-img.png")} 
-      alt={"ProducDiv"}/> 
-        <p>
-        <h1 style={{ fontFamily: 'monospace', }}>Produc_Div</h1>
-        </p>
+        <img
+          className="logo"
+          src={require("../../Docs/logo-img.png")}
+          alt={"ProducDiv"}
+          />
       </div>
-{/*       
+          <h1 className="h1-pro">Produc_Div</h1>
+      {/*       
         <div className="header_title">
           {props.state.projects.map((project) => {
             if (project.id === props.currentproject)
@@ -30,14 +31,14 @@ export default function Header(props) {
         className="dropdown"
         currentProject={props.currentProject}
         setCurrentProject={props.setCurrentProject}
-      />
-      <div className="header_title">
-        {props.state.projects.map((project) => {
+      /> 
+       {/* <div className="header_title">
+        {props.state?.projects?.map((project) => {
           if (project.id === props.currentProject)
             return <div className="header_title_text">{project.name} </div>;
-        })}
-      </div>
+        })}   */}
+      {/* </div> */}
       <div className="project_members"></div>
     </header>
-   
-  )};
+  );
+}
