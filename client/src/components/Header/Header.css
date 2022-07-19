@@ -18,7 +18,8 @@
   align-self: center;
   align-content: center; */
   font-size: 35px;
-  /* justify-content: start; */
+  color: white;
+  justify-content: start;
 }
 .header_title_text {
   padding: 1em;
@@ -26,10 +27,9 @@
   justify-content: center;
   /* margin-right: 1600px; */
   /* margin-left: 1600px; */
+}
 
- }
-
- .dropdown {
+.dropdown {
   height: 10px;
  }
 

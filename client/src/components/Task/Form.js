@@ -4,16 +4,11 @@ import { AuthContext } from "../../context/AuthProvider";
 
 const Form = ({ state, setState, currentColumn, newTask, currentProject }) => {
   const { user } = useContext(AuthContext);
-  //   const state = props.state;
-  //   const setState = props.setState;
 
   const column = currentColumn;
-  // const [user_id, setUser_id] = useState(1);
+
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
-
-  //   const [owner, setOwner] = useState(null);
-  //   const [members, setMembers] = useState([]);
 
   const handleSubmit = (e) => {
     console.log({ currentProject });
@@ -27,7 +22,6 @@ const Form = ({ state, setState, currentColumn, newTask, currentProject }) => {
         owner_id: user.id,
       })
       .then((response) => {
-        // console.log("========", response.data.id);
         axios
           .post(
             `http://localhost:8080/api/tasks/users_to_tasks/${user.id}/${response.data.id}`

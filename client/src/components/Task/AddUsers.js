@@ -20,7 +20,6 @@ const AddUsers = ({
   const handleCheckClick = (e) => {
     e.preventDefault();
 
-    // if (!state.users_to_tasks[taskID - 1].assigned_users.includes(user.id))
     Promise.resolve(addUserToCard(user.id, taskID))
       .then(
         setTimeout(() => {

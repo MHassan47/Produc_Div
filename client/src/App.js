@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState, useRef } from "react";
 import "./App.css";
-// import { CssBaseline } from "@material-ui/core";
+
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
 import SignIn from "./components/Auth/SignIn";
@@ -37,7 +37,7 @@ export default function App() {
       setLoading(false);
       setUser(state.user[0]);
     }
-  }, [state.user, isFetching]);
+  }, [isFetching, state.user[0]]);
 
   const login = (data) => {
     setUser({
@@ -98,12 +98,7 @@ export default function App() {
           />
           <Route
             path="/chat"
-            element={
-              <Chat
-                state={state}
-                setState={setState}
-              />
-            }
+            element={<Chat state={state} setState={setState} />}
           />
         </Routes>
       </BrowserRouter>

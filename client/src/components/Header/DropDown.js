@@ -1,4 +1,4 @@
-import { useState } from "react";
+import "./DropDown.css";
 
 function DropDown({ currentProject, setCurrentProject }) {
   // const [selectedProject, setSelectedProject] = useState(currentProject);
@@ -6,7 +6,6 @@ function DropDown({ currentProject, setCurrentProject }) {
   const handleChange = (e) => {
     setCurrentProject(Number(e.target.value));
   };
-  console.log({ currentProject });
 
   return (
     <select className="" value={currentProject} onChange={handleChange}>

@@ -4,7 +4,6 @@ import "./Header.css";
 // import { Navigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import "../../Docs/Logo.css";
-// import { useState } from "react";
 import DropDown from "./DropDown";
 
 export default function Header(props) {
@@ -25,8 +24,6 @@ export default function Header(props) {
             if (project.id === props.currentproject)
               return <div key={project.id} className="header_title_text">{project.name} </div>;
 
-          })}
-        </div> */}
       <DropDown
         className="dropdown"
         currentProject={props.currentProject}
