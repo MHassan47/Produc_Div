@@ -31,13 +31,13 @@ const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 export default function App() {
   const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("");
-  const [showChat, setShowChat] = useState(false);
+  // const [room, setRoom] = useState("");
+  // const [showChat, setShowChat] = useState(false);
 
 
-  const client = useClient();
-  const { ready, tracks } = useMicrophoneAndCameraTracks();
-  const [inCall, setInCall] = useState(false);
+  // const client = useClient();
+  // const { ready, tracks } = useMicrophoneAndCameraTracks();
+  // const [inCall, setInCall] = useState(false);
 
 
 
@@ -49,10 +49,13 @@ export default function App() {
     if (!isFetching) {
       setLoading(false);
       setUser(state.user[0]);
+      
     }
+ 
   }, [state.user, isFetching]);
-
-
+  
+// const { sendChatMessage, chatMessages } = useChatSocket(user.first_name);
+  
   const login = (data) => {
     setUser({
       id: data.id,
@@ -78,7 +81,6 @@ export default function App() {
     });
   };
   
-  const { sendChatMessage, chatMessages } = useChatSocket(user.first_name);
   if (loading) {
     return <p>Loading</p>;
   }
@@ -120,8 +122,8 @@ export default function App() {
               <Chat
                 state={state}
                 setState={setState}
-                sendChatMessage={sendChatMessage}
-                chatMessages={chatMessages}
+                // sendChatMessage={sendChatMessage}
+                // chatMessages={chatMessages}
               />
             }
           />

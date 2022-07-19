@@ -101,20 +101,15 @@ export default function SignIn({ state, setState }) {
       .post("http://localhost:8080/users/sign-in", body, {
         withCredentials: true,
       })
-      // const userArr = [];
+  
 
       .then(
         ({ data }) => {
-          localStorage.setItem("user", JSON.stringify(data.user))
-          // console.log("//////DATA//////", data)
-          // userStateArray.map((user) => {
-          //   if (user.email === email) {
-          //     console.log("##########", user.id);
           console.log("//////DATA//////", data.user)
 
           return login(data.user);
         }
-        //   });
+       
       )
       .then(() => navigate("/dashboard", { replace: true }))
       .then(() => console.log("THIS IS STATE", state))
@@ -136,16 +131,13 @@ export default function SignIn({ state, setState }) {
             <button className='buttons'>Sign In</button>
           </NavLink>
           <NavLink to='/register'> <button className='buttons'>Register</button></NavLink>
-          {/* 
-          <IconButton>
-            <SortIcon className={classes.icon} />
-          </IconButton> */}
+        
 
         </Toolbar>
       </AppBar>
       <section className="section"  >
         <div className="sign-in-h1">
-          {/* <h1>Sign In</h1> */}
+        
           <Typical
         loop={Infinity}
         wrapper="l"
@@ -192,7 +184,7 @@ export default function SignIn({ state, setState }) {
                 type="submit"
                 className="btn"
                 style={{ marginLeft: '8em'}}
-              // onClick={(event) => handleSubmit()}
+            
               >
                 Sign In
               </button>
@@ -204,7 +196,7 @@ export default function SignIn({ state, setState }) {
                 </p>
               <br />
               <span className="link">
-                {/* put router link here */}
+              
                 <button
                   type="button"
                   className="btn"

@@ -8,7 +8,7 @@ const PORT = 8080;
 const ws = require("ws");
 
 
-app.use(cors());
+// app.use(cors());
 
 
 // db connection

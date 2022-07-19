@@ -5,6 +5,10 @@ import "./Dashboard.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { NavLink, useSearchParams } from "react-router-dom";
+import Typical from 'react-typical'
+
+
+
 
 const Dashboard = ({ state, setState, updateCard, addUserToCard }) => {
   const [currentProject, setCurrentProject] = useState();
@@ -41,8 +45,10 @@ const Dashboard = ({ state, setState, updateCard, addUserToCard }) => {
     </div>
   </div>
   ) : (
-    <div>
-      <NavLink to="/">Please Log in to proceed</NavLink>
+    <div className="navlink">
+      <NavLink to="/">
+       Please Log in to proceed 
+        </NavLink>
     </div>
   );
 };

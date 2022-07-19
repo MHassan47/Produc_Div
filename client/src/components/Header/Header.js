@@ -12,7 +12,7 @@ export default function Header(props) {
   return (
     <header className="header">
       <div>
-      <img className="logo" src={require("../../Docs/logo-img.png")} 
+      <img className="logo" src={require("../../Docs/New_PD_logo.png")} 
       alt={"ProducDiv"}/> 
         <p>
         <h1 style={{ fontFamily: 'monospace', }}>Produc_Div</h1>

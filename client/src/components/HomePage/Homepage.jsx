@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     fontFamily: 'monospace',
     fontSize: '1.2em',
-    background: "#000"
+    background: "#222220"
   },
   appbar: {
     background: '#323132',
