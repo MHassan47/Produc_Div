@@ -1,29 +1,20 @@
-import React, { Component, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
 import SignIn from "./components/Auth/SignIn";
 import Dashboard from "./components/Dashboard/Dashboard";
-
-import Kanban from "./components//Kanban/Kanban";
-import Header from "./components/Header/Header";
-import SideBar from "./components/SideBar/SideBar";
 import Chat from "./components/Chat/Chat";
 import Conference from "./components/Conference/Conference";
 import useApplicationData from "./hooks/useApplicationData";
-import useChatSocket from "./hooks/useChatSocket";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthProvider";
-import { Button } from "@material-ui/core";
-import VideoCall from "./components/Conference/VideoCall";
-import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks} from "agora-rtc-react";
-import io from "socket.io-client";
+// import { createClient, createMicrophoneAndCameraTracks} from "agora-rtc-react";
 
-const config = { mode: "rtc", codec: "vp8" };
+// const config = { mode: "rtc", codec: "vp8" };
 
-const useClient = createClient(config);
-const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
+// const useClient = createClient(config);
+// const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 export default function App() {
 

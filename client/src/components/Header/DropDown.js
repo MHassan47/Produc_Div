@@ -1,7 +1,6 @@
 import "./DropDown.css";
 
 function DropDown({ currentProject, setCurrentProject }) {
-  // const [selectedProject, setSelectedProject] = useState(currentProject);
 
   const handleChange = (e) => {
     setCurrentProject(Number(e.target.value));

@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect, setState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import axios from "./api/axios";
 import "./Register.css";
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 import { NavLink } from "react-router-dom";
 import Typical from 'react-typical'
 
@@ -81,19 +80,19 @@ export default function Register({ state, setState }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (validateRegistration())
-      console.log("**************SUBMIT LETS GOOOO**************");
-    const body = {
-      first_name,
-      last_name,
-      email,
-      password,
-      confirmPassword,
-      photo_url,
-      role,
-    };
+    if (validateRegistration()) {
 
-    axios
+      const body = {
+        first_name,
+        last_name,
+        email,
+        password,
+        confirmPassword,
+        photo_url,
+        role,
+      };
+      
+      axios
       .post("http://localhost:8080/users/register", body)
       .then((response) => {
         console.log(response);
@@ -111,10 +110,11 @@ export default function Register({ state, setState }) {
         console.log("Registration error---", error);
         alert("Email already exists");
       });
-  };
-
-  return (
-    <div>
+    }
+    };
+    
+    return (
+      <div>
        <AppBar className={classes.appbar} elevation={0}>
         <Toolbar className={classes.appbarWrapper}>
           <h1 className={classes.appbarTitle}>
@@ -141,9 +141,6 @@ export default function Register({ state, setState }) {
         ]}
         />
         </p>
-          {/* <p className="h1-title">
-            <h1>Register</h1>
-          </p> */}
           <form onSubmit={handleSubmit}>
             <div className="form-body">
               <div className="username">
