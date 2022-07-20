@@ -47,7 +47,6 @@ return (
   <Grid container spacing={2} alignItems="center">
     <Grid item>
       <Button 
-      id="join_button"
       variant="contained" 
       color={trackState.audio ? "primary" : "secondary"}
       onClick={() => mute("audio")}
@@ -58,7 +57,6 @@ return (
     </Grid>
     <Grid item>
     <Button 
-      id="join_button"
       variant="contained" 
       color={trackState.audio ? "primary" : "secondary"}
       onClick={() => mute("video")}
@@ -69,7 +67,6 @@ return (
     </Grid>
     <Grid item>
     <Button 
-      id="join_button"
       variant="contained" 
       color={trackState.audio ? "primary" : "secondary"}
       onClick={() => leaveChannel()}

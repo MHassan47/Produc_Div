@@ -7,13 +7,6 @@ import Form from "../Task/Form";
 import "./Kanban.css";
 import { IoIosAdd } from "react-icons/io";
 import { IoRemoveSharp } from "react-icons/io5";
-import Header from "../Header/Header";
-import SideBar from "../SideBar/SideBar";
-import { getThemeProps } from "@material-ui/styles";
-// const test = [
-//   { id: 1, name: "one" },
-//   { id: 2, name: "two" },
-// ];
 
 const Kanban = ({
   state,
@@ -23,9 +16,7 @@ const Kanban = ({
   updateCard,
   addUserToCard,
 }) => {
-  // const state = props.state;
-  // const setState = props.setState;
-  // const [project, setProject] = useState(1);
+ 
   const [columns, setColumns] = useState(["To Do", "In Progress", "Complete"]);
   const [currentColumn, setCurrentColumn] = useState("");
   const [newCardToDo, setNewCardToDo] = useState(false);
@@ -116,13 +107,6 @@ const Kanban = ({
                           <IoIosAdd
                             onClick={
                               () => newTask(element)
-
-                              // newTask(element)
-                              /* () => {
-                          // setNewCard((prev) => !prev);
-                          
-                        }
-                        /*setNewCard((prev) => !prev)*/
                             }
                           />
                         </div>
@@ -203,38 +187,6 @@ const Kanban = ({
               </Droppable>
             ))}
           </div>
-          {/* <div className="newCard">
-        <div className="newCard-form">
-        {newCardToDo && (
-          <Form
-          state={state}
-          setState={setState}
-          currentColumn={currentColumn}
-          newTask={newTask}
-          />
-          )}
-          </div>
-          <div className="newCard-form">
-          {newCardInProgress && (
-            <Form
-            state={state}
-            setState={setState}
-            currentColumn={currentColumn}
-            newTask={newTask}
-            />
-            )}
-            </div>
-            <div className="newCard-form">
-            {newCardComplete && (
-              <Form
-              state={state}
-              setState={setState}
-              currentColumn={currentColumn}
-              newTask={newTask}
-              />
-              )}
-              </div>
-            </div> */}
         </DragDropContext>
       </section>
     </div>

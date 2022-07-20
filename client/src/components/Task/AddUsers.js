@@ -27,7 +27,7 @@ const AddUsers = ({
           setUpdate((prev) => !prev);
           renderListContainer();
           console.log("DONE");
-        }, 50)
+        }, 200)
       )
 
       .catch((error) => console.log(error));

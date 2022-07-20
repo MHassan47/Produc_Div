@@ -7,13 +7,18 @@ import "./Conference.css";
 
 export default function Conference({ state, setState }) {
 const [inCall, setInCall] = useState(false);
+const [currentProject, setCurrentProject] = useState(1);
 
 
 
 return (
   <div className="conference_container">
     <div className="conference_header">
-      <Header state={state} />
+      <Header 
+      state={state} 
+      currentProject={currentProject}
+      setCurrentProject={setCurrentProject}
+      />
     </div>
     <div className="conference_content">
       <div className="conference_sidebar">
@@ -24,7 +29,7 @@ return (
       {inCall ? <VideoCall setInCall={ setInCall } /> 
       :  
       
-      <Button id="join_button" style={{ justifyContent: 'centre', marginTop: '100px', width: '100%'}} variant="contained" color="primary" onClick={() => setInCall(true)}>
+      <Button id="join_button" variant="contained" color="primary" onClick={() => setInCall(true)}>
       Join Call
     </Button>}
       
@@ -32,12 +37,4 @@ return (
     </div>
   </div>
 );
-
-  // return (
-  //   <div style={{ height: "100vh" }}>
-  
-
-      
-  //   </div>
-  // );
 }
