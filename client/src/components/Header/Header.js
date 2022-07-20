@@ -1,37 +1,45 @@
-import React, { useContext, useState } from "react";
-
+import React, { useContext } from "react";
 import "./Header.css";
-import { Navigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import "../../Docs/Logo.css";
-
 import DropDown from "./DropDown";
+import Typical from 'react-typical'
+
+
 
 export default function Header(props) {
   const { user } = useContext(AuthContext);
   return (
     <header className="header">
       <div>
-        <img
-          className="logo"
-          src={require("../../Docs/logo-img.png")}
-          alt={"ProducDiv"}
+      </div>
+      <div className="h1-pro">
+
+        <Typical
+          loop={100}
+          wrapper="m"
+          fontFamily="monospace"
+          steps={[
+            '<',
+            1000,
+            '< Produc_Div />',
+            2000,
+          ]}
         />
-        <p>
-          <h1 style={{ fontFamily: "monospace" }}>Produc_Div</h1>
-        </p>
+
       </div>
 
-      <DropDown
-        className="dropdown"
-        currentProject={props.currentProject}
-        setCurrentProject={props.setCurrentProject}
-      />
+
       <div className="header_title">
-        {props.state.projects.map((project) => {
+        {props.state?.projects?.map((project) => {
           if (project.id === props.currentProject)
             return <div className="header_title_text">{project.name} </div>;
         })}
+        <DropDown
+          className="dropdown"
+          currentProject={props.currentProject}
+          setCurrentProject={props.setCurrentProject}
+        />
       </div>
       <div className="project_members"></div>
     </header>

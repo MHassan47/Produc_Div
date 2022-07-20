@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import "./SignIn.css";
 import { AuthContext } from "../../context/AuthProvider";
-import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, IconButton, Toolbar, Collapse } from "@material-ui/core";
-import Typical from "react-typical";
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar } from '@material-ui/core';
+import Typical from 'react-typical'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
     background: "#000",
   },
   appbar: {
-    background: "#323132",
+    background: '#323132',
+    
   },
   appbarWrapper: {
     width: "80%",
@@ -92,25 +94,23 @@ export default function SignIn({ state, setState }) {
       email,
       password,
     };
-    if (validateLogin())
-      axios
-        .post("http://localhost:8080/users/sign-in", body, {
-          withCredentials: true,
-        })
-        // const userArr = [];
+    axios
+      .post("http://localhost:8080/users/sign-in", body, {
+        withCredentials: true,
+      })
 
-        .then(
-          ({ data }) => {
-            return login(data.user);
-          }
-          //   });
-        )
-        .then(() => navigate("/dashboard", { replace: true }))
-        // .then(() => console.log("THIS IS STATE", state))
+      .then(
+        ({ data }) => {
 
-        .catch((error) => {
-          setErrMsg(error.response.data.error);
-        });
+          return login(data.user);
+        }
+
+      )
+      .then(() => navigate("/dashboard", { replace: true }))
+
+      .catch((error) => {
+        setErrMsg(error.response.data.error);
+      });
   };
 
   return (
@@ -129,19 +129,22 @@ export default function SignIn({ state, setState }) {
             {" "}
             <button className="buttons">Register</button>
           </NavLink>
-          {/* 
-          <IconButton>
-            <SortIcon className={classes.icon} />
-          </IconButton> */}
+          <NavLink to='/register'> <button className='buttons'>Register</button></NavLink>
+
+
         </Toolbar>
       </AppBar>
       <section className="section">
         <div className="sign-in-h1">
-          {/* <h1>Sign In</h1> */}
           <Typical
             loop={Infinity}
             wrapper="l"
-            steps={[" ", 1000, "Sign In", 6000]}
+            steps={[
+              ' ',
+              1000,
+              'Sign In',
+              6000,
+            ]}
           />
         </div>
         <div>
@@ -154,7 +157,7 @@ export default function SignIn({ state, setState }) {
                 type="text"
                 id="email"
                 fontSize="2em"
-                style={{ height: "2.5em", width: "40%" }}
+                style={{ height: '2.5em', width: '40%' }}
                 ref={userRef}
                 autoComplete="off"
                 onChange={(event) => setEmail(event.target.value)}
@@ -170,7 +173,8 @@ export default function SignIn({ state, setState }) {
               <input
                 type="password"
                 id="password"
-                style={{ height: "2.5em", width: "40%" }}
+                style={{ height: '2.5em', width: '40%' }}
+
                 onChange={(event) => setPassword(event.target.value)}
                 value={password}
                 required
@@ -181,28 +185,27 @@ export default function SignIn({ state, setState }) {
               <button
                 type="submit"
                 className="btn"
-                style={{ marginLeft: "8em" }}
-                // onClick={(event) => handleSubmit()}
+                style={{ marginLeft: '8em' }}
+
               >
                 Sign In
               </button>
             </div>
           </form>
 
-          <p className="footer">Don't have an account?</p>
+          <p className="footer">
+            Don't have an account?
+          </p>
           <br />
           <span className="link">
-            {/* put router link here */}
             <button
               type="button"
               className="btn"
-              style={{ marginLeft: "18em" }}
+              style={{ marginLeft: '18em' }}
               onClick={(event) => handleSubmit()}
             >
               {" "}
-              <a className="register-btn " href="/register">
-                Register
-              </a>{" "}
+              <a className="register-btn " href="/register">Register</a>{" "}
             </button>
           </span>
         </div>

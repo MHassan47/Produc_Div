@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import "./SideBar.css";
 // import Logout from "../Auth/Logout";
 import { SidebarData } from "./SideBarData";
 import Logout from "../Auth/Logout";
-import { useSearchParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 export default function SideBar() {

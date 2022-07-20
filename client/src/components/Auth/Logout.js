@@ -26,7 +26,6 @@ const Logout = (props) => {
     <div className="row" onClick={handleClick}>
       <MdLogout className="logout_icon" id="icon" />
       <div id="title">Logout</div>
-      {/* <button onClick={handleClick}>Logout</button> */}
     </div>
   );
 };
