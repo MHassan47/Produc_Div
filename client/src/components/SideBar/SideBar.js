@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthProvider";
 
 export default function SideBar() {
   const { user } = useContext(AuthContext);
-  console.log("/+/+/+", user);
+  // console.log("/+/+/+", user);
   return user ? (
     <div className="Sidebar">
       <ul className="SidebarList">

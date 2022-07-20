@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRef, useState, useEffect, useContext, React } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import "./SignIn.css"
+import "./SignIn.css";
 import { AuthContext } from "../../context/AuthProvider";
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar } from '@material-ui/core';
@@ -11,49 +11,46 @@ import Typical from 'react-typical'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    fontFamily: 'monospace',
-    fontSize: '1.2em',
-    background: "#000"
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    fontFamily: "monospace",
+    fontSize: "1.2em",
+    background: "#000",
   },
   appbar: {
     background: '#323132',
     
   },
   appbarWrapper: {
-    width: '80%',
-    margin: '0 auto',
+    width: "80%",
+    margin: "0 auto",
   },
   appbarTitle: {
-    flexGrow: '1',
+    flexGrow: "1",
   },
   icon: {
-    color: '#fff',
-    fontSize: '2rem',
+    color: "#fff",
+    fontSize: "2rem",
   },
   colorText: {
-    fontFamily: 'monospace',
-    fontSize: '2.5rem',
-    color: '#a425ff',
+    fontFamily: "monospace",
+    fontSize: "2.5rem",
+    color: "#a425ff",
   },
   container: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   title: {
-    color: '#000',
-    fontSize: '4.5rem',
+    color: "#000",
+    fontSize: "4.5rem",
   },
   goDown: {
-    color: '#fff',
-    fontSize: '4rem',
-  }
+    color: "#fff",
+    fontSize: "4rem",
+  },
 }));
-
-
-
 
 export default function SignIn({ state, setState }) {
   const classes = useStyles();
@@ -92,8 +89,7 @@ export default function SignIn({ state, setState }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (validateLogin())
-      console.log("**************SUBMIT Sign-In clicked **************");
+    // console.log("**************SUBMIT Sign-In clicked **************");
     const body = {
       email,
       password,
@@ -111,7 +107,6 @@ export default function SignIn({ state, setState }) {
 
       )
       .then(() => navigate("/dashboard", { replace: true }))
-      .then(() => console.log("THIS IS STATE", state))
 
       .catch((error) => {
         setErrMsg(error.response.data.error);
@@ -119,22 +114,27 @@ export default function SignIn({ state, setState }) {
   };
 
   return (
-
     <div className="background-colour">
       <AppBar className={classes.appbar} elevation={0}>
         <Toolbar className={classes.appbarWrapper}>
           <h1 className={classes.appbarTitle}>
-            <span href="/Homepage" className={classes.colorText}>Produc_Div</span>
+            <span href="/Homepage" className={classes.colorText}>
+              Produc_Div
+            </span>
           </h1>
-          <NavLink to='/sign-in' >
-            <button className='buttons'>Sign In</button>
+          <NavLink to="/sign-in">
+            <button className="buttons">Sign In</button>
+          </NavLink>
+          <NavLink to="/register">
+            {" "}
+            <button className="buttons">Register</button>
           </NavLink>
           <NavLink to='/register'> <button className='buttons'>Register</button></NavLink>
 
 
         </Toolbar>
       </AppBar>
-      <section className="section"  >
+      <section className="section">
         <div className="sign-in-h1">
           <Typical
             loop={Infinity}
@@ -147,10 +147,12 @@ export default function SignIn({ state, setState }) {
             ]}
           />
         </div>
-        <div >
+        <div>
           <form className="signIn_form" onSubmit={handleSubmit}>
-            <div >
-              <label className="yt-font" htmlFor="email">Email:&nbsp;&nbsp;&nbsp; </label>
+            <div>
+              <label className="yt-font" htmlFor="email">
+                Email:&nbsp;&nbsp;&nbsp;{" "}
+              </label>
               <input
                 type="text"
                 id="email"
@@ -163,9 +165,11 @@ export default function SignIn({ state, setState }) {
                 required
               />
             </div>
-            < br />
+            <br />
             <div>
-              <label className="yt-font" htmlFor="password">Password:&nbsp;&nbsp;&nbsp;</label>
+              <label className="yt-font" htmlFor="password">
+                Password:&nbsp;&nbsp;&nbsp;
+              </label>
               <input
                 type="password"
                 id="password"
@@ -194,7 +198,6 @@ export default function SignIn({ state, setState }) {
           </p>
           <br />
           <span className="link">
-
             <button
               type="button"
               className="btn"
