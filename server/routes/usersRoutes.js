@@ -89,7 +89,10 @@ module.exports = (db) => {
   });
 
   router.post("/logout", (req, res) => {
+    console.log(req.session, "LOGGED OUT");
     req.session.id = null;
+    console.log(req.session);
+
     return res.status(204).send();
   });
   return router;

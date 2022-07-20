@@ -22,7 +22,7 @@
   font-weight: bold;
   font-style: oblique;
   color: #FFFFFF;
-  background: #333333;
+  background: #323132;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   color: #a425ff;
  
@@ -34,10 +34,12 @@
 
  .h1-pro {
   position: absolute;
-  margin-top: 45px;
+  margin-top: 42px;
   margin-right: 1800px;
+  font-weight: bold;
+  text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
   color: #a425ff;
-  font-size: 3em;
-  width: 400px;
+  font-size: 3.5em;
+  width: 475px;
   font-family: monospace;
  }

@@ -1,5 +1,5 @@
 .Sidebar {
-  height: 150%;
+  height: 100%;
   width: 250px;
   background-color: #323132;
 }
@@ -32,13 +32,17 @@
   cursor: pointer;
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   background-color: #bd88ef;
+  box-shadow: 5px 3px 5px #ad7cda;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
+
 .SidebarList #active {
   background-color: #1b1d1e;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
+  box-shadow: 10px 3px 10px #1a1a1b;
+
 }
 
 .SidebarList li:last-child {
@@ -68,7 +72,7 @@
   width: 200px;
   border-radius: 10px;
   height: 50px;
-
+  box-shadow: 10px 3px 10px #1a1a1b;
   background-color: #1b1d1e;
 }
 .user_profile_picture {

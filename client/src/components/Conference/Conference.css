@@ -9,15 +9,16 @@
 
 .conference_content {
   display: flex;
-  height: 800px;
+  height: 1200px;
   overflow: hidden;
   margin: 1rem;
  
 }
 
 .conference_call { 
-  display: flex;
-  width: 60%;
+  /* display: flex; */
+  /* position: absolute; */
+  width: 73%;
   padding-top: 4rem;
   padding-left: 9rem;
   padding-right: 11rem; 
@@ -27,7 +28,7 @@
  
 }
 .conference_call:hover {
-  box-shadow:10px 5px 5px rgb(132, 57, 253);
+  box-shadow:10px 2px 2px #a425ff;
 }
 #join_button {
   flex-direction: row;
@@ -45,7 +46,7 @@
   line-height: normal;
   margin-top: 300px ;
   margin-bottom: 300px;
-  margin-left: 500px;
+  margin-left: 800px;
   min-height: 25px;
   min-width: 0;
   outline: none;

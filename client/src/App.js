@@ -25,17 +25,38 @@ export default function App() {
 
   const { isFetching, state, setState, updateCard, addUserToCard } =
     useApplicationData();
-  const [user, setUser] = useState(state.user[0]);
-  const [loading, setLoading] = useState(true);
-  console.log("state:", state);
-  useEffect(() => {
-    if (!isFetching) {
-      setLoading(false);
-      setUser(state.user[0]);
+  console.log("//////////", state);
+
+  const [user, setUser] = useState(
+    state.user[0] || {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      photo_url: "",
+      role: "",
+      auth: false,
     }
-  }, [isFetching, state.user[0]]);
+  );
+  useEffect(() => {
+    // console.log("GOT IT");
+    if (state.user.length > 0) {
+      setUser(state.user[0]);
+      // console.log(".........", state.user);
+    }
+  }, [isFetching]);
+  // console.log("=======", user);
+  // const [loading, setLoading] = useState(true);
+  // console.log("state:", state);
+  // useEffect(() => {
+  //   if (!isFetching) {
+  //     setLoading(false);
+  //     setUser(state.user[0]);
+  //   }
+  // }, [isFetching, state.user[0]]);
 
   const login = (data) => {
+    // console.log("=======", data);
     setUser({
       id: data.id,
       first_name: data.first_name,
@@ -59,10 +80,10 @@ export default function App() {
       auth: false,
     });
   };
-
-  if (loading) {
-    return <p>Loading</p>;
-  }
+  console.log({ user });
+  // if (loading) {
+  //   return <p>Loading</p>;
+  // }
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       <BrowserRouter>
