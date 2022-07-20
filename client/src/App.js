@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import "./App.css";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
@@ -9,6 +9,11 @@ import Conference from "./components/Conference/Conference";
 import useApplicationData from "./hooks/useApplicationData";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthProvider";
+// import {
+//   createClient,
+//   createMicrophoneAndCameraTracks,
+// } from "agora-rtc-react";
+// import io from "socket.io-client";
 // import { createClient, createMicrophoneAndCameraTracks} from "agora-rtc-react";
 
 // const config = { mode: "rtc", codec: "vp8" };
