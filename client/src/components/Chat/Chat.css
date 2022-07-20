@@ -21,22 +21,25 @@
   padding-right: 1.5rem;
   background-color: #1b1d1e;
   border-radius: 3%;
-  width: 60%;
-
+  width: 80%;
 }
 
+.chat_call:hover {
+  box-shadow:10px 2px 2px #a425ff;
+}
 
 .react-scroll-to-bottom--css-jpryv-1n7m0yu {
+  
   width:100%;
   position: relative;
   height: 97%;
 }
 
 .footer-layout {
-  bottom: 0;
+  margin-top: 900px;
   position: absolute;
   max-height: 5% ;
-  width: 95%;
+  width: 80%;
 }
 
 
@@ -48,18 +51,26 @@
 
 .chat_footer{
   justify-content: space-between;
-  width: 65%;
+  width: 100%;
 }
+
+
  .send-chat {
-  height: 2.5em;
-  width: 5%;
+  font-family: monospace;
+  font-size: 17px;
+  font-weight: bolder;
+  height: 3em;
+  width: 4.5%;
   padding-right: 1.5rem;
   background-color:#a425ff;
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
  }
+
 .type-2 {
   justify-content: flex-start;
-  height: 2.5em;
-  width: 91%;
+  height: 3.5em;
+  width: 94%;
   background-color: #1b1d1e;
   border:0;
   box-shadow:0 0 4px rgba(0,0,0,0.3);
