@@ -101,13 +101,6 @@ export default function SignIn({ state, setState }) {
 
         .then(
           ({ data }) => {
-            // localStorage.setItem("user", JSON.stringify(data.user))
-            // console.log("//////DATA//////", data)
-            // userStateArray.map((user) => {
-            //   if (user.email === email) {
-            //     console.log("##########", user.id);
-            // console.log("//////DATA//////", data.user);
-
             return login(data.user);
           }
           //   });
