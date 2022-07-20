@@ -9,7 +9,7 @@
 
 .conference_content {
   display: flex;
-  height: 800px;
+  height: 1200px;
   overflow: hidden;
   margin: 1rem;
  
@@ -18,7 +18,7 @@
 .conference_call { 
   /* display: flex; */
   /* position: absolute; */
-  width: 60%;
+  width: 73%;
   padding-top: 4rem;
   padding-left: 9rem;
   padding-right: 11rem; 
@@ -46,7 +46,7 @@
   line-height: normal;
   margin-top: 300px ;
   margin-bottom: 300px;
-  margin-left: 500px;
+  margin-left: 800px;
   min-height: 25px;
   min-width: 0;
   outline: none;

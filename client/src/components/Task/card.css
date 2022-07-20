@@ -3,8 +3,8 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  width: 250px;
-  height: 90px;
+  width: 300px;
+  height: 140px;
   padding: 10px;
   background-color: #1b1d1e;
   border-radius: 10px;
@@ -14,9 +14,11 @@
 
 .card_header {
   display: flex;
-  width: 200px;
-  height: max-content;
-  background-color: rgb(39, 41, 44);
+  width: 300px;
+  height: 35px;
+  height: fit-content;
+  /* height: max-content; */
+  background-color: rgb(42, 39, 44);
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
   border-bottom: 2px solid #afaac2e7;
@@ -25,8 +27,9 @@
 .card__description {
   display: flex;
   align-items: flex-start;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: monospace;
   color: white;
   margin-left: 3px;
   margin-bottom: 5px;

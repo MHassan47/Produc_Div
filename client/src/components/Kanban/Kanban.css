@@ -13,11 +13,12 @@
 }
 .kanban__section__title {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   flex-direction: row;
   width: 100%;
+  height: 25%;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 26px;
   font-family: monospace;
   align-items: center;
 
@@ -28,7 +29,7 @@
 
 .kanban__section__count {
   display: flex;
-  margin-left: 1rem;
+  margin-left: 2.5em;
   color: rgba(225, 217, 217, 0.626);
 }
 .kanban__section__add {
@@ -41,7 +42,7 @@
 }
 
 .kanban__section {
-  width: 375px;
+  width: 475px;
   height: fit-content;
   border-radius: 15px;
   border: 100px rgb(232, 231, 231);
