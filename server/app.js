@@ -53,7 +53,7 @@ wsServer.on("connection", (socket) => {
       • Broadcast it to everybody in the chat
       • Write it to a database
     */
-    console.log("*** " + message);
+
     // save to array
     chatMessages.push(JSON.parse(message));
 

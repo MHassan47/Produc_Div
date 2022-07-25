@@ -11,7 +11,6 @@ const Form = ({ state, setState, currentColumn, newTask, currentProject }) => {
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
-    console.log({ currentProject });
     if (!description) return setError(true);
     e.preventDefault();
     axios
@@ -27,7 +26,6 @@ const Form = ({ state, setState, currentColumn, newTask, currentProject }) => {
             `http://localhost:8080/api/tasks/users_to_tasks/${user.id}/${response.data.id}`
           )
           .then((data) => {
-            console.log("HERE");
             setState({
               ...state,
               tasks: [...state.tasks, response.data],

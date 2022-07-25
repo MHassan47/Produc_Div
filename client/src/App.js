@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import HomePage from "./components/HomePage/Homepage";
 import Register from "./components/Auth/Register";
@@ -9,23 +9,10 @@ import Conference from "./components/Conference/Conference";
 import useApplicationData from "./hooks/useApplicationData";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthProvider";
-// import {
-//   createClient,
-//   createMicrophoneAndCameraTracks,
-// } from "agora-rtc-react";
-// import io from "socket.io-client";
-// import { createClient, createMicrophoneAndCameraTracks} from "agora-rtc-react";
-
-// const config = { mode: "rtc", codec: "vp8" };
-
-// const useClient = createClient(config);
-// const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 export default function App() {
-
   const { isFetching, state, setState, updateCard, addUserToCard } =
     useApplicationData();
-  console.log("//////////", state);
 
   const [user, setUser] = useState(
     state.user[0] || {
@@ -39,24 +26,12 @@ export default function App() {
     }
   );
   useEffect(() => {
-    // console.log("GOT IT");
     if (state.user.length > 0) {
       setUser(state.user[0]);
-      // console.log(".........", state.user);
     }
   }, [isFetching]);
-  // console.log("=======", user);
-  // const [loading, setLoading] = useState(true);
-  // console.log("state:", state);
-  // useEffect(() => {
-  //   if (!isFetching) {
-  //     setLoading(false);
-  //     setUser(state.user[0]);
-  //   }
-  // }, [isFetching, state.user[0]]);
 
   const login = (data) => {
-    // console.log("=======", data);
     setUser({
       id: data.id,
       first_name: data.first_name,
@@ -80,10 +55,7 @@ export default function App() {
       auth: false,
     });
   };
-  console.log({ user });
-  // if (loading) {
-  //   return <p>Loading</p>;
-  // }
+
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       <BrowserRouter>

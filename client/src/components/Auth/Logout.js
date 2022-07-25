@@ -7,16 +7,16 @@ import { MdLogout } from "react-icons/md";
 // import { useCookies } from "react-cookie";
 
 const Logout = (props) => {
-  // const [cookies, setCookie, removeCookie] = useCookies(["session"]);
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // Logout handler
   const handleClick = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:8080/users/logout", { withCredentials: false })
       .then(() => {
         logout(user);
-        // removeCookie("session");
       })
       .then(() => navigate("/", { replace: true }))
       .catch((error) => console.log(error));

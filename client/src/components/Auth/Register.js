@@ -2,53 +2,48 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import { AppBar, Toolbar } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import Typical from 'react-typical'
-
-
-
+import Typical from "react-typical";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    fontFamily: 'monospace',
-    fontSize: '1.2em',
-    background: "#000"
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    fontFamily: "monospace",
+    fontSize: "1.2em",
+    background: "#000",
   },
   appbar: {
-    background: '#323132',
+    background: "#323132",
   },
   appbarWrapper: {
-    width: '80%',
-    margin: '0 auto',
+    width: "80%",
+    margin: "0 auto",
   },
   appbarTitle: {
-    flexGrow: '1',
+    flexGrow: "1",
   },
   icon: {
-    color: '#fff',
-    fontSize: '2rem',
+    color: "#fff",
+    fontSize: "2rem",
   },
   colorText: {
-    fontFamily: 'monospace',
-    fontSize: '2.5rem',
-    color: '#a425ff',
+    fontFamily: "monospace",
+    fontSize: "2.5rem",
+    color: "#a425ff",
   },
   container: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   title: {
-    color: '#000',
-    fontSize: '4.5rem',
+    color: "#000",
+    fontSize: "4.5rem",
   },
 }));
-
-
 
 export default function Register({ state, setState }) {
   const classes = useStyles();
@@ -78,10 +73,10 @@ export default function Register({ state, setState }) {
     return true;
   };
 
+  // Registration handler
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateRegistration()) {
-
       const body = {
         first_name,
         last_name,
@@ -91,56 +86,53 @@ export default function Register({ state, setState }) {
         photo_url,
         role,
       };
-      
+
       axios
-      .post("http://localhost:8080/users/register", body)
-      .then((response) => {
-        console.log(response);
-        setState({
-          ...state,
-          users: {
-            ...state.users,
-            [response.data.user.id]: response.data.user,
-          },
+        .post("http://localhost:8080/users/register", body)
+        .then((response) => {
+          console.log(response);
+          setState({
+            ...state,
+            users: {
+              ...state.users,
+              [response.data.user.id]: response.data.user,
+            },
+          });
+          console.log("NEW STATE----", state);
+        })
+        .then(() => navigate("/sign-in"))
+        .catch((error) => {
+          console.log("Registration error---", error);
+          alert("Email already exists");
         });
-        console.log("NEW STATE----", state);
-      })
-      .then(() => navigate("/sign-in"))
-      .catch((error) => {
-        console.log("Registration error---", error);
-        alert("Email already exists");
-      });
     }
-    };
-    
-    return (
-      <div>
-       <AppBar className={classes.appbar} elevation={0}>
+  };
+
+  return (
+    <div>
+      <AppBar className={classes.appbar} elevation={0}>
         <Toolbar className={classes.appbarWrapper}>
           <h1 className={classes.appbarTitle}>
             <span className={classes.colorText}>Produc_Div</span>
           </h1>
-          <NavLink to='/sign-in' >
-            <button className='buttons'>Sign In</button>
+          <NavLink to="/sign-in">
+            <button className="buttons">Sign In</button>
           </NavLink>
-          <NavLink to='/register'> <button className='buttons'>Register</button></NavLink>
-        
+          <NavLink to="/register">
+            {" "}
+            <button className="buttons">Register</button>
+          </NavLink>
         </Toolbar>
       </AppBar>
       <div className="form_layout">
         <div className="form">
-        <p className="h1-title">
-          <Typical
-        loop={Infinity}
-        wrapper="l"
-        steps={[
-          ' ',
-          1000,
-          'Register', 
-          6000,
-        ]}
-        />
-        </p>
+          <p className="h1-title">
+            <Typical
+              loop={Infinity}
+              wrapper="l"
+              steps={[" ", 1000, "Register", 6000]}
+            />
+          </p>
           <form onSubmit={handleSubmit}>
             <div className="form-body">
               <div className="username">
@@ -149,7 +141,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
-                  style={{ height: '2.5em', width: '60%'}}
+                  style={{ height: "2.5em", width: "60%" }}
                   type="text"
                   id="firstName"
                   placeholder="First Name"
@@ -166,7 +158,7 @@ export default function Register({ state, setState }) {
                   name=""
                   id="lastName"
                   className="form__input"
-                  style={{ height: '2.5em', width: '60%'}}
+                  style={{ height: "2.5em", width: "60%" }}
                   placeholder="LastName"
                   onChange={(event) => setLastName(event.target.value)}
                   required
@@ -180,7 +172,7 @@ export default function Register({ state, setState }) {
                   type="email"
                   id="email"
                   className="form__input"
-                  style={{ height: '2.5em', width: '60%'}}
+                  style={{ height: "2.5em", width: "60%" }}
                   placeholder="Email"
                   onChange={(event) => setEmail(event.target.value)}
                   required
@@ -192,7 +184,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
-                  style={{ height: '2.5em', width: '60%'}}
+                  style={{ height: "2.5em", width: "60%" }}
                   type="password"
                   id="password"
                   placeholder="Password"
@@ -206,7 +198,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
-                  style={{ height: '2.5em', width: '60%'}}
+                  style={{ height: "2.5em", width: "60%" }}
                   type="password"
                   id="confirmPassword"
                   placeholder="Confirm Password"
@@ -220,7 +212,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
-                  style={{ height: '2.5em', width: '60%'}}
+                  style={{ height: "2.5em", width: "60%" }}
                   type="url"
                   id="photo_url"
                   placeholder="enter photo_url"
@@ -234,7 +226,7 @@ export default function Register({ state, setState }) {
                 </label>
                 <input
                   className="form__input"
-                  style={{ height: '2.5em', width: '60%'}}
+                  style={{ height: "2.5em", width: "60%" }}
                   type="text"
                   id="role"
                   placeholder="enter role "
@@ -247,7 +239,7 @@ export default function Register({ state, setState }) {
               <button
                 type="submit"
                 className="btn"
-              // onClick={(event) => handleSubmit()}
+                // onClick={(event) => handleSubmit()}
               >
                 Register
               </button>

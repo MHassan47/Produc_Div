@@ -9,7 +9,6 @@ const AddUsers = ({
   renderListContainer,
   taskID,
   state,
-  setState,
   setUpdate,
   addUserToCard,
 }) => {
@@ -26,7 +25,6 @@ const AddUsers = ({
           setAdd(false);
           setUpdate((prev) => !prev);
           renderListContainer();
-          console.log("DONE");
         }, 200)
       )
 
@@ -41,6 +39,7 @@ const AddUsers = ({
       setAdd(false);
     }, 5000);
   };
+  // conditional rendering logic if signed in user is already assigned to task, component will not render
   if (state.users_to_tasks[taskID - 1])
     if (!state.users_to_tasks[taskID - 1].assigned_users.includes(user.id))
       return (

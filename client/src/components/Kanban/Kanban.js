@@ -16,7 +16,6 @@ const Kanban = ({
   updateCard,
   addUserToCard,
 }) => {
- 
   const [columns, setColumns] = useState(["To Do", "In Progress", "Complete"]);
   const [currentColumn, setCurrentColumn] = useState("");
   const [newCardToDo, setNewCardToDo] = useState(false);
@@ -24,11 +23,10 @@ const Kanban = ({
   const [newCardComplete, setNewCardComplete] = useState(false);
 
   const onDragEnd = (result) => {
-    console.log("-------iiii", result);
     const destination = result.destination;
     const sourceIndex = result.source.index;
     const col = result.destination.droppableId;
-    console.log(typeof col);
+
     const task_id = Number(result.draggableId);
 
     const items = state.tasks.map((task) => {
@@ -38,23 +36,17 @@ const Kanban = ({
         return task;
       }
     });
-    // console.log("??????", items);
-    // const [reorderedItem] = items.splice(result.source.index, 1);
-    // items.splice(result.destination.index, 0, reorderedItem);
+
     return axios
       .put(`http://localhost:8080/api/tasks/move/${task_id}`, { col: col })
       .then(setState({ ...state, tasks: items }))
       .catch((error) => console.log(error));
-
-    console.log("dragged item");
   };
 
   const newTask = (element) => {
-    // setNewCard(true);
     console.log(element);
     setCurrentColumn(element);
     if (element === "To Do") {
-      // if ("To Do" === element) return <Form />;
       setNewCardToDo((prev) => !prev);
       console.log(element);
     } else if (element === "In Progress") {
@@ -72,120 +64,122 @@ const Kanban = ({
       <section>
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="kanban">
-            {columns.map((element) => (
-              <Droppable key={element} droppableId={element}>
-                {(provided) => (
-                  <div
-                    {...provided.droppableProps}
-                    className="kanban__section"
-                    ref={provided.innerRef}
-                  >
-                    <div className="kanban__section__title">
-                      {element}
-                      <div className="kanban__section__count">
-                        {
-                          state.tasks.filter(
-                            (task) =>
-                              task.col === element &&
-                              task.project_id === currentProject
-                          ).length
-                        }
-                      </div>
-                      {newCardToDo || newCardInProgress || newCardComplete ? (
-                        <div className="kanban__section__add">
-                          <IoRemoveSharp
-                            onClick={() => {
-                              console.log(currentProject);
-                              setNewCardToDo(false);
-                              setNewCardInProgress(false);
-                              setNewCardComplete(false);
-                            }}
-                          />
+            {columns.map(
+              (
+                element //Creates columns of kanban
+              ) => (
+                <Droppable key={element} droppableId={element}>
+                  {(provided) => (
+                    <div
+                      {...provided.droppableProps}
+                      className="kanban__section"
+                      ref={provided.innerRef}
+                    >
+                      <div className="kanban__section__title">
+                        {element}
+                        <div className="kanban__section__count">
+                          {
+                            state.tasks.filter(
+                              // Only displays tasks assigned to current project
+                              (task) =>
+                                task.col === element &&
+                                task.project_id === currentProject
+                            ).length
+                          }
                         </div>
-                      ) : (
-                        <div className="kanban__section__add">
-                          <IoIosAdd
-                            onClick={
-                              () => newTask(element)
-                            }
-                          />
-                        </div>
-                      )}
-                    </div>
-                    <div className="kanban__section__content">
-                      <div className="newCard-form" id={element}>
-                        {element === "To Do" && newCardToDo && (
-                          <Form
-                            state={state}
-                            setState={setState}
-                            currentColumn={element}
-                            newTask={newTask}
-                            currentProject={currentProject}
-                          />
-                        )}
-
-                        {element === "In Progress" && newCardInProgress && (
-                          <Form
-                            state={state}
-                            setState={setState}
-                            currentColumn={element}
-                            newTask={newTask}
-                            currentProject={currentProject}
-                          />
-                        )}
-
-                        {element === "Complete" && newCardComplete && (
-                          <Form
-                            state={state}
-                            setState={setState}
-                            currentColumn={element}
-                            newTask={newTask}
-                            currentProject={currentProject}
-                          />
+                        {newCardToDo || newCardInProgress || newCardComplete ? (
+                          <div className="kanban__section__add">
+                            <IoRemoveSharp
+                              onClick={() => {
+                                setNewCardToDo(false);
+                                setNewCardInProgress(false);
+                                setNewCardComplete(false);
+                              }}
+                            />
+                          </div>
+                        ) : (
+                          <div className="kanban__section__add">
+                            <IoIosAdd onClick={() => newTask(element)} />
+                          </div>
                         )}
                       </div>
-                      {state.tasks.map((task, index) => {
-                        if (
-                          task.col === element &&
-                          task.project_id === currentProject
-                        )
-                          return (
-                            <Draggable
-                              key={task.id.toString()}
-                              draggableId={task.id.toString()}
-                              index={index}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={{
-                                    ...provided.draggableProps.style,
-                                    opacity: snapshot.isDragging ? "0.5" : "1",
-                                  }}
-                                >
-                                  <Card
-                                    key={task.id}
-                                    state={state}
-                                    setState={setState}
-                                    task={task}
-                                    updateCard={updateCard}
-                                    addUserToCard={addUserToCard}
+                      <div className="kanban__section__content">
+                        <div className="newCard-form" id={element}>
+                          {element === "To Do" && newCardToDo && (
+                            <Form
+                              state={state}
+                              setState={setState}
+                              currentColumn={element}
+                              newTask={newTask}
+                              currentProject={currentProject}
+                            />
+                          )}
+
+                          {element === "In Progress" && newCardInProgress && (
+                            <Form
+                              state={state}
+                              setState={setState}
+                              currentColumn={element}
+                              newTask={newTask}
+                              currentProject={currentProject}
+                            />
+                          )}
+
+                          {element === "Complete" && newCardComplete && (
+                            <Form
+                              state={state}
+                              setState={setState}
+                              currentColumn={element}
+                              newTask={newTask}
+                              currentProject={currentProject}
+                            />
+                          )}
+                        </div>
+                        {state.tasks.map((task, index) => {
+                          if (
+                            task.col === element &&
+                            task.project_id === currentProject
+                          )
+                            return (
+                              <Draggable //Generates draggable card components
+                                key={task.id.toString()}
+                                draggableId={task.id.toString()}
+                                index={index}
+                              >
+                                {(provided, snapshot) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={{
+                                      ...provided.draggableProps.style,
+                                      opacity: snapshot.isDragging
+                                        ? "0.5"
+                                        : "1",
+                                    }}
                                   >
-                                    {task.name}
-                                  </Card>
-                                </div>
-                              )}
-                            </Draggable>
-                          );
-                      })}
-                      {provided.placeholder}
+                                    <Card
+                                      key={task.id}
+                                      state={state}
+                                      setState={setState}
+                                      task={task}
+                                      updateCard={updateCard}
+                                      addUserToCard={addUserToCard}
+                                    >
+                                      {task.name}
+                                    </Card>
+                                  </div>
+                                )}
+                              </Draggable>
+                            );
+                        })}
+                        {provided.placeholder}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </Droppable>
-            ))}
+                  )}
+                </Droppable>
+              )
+            )}
           </div>
         </DragDropContext>
       </section>

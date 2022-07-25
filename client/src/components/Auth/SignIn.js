@@ -84,10 +84,10 @@ export default function SignIn({ state, setState }) {
     return true;
   };
 
+  // Sign-in handler
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // console.log("**************SUBMIT Sign-In clicked **************");
     const body = {
       email,
       password,

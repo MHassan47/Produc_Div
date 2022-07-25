@@ -6,8 +6,6 @@ const bcrypt = require("bcrypt");
 // Get all users
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    console.log("req session---", req.session);
-
     db.query(`SELECT * FROM users WHERE users.id = $1;`, [req.session.id])
       .then(({ rows: user }) => {
         res.json(user);

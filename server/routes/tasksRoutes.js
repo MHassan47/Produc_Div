@@ -6,12 +6,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM tasks;`)
       .then((data) => {
-      
-
-        res.json(
-          data.rows
-          
-        );
+        res.json(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -49,23 +44,17 @@ module.exports = (db) => {
 
   //   Creates a task card
   router.post("/new/:projectID", (req, res) => {
-    console.log("reached");
     const { name, created_at, owner_id, col } = req.body;
     const project_id = req.params.projectID;
-  
 
     db.query(
       `INSERT INTO tasks(name, created_at, owner_id, col, project_id) VALUES($1, $2, $3, $4, $5)
         RETURNING *;`,
       [name, created_at, owner_id, col, project_id]
     )
-     
+
       .then((response) => {
-        console.log("done");
-        res.json(
-          response.rows[0]
-          
-        );
+        res.json(response.rows[0]);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -74,7 +63,6 @@ module.exports = (db) => {
 
   //   Moves tasks
   router.put("/move/:id", (req, res) => {
-    console.log("testtt");
     const task_id = req.params.id;
     const column = req.body.col;
     db.query(
@@ -105,7 +93,7 @@ module.exports = (db) => {
   router.post("/users_to_tasks/:id/:taskID", (req, res) => {
     const user_id = req.params.id;
     const task_id = req.params.taskID;
-    console.log("////////////////", req.params);
+
     db.query(
       `INSERT INTO users_to_tasks (user_id, task_id) 
       VALUES ($1, $2) RETURNING *;`,

@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import "./SideBar.css";
 // import Logout from "../Auth/Logout";
 import { SidebarData } from "./SideBarData";
@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthProvider";
 
 export default function SideBar() {
   const { user } = useContext(AuthContext);
-  // console.log("/+/+/+", user);
+
   return user ? (
     <div className="Sidebar">
       <ul className="SidebarList">

@@ -9,10 +9,10 @@
 .buttons {
   appearance: none;
   background-color: #a425ff;
-  border: 2px solid #1A1A1A;
+  border: 2px solid #1a1a1a;
   border-radius: 15px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font-family: monospace;
@@ -26,7 +26,7 @@
   padding: 14px 22px;
   text-align: center;
   text-decoration: none;
-  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -48,32 +48,29 @@
   transform: translateY(0);
 }
 
-
 .buttons:active {
   box-shadow: 0px 0px 0px 0px;
   top: 5px;
   left: 5px;
 }
-  #console-container {
-    font-family: monospace;
-    font-size:4em;
-    font-weight: 100;
-    text-align:center;
-    height:200px;
-    width:600px;
-    display:block;
-    /* position:absolute; */
-    color:#a425ff;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    margin:auto;
-  }
-  .console-underscore {
-     display:inline-block;
-    position:relative;
-    top:-0.14em;
-    left:10px;
-  }
-  
+#console-container {
+  font-family: monospace;
+  font-size: 4em;
+  font-weight: 100;
+  text-align: center;
+  height: 200px;
+  width: 600px;
+  display: block;
+  color: #a425ff;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.console-underscore {
+  display: inline-block;
+  position: relative;
+  top: -0.14em;
+  left: 10px;
+}

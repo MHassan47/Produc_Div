@@ -42,7 +42,7 @@ module.exports = (db) => {
 
   router.get("/register", (req, res) => {
     const { users } = req.body;
-    console.log("++++++++++++++++++++USers:  ", users);
+
     res.render("register");
   });
 
@@ -51,7 +51,7 @@ module.exports = (db) => {
       req.body;
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    console.log("password----", hashedPassword);
+
     db.query(
       `INSERT INTO users (first_name, last_name, email, password, photo_url, role) 
       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
@@ -59,7 +59,6 @@ module.exports = (db) => {
     )
       .then((result) => {
         const user = result.rows[0];
-       
 
         res.json({ user });
       })
@@ -70,7 +69,6 @@ module.exports = (db) => {
     return router;
   });
 
-
   router.post("/sign-in", (req, res) => {
     const { email, password } = req.body;
     db.query(`SELECT * FROM users WHERE email = $1;`, [email])
@@ -79,7 +77,7 @@ module.exports = (db) => {
         if (user) correctPassword = bcrypt.compareSync(password, user.password);
         if (correctPassword) {
           req.session.id = user.id;
-          console.log(req.session);
+
           return res.json({ user });
         } else {
           return res.status(401).send({ error: "Incorrect email/password" });
@@ -89,9 +87,7 @@ module.exports = (db) => {
   });
 
   router.post("/logout", (req, res) => {
-    console.log(req.session, "LOGGED OUT");
     req.session.id = null;
-    console.log(req.session);
 
     return res.status(204).send();
   });
