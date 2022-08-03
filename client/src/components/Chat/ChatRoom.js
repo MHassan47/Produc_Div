@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import useChatSocket from "../../hooks/useChatSocket";
 import { AuthContext } from "../../context/AuthProvider";
 
-export default function ChatRoom({ state, socket, username, room, joinRoom }) {
+export default function ChatRoom({ state }) {
   const [currentProject, setCurrentProject] = useState(1);
   const [currentMessage, setCurrentMessage] = useState("");
   const { user } = useContext(AuthContext);

@@ -12,7 +12,6 @@ const Kanban = ({
   state,
   setState,
   currentProject,
-  setCurrentProject,
   updateCard,
   addUserToCard,
 }) => {

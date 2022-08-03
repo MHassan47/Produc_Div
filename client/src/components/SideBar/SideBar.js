@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import "./SideBar.css";
-// import Logout from "../Auth/Logout";
 import { SidebarData } from "./SideBarData";
 import Logout from "../Auth/Logout";
 import { AuthContext } from "../../context/AuthProvider";
